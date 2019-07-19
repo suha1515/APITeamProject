@@ -1,5 +1,5 @@
 #pragma once
-
+// a
 class CGameObject;
 class CMaingame
 {
