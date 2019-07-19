@@ -15,7 +15,7 @@ CMaingame::~CMaingame()
 void CMaingame::Initialize()
 {
 	// GetDC: 출력 DC 생성 함수.
-	m_hDC = GetDC(g_hWnd);
+	m_hDC = g_hDC;
 
 	srand((unsigned)time(nullptr));
 
@@ -75,6 +75,8 @@ void CMaingame::Render()
 		for (auto& pObject : m_ObjLst[i])
 			pObject->Render(m_hDC);
 	}
+
+	BitBlt(GetDC(g_hWnd), 0, 0, WINCX, WINCY, g_hDC, 0, 0, SRCCOPY);
 }	
 
 void CMaingame::Release()

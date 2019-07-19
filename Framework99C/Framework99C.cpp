@@ -9,6 +9,11 @@
 
 // 전역 변수:
 HWND g_hWnd;
+// 더블 버퍼링을 위한 변수
+HDC	g_hDC;
+HBITMAP g_hBitmap;
+
+
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
@@ -122,6 +127,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, L"Hello world", WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
 
+  g_hDC = CreateCompatibleDC(GetDC(hWnd));
+  g_hBitmap = CreateCompatibleBitmap(GetDC(hWnd),WINCX,WINCY);
+  SelectObject(g_hDC, g_hBitmap);
+
    if (!hWnd)
    {
       return FALSE;
@@ -131,6 +140,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
+   DeleteObject(g_hBitmap);
 
    return TRUE;
 }

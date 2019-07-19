@@ -1,4 +1,10 @@
 #pragma once
+/*
+	플레이어 스크립트 by 정보성
+
+	설명 : 플레이어가 호출하는 함수및 사용 변수
+*/
+
 #include "GameObject.h"
 class CPlayer :
 	public CGameObject

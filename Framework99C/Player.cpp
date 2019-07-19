@@ -59,14 +59,28 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir)
 
 void CPlayer::KeyInput()
 {
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		m_tInfo.fX -= m_fSpeed;
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		m_tInfo.fX += m_fSpeed;
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
-		m_tInfo.fY -= m_fSpeed;
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-		m_tInfo.fY += m_fSpeed;
+	//플레이어 영역 제한 버벅거리는거 없음.
+	if (m_tRect.left > 0)
+	{
+		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+			m_tInfo.fX -= m_fSpeed;
+	}
+	if (m_tRect.right < WINCX)
+	{
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+			m_tInfo.fX += m_fSpeed;
+	}
+	if (m_tRect.top > 0)
+	{
+		if (GetAsyncKeyState(VK_UP) & 0x8000)
+			m_tInfo.fY -= m_fSpeed;
+	}
+	if (m_tRect.bottom < WINCX)
+	{
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+			m_tInfo.fY += m_fSpeed;
+	}
+
 	if (GetAsyncKeyState('W') & 0x8000)
 		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
 	if (GetAsyncKeyState('S') & 0x8000)
