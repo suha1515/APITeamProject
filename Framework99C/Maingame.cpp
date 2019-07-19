@@ -27,7 +27,7 @@ void CMaingame::Initialize()
 	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
 	// Monster
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 200; ++i)
 	{
 		float x = float(rand() % (WINCX - 200)) + 100.f;
 		float y = float(rand() % (WINCY - 200)) + 100.f;

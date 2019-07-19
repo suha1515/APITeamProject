@@ -9,9 +9,18 @@
 
 // 전역 변수:
 HWND g_hWnd;
+HDC g_hDC;
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+
+// FPS 관련:
+float g_fDeltaTime;
+float g_fElapsedTime;
+
+TCHAR g_szFPS[10];
+int g_nFPS;
+
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -39,6 +48,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }   
 
+	g_hDC = GetDC(g_hWnd);
+
     MSG msg;
 	msg.message = WM_NULL;
 
@@ -62,10 +73,26 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (dwCurTime - dwOldTime >= 10) // 0.01초 간격으로 진행.
 		{
+			g_fDeltaTime = (int(dwCurTime - dwOldTime)) / 1000.f; // 프레임 변경에 걸리는 시간
+			// GetTickCount()가 1초에 1000을 카운팅하므로 1000으로 나눔
+
+			g_fElapsedTime += g_fDeltaTime;
+
 			mainGame.Update();
 			mainGame.Render();
 
 			dwOldTime = dwCurTime;
+
+			++g_nFPS;
+
+		}
+
+		TextOut(g_hDC, 100, 100, g_szFPS, lstrlen(g_szFPS));
+		if (1.f <= g_fElapsedTime)
+		{
+			swprintf_s(g_szFPS, _T("%d"), g_nFPS);
+			g_nFPS = 0;
+			g_fElapsedTime -= 1.f;
 		}
 	}	
 
