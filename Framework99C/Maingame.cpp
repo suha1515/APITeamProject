@@ -66,8 +66,6 @@ void CMaingame::Update()
 
 void CMaingame::Render()
 {
-	Rectangle(m_hDC, 0, 0, WINCX, WINCY);
-
 	// 이터레이터 패턴 (반복자 패턴)
 	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
 	for (int i = 0; i < OBJECT_END; ++i)
@@ -76,7 +74,7 @@ void CMaingame::Render()
 			pObject->Render(m_hDC);
 	}
 
-	BitBlt(GetDC(g_hWnd), 0, 0, WINCX, WINCY, g_hDC, 0, 0, SRCCOPY);
+	BitBlt(GetDC(g_hWnd), 0, 0, WINCX, WINCY, m_hDC, 0, 0, SRCCOPY);
 }	
 
 void CMaingame::Release()

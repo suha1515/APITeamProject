@@ -32,5 +32,7 @@ private:
 
 private:	
 	OBJLIST*	m_pBulletLst;
+
+	bool m_bArrButton[BUTTON_END];
 };
 

@@ -24,7 +24,7 @@ void CPlayer::Initialize()
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 
-	m_fSpeed = 10.f;
+	m_fSpeed = 350.f;
 }
 
 int CPlayer::Update()
@@ -63,30 +63,51 @@ void CPlayer::KeyInput()
 	if (m_tRect.left > 0)
 	{
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-			m_tInfo.fX -= m_fSpeed;
+			m_tInfo.fX -= m_fSpeed * DELTA_TIME;
 	}
 	if (m_tRect.right < WINCX)
 	{
 		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-			m_tInfo.fX += m_fSpeed;
+			m_tInfo.fX += m_fSpeed * DELTA_TIME;
 	}
 	if (m_tRect.top > 0)
 	{
 		if (GetAsyncKeyState(VK_UP) & 0x8000)
-			m_tInfo.fY -= m_fSpeed;
+			m_tInfo.fY -= m_fSpeed * DELTA_TIME;
 	}
-	if (m_tRect.bottom < WINCX)
+	if (m_tRect.bottom < WINCY)
 	{
 		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-			m_tInfo.fY += m_fSpeed;
+			m_tInfo.fY += m_fSpeed * DELTA_TIME;
 	}
+	
+	static int nMaximumBullet = MAXIMUM_MISSILE;
 
-	if (GetAsyncKeyState('W') & 0x8000)
+
+	// BUTTON_A : 키보드를 누를 경우 최대 4개의 미사일까지 발사
+	if (!m_bArrButton[BUTTON_A] && (GetAsyncKeyState('A') & 0x8000))
+	{
 		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-	if (GetAsyncKeyState('S') & 0x8000)
-		m_pBulletLst->push_back(CreateBullet(BULLET_DOWN));
-	if (GetAsyncKeyState('A') & 0x8000)
-		m_pBulletLst->push_back(CreateBullet(BULLET_LEFT));
-	if (GetAsyncKeyState('D') & 0x8000)
-		m_pBulletLst->push_back(CreateBullet(BULLET_RIGHT));
+
+		if (!(--nMaximumBullet))
+		{
+			m_bArrButton[BUTTON_A] = true;
+			nMaximumBullet = MAXIMUM_MISSILE;
+		}
+	}
+	if (!GetAsyncKeyState('A'))
+		m_bArrButton[BUTTON_A] = false;
+
+	// BUTTON_S : 필살기 버튼 연속입력 방지
+	if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
+	{
+		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
+		m_bArrButton[BUTTON_S] = true;
+	}
+	if (!GetAsyncKeyState('S'))
+		m_bArrButton[BUTTON_S] = false;
+	//if (GetAsyncKeyState('W') & 0x8000)
+	//	m_pBulletLst->push_back(CreateBullet(BULLET_UP));
+	//if (GetAsyncKeyState('D') & 0x8000)
+	//	m_pBulletLst->push_back(CreateBullet(BULLET_RIGHT));
 }

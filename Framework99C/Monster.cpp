@@ -19,7 +19,7 @@ void CMonster::Initialize()
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 
-	m_fSpeed = 5.f;
+	m_fSpeed = 300.f;
 }
 
 int CMonster::Update()
@@ -45,7 +45,7 @@ void CMonster::Release()
 
 void CMonster::IsMoving()
 {
-	m_tInfo.fX += m_fSpeed;
+	m_tInfo.fX += m_fSpeed * DELTA_TIME;
 }
 
 void CMonster::IsOutRange()
