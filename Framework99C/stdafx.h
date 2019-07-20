@@ -39,6 +39,7 @@ using namespace std;
 #include "Extern.h"
 #include "Function.h"
 #include "Struct.h"
+#include "Texture.h"
 
 // Manager Headers
 #include "AbstractFactory.h"

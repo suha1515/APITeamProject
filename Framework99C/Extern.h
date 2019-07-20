@@ -11,5 +11,9 @@ extern float g_fDeltaTime;
 extern float g_fElapsedTime;
 extern float g_fTimeScale;
 
+
+// 리소스 매니저 만들기 전까지 사용할 전역변수
+extern HINSTANCE hInst;
+
 #define __EXTERN_H__
 #endif

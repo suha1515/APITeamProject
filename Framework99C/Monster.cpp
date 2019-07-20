@@ -46,12 +46,21 @@ void CMonster::Release()
 void CMonster::IsMoving()
 {
 	m_tInfo.fX += m_fSpeed * DELTA_TIME;
+	CGameObject::UpdateRect();
+
+	if (m_tRect.left < 0.f)
+		m_tInfo.fX += 0.f - m_tRect.left;
+	else if(m_tRect.right > WINCX)
+		m_tInfo.fX -= m_tRect.right - WINCX;
+
+	CGameObject::UpdateRect();
+
 }
 
 void CMonster::IsOutRange()
 {
 	CGameObject::UpdateRect();
 
-	if (0 >= m_tRect.left || WINCX <= m_tRect.right)
-		m_fSpeed *= -1.f;
+	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
+		m_fSpeed *= -1;
 }
