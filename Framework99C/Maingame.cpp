@@ -2,6 +2,7 @@
 #include "Maingame.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Stage.h"
 
 CMaingame::CMaingame()	
 {
@@ -20,6 +21,10 @@ void CMaingame::Initialize()
 	srand((unsigned)time(nullptr));
 
 	CGameObject* pGameObject = nullptr;
+
+	// Stage
+	pGameObject = CAbstractFactory<CStage>::CreateObject();
+	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
@@ -60,7 +65,7 @@ void CMaingame::Update()
 		}
 	}	
 
-	//CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+	CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
 	CCollsionMgr::CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
 }
 

@@ -2,6 +2,8 @@
 
 #ifndef __DEFINE_H__
 
+#pragma comment (lib, "msimg32")
+
 #define WINCX 700
 #define WINCY 1000
 
