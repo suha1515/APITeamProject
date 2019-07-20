@@ -23,7 +23,7 @@ void CBullet::Initialize()
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 
-	m_fSpeed = 20.f;
+	m_fSpeed = 1000.f;
 }
 
 int CBullet::Update()
@@ -52,16 +52,16 @@ void CBullet::IsMoving()
 	switch (m_eDirection)
 	{
 	case BULLET_LEFT:
-		m_tInfo.fX -= m_fSpeed;
+		m_tInfo.fX -= m_fSpeed * DELTA_TIME;
 		break;
 	case BULLET_RIGHT:
-		m_tInfo.fX += m_fSpeed;
+		m_tInfo.fX += m_fSpeed * DELTA_TIME;
 		break;
 	case BULLET_UP:
-		m_tInfo.fY -= m_fSpeed;
+		m_tInfo.fY -= m_fSpeed * DELTA_TIME;
 		break;
 	case BULLET_DOWN:
-		m_tInfo.fY += m_fSpeed;
+		m_tInfo.fY += m_fSpeed * DELTA_TIME;
 		break;
 	}
 }
