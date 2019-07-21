@@ -3,46 +3,71 @@
 
 
 CTexture::CTexture()
+	:m_hMemDC(NULL)
 {
-	m_hDC = g_hDC;
+	m_bColorKeyEnable = false;
+	m_tColorKey = RGB(255, 0, 255);
 }
 
 
 CTexture::~CTexture()
 {
-	m_hBitmap = (HBITMAP)SelectObject(m_hDC, m_hOldBitmap);
+	m_hBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hOldBitmap);
 	DeleteObject(m_hBitmap);
 	DeleteDC(m_hMemDC);
 }
 
-void CTexture::Render(HDC hDC)
+
+bool CTexture::LoadTexture(HINSTANCE hInst, HDC hDC, const string & strKey, const TCHAR * pFileName, const string & strPathKey)
 {
-	BitBlt(hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, m_tPivot.fY, SRCCOPY);
-}
+	if(!m_hMemDC)
+		m_hMemDC = CreateCompatibleDC(hDC);
 
-bool CTexture::SetTexture(HINSTANCE _hInst, wstring _strPath, wstring _strFileName)
-{
+	// 전체 경로
+	const TCHAR* pPath = CPathMgr::FindPath(strPathKey);
 
-	if (!m_hMemDC)
-	{
-		m_hBitmap = (HBITMAP)LoadImage(_hInst, (_strPath + _strFileName).c_str(), IMAGE_BITMAP, 700, 8030, LR_LOADFROMFILE);
-		m_hMemDC = CreateCompatibleDC(m_hDC);
-		m_hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBitmap);
-		GetObject(m_hBitmap, sizeof(BITMAP), &m_tBit);
-	}
+	wstring strPath;
 
+	if (pPath)
+		strPath = pPath;
+
+	strPath += pFileName;
+
+	if(!m_hBitmap)
+		m_hBitmap = (HBITMAP)LoadImage(hInst, strPath.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
 	return true;
 }
 
-void CTexture::SetPivot(INFO _pivot)
+BITMAP CTexture::GetBitmap()
 {
-	m_tPivot = _pivot;
+	return m_tBit;
 }
 
-HBITMAP CTexture::GetBitmap()
+bool CTexture::GetKeyEnable()
 {
-	return m_hBitmap;
+	return m_bColorKeyEnable;
+}
+
+COLORREF CTexture::GetColorKey()
+{
+	return m_tColorKey;
+}
+
+void CTexture::Render(HDC hDC)
+{
+	m_hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBitmap); // Q.매번 출력전에 선택해줘야되는거같은데이유는?!
+	GetObject(m_hBitmap, sizeof(BITMAP), &m_tBit);
+}
+
+void CTexture::SetPivot(INFO pivot)
+{
+	m_tPivot = pivot;
+}
+
+void CTexture::SetColorKey(COLORREF colorKey)
+{
+	m_tColorKey = colorKey;
 }
 
 HDC CTexture::GetDC()

@@ -17,14 +17,22 @@ void CMaingame::Initialize()
 {
 	// GetDC: 출력 DC 생성 함수.
 	m_hDC = g_hDC;
+	m_hInst = g_hInst;
+	m_hMemDC = CreateCompatibleDC(m_hDC);
 
+	bitmap = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
+	oldbitmap = (HBITMAP)SelectObject(m_hMemDC, bitmap);
 	srand((unsigned)time(nullptr));
+
+	CPathMgr::Initialize();
+
+	CResourceMgr::Initialize(m_hInst, m_hDC);
 
 	CGameObject* pGameObject = nullptr;
 
 	// Stage
 	pGameObject = CAbstractFactory<CStage>::CreateObject();
-	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+	m_ObjLst[OBJECT_STAGE].push_back(pGameObject);
 
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
@@ -32,12 +40,12 @@ void CMaingame::Initialize()
 	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
 	// Monster
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
-		float x = float(rand() % (WINCX - 200)) + 100.f;
-		float y = float(rand() % (WINCY - 200)) + 100.f;
+		//float x = float(rand() % (WINCX - 200)) + 100.f;
+		//float y = float(rand() % (WINCY - 200)) + 100.f;
 
-		pGameObject = CAbstractFactory<CMonster>::CreateObject(x, y);
+		pGameObject = CAbstractFactory<CMonster>::CreateObject();
 		m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	}
 }
@@ -76,16 +84,18 @@ void CMaingame::Render()
 	for (int i = 0; i < OBJECT_END; ++i)
 	{
 		for (auto& pObject : m_ObjLst[i])
-			pObject->Render(m_hDC);
+			pObject->Render(m_hMemDC);
 	}
 
-	BitBlt(GetDC(g_hWnd), 0, 0, WINCX, WINCY, m_hDC, 0, 0, SRCCOPY);
+	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
 }	
 
 void CMaingame::Release()
 {
 	// GetDC함수로 할당받은 DC는 아래 함수로 해제해주어야 한다.
-	ReleaseDC(g_hWnd, m_hDC);
+	bitmap = (HBITMAP)SelectObject(m_hMemDC, oldbitmap);
+	DeleteObject(bitmap);
+	DeleteDC(m_hMemDC);
 
 	for (int i = 0; i < OBJECT_END; ++i)
 	{

@@ -1,23 +1,29 @@
 #pragma once
 class CTexture
 {
+	friend class ResourceMgr;
 public:
 	CTexture();
 	~CTexture();
 
 public:
+	bool LoadTexture(HINSTANCE hInst, HDC hDC, const string& strKey,
+		const TCHAR* pFileName, const string& strPathKey = TEXTURE_PATH);
+
+public:
+	HDC GetDC();
+	BITMAP GetBitmap();
+	bool GetKeyEnable();
+	COLORREF GetColorKey();
 	void Render(HDC hDC);
+	
 
 public:
-	bool SetTexture(HINSTANCE _hInst, wstring _strPath, wstring _strFileName);
-	void SetPivot(INFO _pivot);
-
-public:
-	HBITMAP GetBitmap();
-	HDC	GetDC();
+	void SetPivot(INFO pivot);
+	void SetColorKey(COLORREF colorKey);
+	
 
 private:
-	HDC m_hDC;
 	HDC m_hMemDC;
 
 	HBITMAP m_hBitmap;
@@ -25,5 +31,8 @@ private:
 	BITMAP m_tBit;
 
 	INFO m_tPivot;
+
+	bool m_bColorKeyEnable;
+	COLORREF m_tColorKey;
 };
 
