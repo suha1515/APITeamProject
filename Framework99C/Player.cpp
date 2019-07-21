@@ -25,19 +25,22 @@ void CPlayer::Initialize()
 	m_tInfo.fCY = 100.f;
 
 	m_fSpeed = 350.f;
+
+	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player.bmp"));
 }
 
 int CPlayer::Update()
 {
 	KeyInput();
+	CGameObject::UpdateRect();
 
 	return NO_EVENT;
 }
 
 void CPlayer::Render(HDC hDC)
 {
-	CGameObject::UpdateRect();
-	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	m_pTexture->Render(hDC);
+	TransparentBlt(hDC, m_tInfo.fX - 40, m_tInfo.fY - 40, 80, 80, m_pTexture->GetDC(), 0, 0, 80, 80, RGB(255, 255, 255));
 }
 
 void CPlayer::Release()

@@ -32,5 +32,7 @@ protected:
 
 	float	m_fSpeed;
 	bool	m_bIsDead;
+
+	CTexture* m_pTexture;
 };
 
