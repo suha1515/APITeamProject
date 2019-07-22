@@ -27,24 +27,27 @@ void CPlayer::Initialize()
 	m_fSpeed = 350.f;
 
 	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player.bmp"));
+	m_pTexture->SetColorKey(RGB(255, 255, 255));
 }
 
 int CPlayer::Update()
 {
 	KeyInput();
 	CGameObject::UpdateRect();
+	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+	m_pTexture->SetXY(0.f, 2.f);
 
 	return NO_EVENT;
 }
 
 void CPlayer::Render(HDC hDC)
 {
-	m_pTexture->Render(hDC);
-	TransparentBlt(hDC, m_tInfo.fX - 40, m_tInfo.fY - 40, 80, 80, m_pTexture->GetDC(), 0, 0, 80, 80, RGB(255, 255, 255));
+	m_pTexture->DrawTexture(hDC, m_tImgInfo);
 }
 
 void CPlayer::Release()
 {
+	m_pTexture->SafeDelete();
 }
 
 CGameObject* CPlayer::CreateBullet()

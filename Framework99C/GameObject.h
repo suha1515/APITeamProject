@@ -13,7 +13,6 @@ public:
 	void SetPos(float x, float y);
 	void SetDead(bool bIsDead);
 
-	// virtual
 public:
 	virtual void Initialize() = 0;
 	virtual int Update() = 0;
@@ -22,13 +21,14 @@ public:
 protected:
 	virtual void Release() = 0;
 
-	// 
 protected:
 	void UpdateRect();
+	void UpdateImgInfo(float CImgX, float CImgY);
 
 protected:
 	INFO	m_tInfo;
 	RECT	m_tRect;
+	IMGINFO	m_tImgInfo;
 
 	float	m_fSpeed;
 	bool	m_bIsDead;

@@ -21,6 +21,7 @@ void CMonster::Initialize()
 
 	m_fSpeed = 0.f;
 	m_pTexture = CResourceMgr::LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+	m_pTexture->SetColorKey(RGB(0, 128, 128));
 }
 
 int CMonster::Update()
@@ -31,18 +32,19 @@ int CMonster::Update()
 	IsMoving();
 	IsOutRange();
 	CGameObject::UpdateRect();
+	CGameObject::UpdateImgInfo(300.f, 300.f);
 
 	return NO_EVENT;
 }
 
 void CMonster::Render(HDC hDC)
 {
-	m_pTexture->Render(hDC);
-	TransparentBlt(hDC, m_tInfo.fX - (354 /2), m_tInfo.fY - (372 / 2), 354, 372, m_pTexture->GetDC(), 0, 0, 116, 122, RGB(0, 128, 128));
+	m_pTexture->DrawTexture(hDC, m_tImgInfo);
 }
 
 void CMonster::Release()
 {
+	m_pTexture->SafeDelete();
 }
 
 void CMonster::IsMoving()

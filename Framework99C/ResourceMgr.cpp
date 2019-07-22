@@ -28,7 +28,10 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 	CTexture* pTexture = FindTexture(strKey);
 
 	if (pTexture)
+	{
+		pTexture->AddRef();
 		return pTexture;
+	}
 
 	pTexture = new CTexture;
 
@@ -36,7 +39,7 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 	{
 		if (pTexture)
 		{
-			delete pTexture;
+			pTexture->SafeDelete();
 			pTexture = nullptr;
 			return pTexture;
 		}

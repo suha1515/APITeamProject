@@ -70,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		dwCurTime = GetTickCount();
 
-		if (dwCurTime - dwOldTime >= 33) // 0.01초 간격으로 진행.
+		if (dwCurTime - dwOldTime >= 10) // 0.01초 간격으로 진행.
 		{
 			g_fDeltaTime = (int(dwCurTime - dwOldTime)) / 1000.f; // GetTickCount가 1000단위이므로 1000으로 나눠 줌
 			g_fElapsedTime += g_fDeltaTime;
