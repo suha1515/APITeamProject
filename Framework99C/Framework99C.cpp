@@ -9,9 +9,7 @@
 
 // 전역 변수:
 HWND g_hWnd;
-// 더블 버퍼링을 위한 변수
 HDC	g_hDC;
-HBITMAP g_hBitmap;
 
 // 프레임간 간격관련 변수
 float g_fDeltaTime;
@@ -21,7 +19,7 @@ float g_fTimeScale = 1.f;
 TCHAR g_strFPS[10];
 int g_nFPS;
 
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HINSTANCE g_hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -72,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		dwCurTime = GetTickCount();
 
-		if (dwCurTime - dwOldTime >= 10) // 0.01초 간격으로 진행.
+		if (dwCurTime - dwOldTime >= 33) // 0.01초 간격으로 진행.
 		{
 			g_fDeltaTime = (int(dwCurTime - dwOldTime)) / 1000.f; // GetTickCount가 1000단위이므로 1000으로 나눠 줌
 			g_fElapsedTime += g_fDeltaTime;
@@ -122,7 +120,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+   g_hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    RECT rc = { 0, 0, WINCX, WINCY };
 
@@ -134,21 +132,17 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, L"Hello world", WS_OVERLAPPEDWINDOW,
 	   WINCX / 2, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
 
-  g_hDC = CreateCompatibleDC(GetDC(hWnd));
-  g_hBitmap = CreateCompatibleBitmap(GetDC(hWnd),WINCX,WINCY);
-  SelectObject(g_hDC, g_hBitmap);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   g_hWnd = hWnd;
+	g_hWnd = hWnd;
+	g_hDC = GetDC(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
-   DeleteObject(g_hBitmap);
 
    return TRUE;
 }

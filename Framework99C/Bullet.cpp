@@ -25,7 +25,9 @@ void CBullet::Initialize()
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 
-	m_tInfo.fSpeed = 1000.f;
+
+	m_tInfo.fSpeed = 600.f;
+	m_pTexture = CResourceMgr::LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
 }
 
 int CBullet::Update()
@@ -35,14 +37,15 @@ int CBullet::Update()
 
 	IsMoving();
 	IsOutRange();	
+	CGameObject::UpdateRect();
 
 	return NO_EVENT;
 }
 
 void CBullet::Render(HDC hDC)
 {
-	CGameObject::UpdateRect();
-	Ellipse(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	m_pTexture->Render(hDC);
+	TransparentBlt(hDC, m_tInfo.fX - (48 / 2), m_tInfo.fY - (50 / 2), 48, 48, m_pTexture->GetDC(), 0, 0, 48, 48, RGB(255, 255, 255));
 }
 
 void CBullet::Release()

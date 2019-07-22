@@ -9,6 +9,8 @@
 
 #define DELTA_TIME (g_fDeltaTime * g_fTimeScale)
 
+#define ROOT_PATH "ROOT_PATH"
+#define TEXTURE_PATH "TEXTURE_PATH"
 
 #define NO_EVENT 0
 #define DEAD_OBJ 1

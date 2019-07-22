@@ -37,6 +37,9 @@
     <Filter Include="97.Managers\02.ResourceMgr">
       <UniqueIdentifier>{bec10d55-95fd-48f4-97b4-bf83c420e11d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Managers\03.PathMgr">
+      <UniqueIdentifier>{ebcaba24-5a47-4990-bc50-89e33efbef20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework99C.h">
@@ -96,6 +99,12 @@
     <ClInclude Include="Texture.h">
       <Filter>97.Managers\02.ResourceMgr</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceMgr.h">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="PathMgr.h">
+      <Filter>97.Managers\03.PathMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework99C.cpp">
@@ -127,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceMgr.cpp">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="PathMgr.cpp">
+      <Filter>97.Managers\03.PathMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
