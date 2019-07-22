@@ -29,7 +29,6 @@ void CPlayer::Initialize()
 	m_tInfo.fSpeed = 350.f;
 
 	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player.bmp"));
-
 }
 
 int CPlayer::Update()
@@ -73,13 +72,8 @@ void CPlayer::KeyInput()
 {
 	VECTOR2D vector(0, 0);
 	// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
-	if (CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
-	{
-		m_tInfo.fX += vector.x;
-		m_tInfo.fY += vector.y;
-	}
-	else
-	{
+	CCollsionMgr::CollisionRectEX(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER]);
+
 		//플레이어 영역 제한 버벅거리는거 없음.
 		if (m_tRect.left > 0)
 		{
@@ -101,11 +95,7 @@ void CPlayer::KeyInput()
 			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 				m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		}
-	}
-
 	static int nMaximumBullet = MAXIMUM_MISSILE;
-
-	
 
 	// BUTTON_A : 키보드를 누를 경우 최대 4개의 미사일까지 발사
 	if (!m_bArrButton[BUTTON_A] && (GetAsyncKeyState('A') & 0x8000))

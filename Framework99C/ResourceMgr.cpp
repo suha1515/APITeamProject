@@ -36,6 +36,7 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 	{
 		if (pTexture)
 		{
+			cout << "파일을 불러올 수 없습니다" << endl;
 			delete pTexture;
 			pTexture = nullptr;
 			return pTexture;

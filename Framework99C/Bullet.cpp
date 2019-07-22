@@ -54,6 +54,7 @@ void CBullet::Release()
 	OBJLIST::iterator iter_find = find(m_ObjLst[OBJLECT_BULLET].begin(), m_ObjLst[OBJLECT_BULLET].end(), this);
 	if (iter_find != m_ObjLst[OBJLECT_BULLET].end())
 	{
+		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		m_ObjLst[OBJLECT_BULLET].erase(iter_find);
 	}
 }
@@ -72,7 +73,6 @@ void CBullet::IsMoving()
 		m_tInfo.fY -= m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	case BULLET_DOWN:
-		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	}
 }
