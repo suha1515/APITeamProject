@@ -22,13 +22,14 @@
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 
 // Standard Headers
+#include <iostream>
 #include <string>
 #include <list>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <algorithm>
 #include <functional>
-#include <iostream>
 
 using namespace std;
 
@@ -43,6 +44,8 @@ using namespace std;
 // Manager Headers
 #include "AbstractFactory.h"
 #include "CollsionMgr.h"
+#include "ResourceMgr.h"
+#include "PathMgr.h"
 
-//#pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
+#pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //출처: https://alleysark.tistory.com/36 [앨리삵]

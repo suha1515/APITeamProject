@@ -9,12 +9,17 @@
 
 // 전역 변수:
 HWND g_hWnd;
-// 더블 버퍼링을 위한 변수
 HDC	g_hDC;
-HBITMAP g_hBitmap;
 
+// 프레임간 간격관련 변수
+float g_fDeltaTime;
+float g_fElapsedTime;
+float g_fTimeScale = 1.f;
+// FPS 관련 변수
+TCHAR g_strFPS[10];
+int g_nFPS;
 
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HINSTANCE g_hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -65,23 +70,33 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		dwCurTime = GetTickCount();
 
-		if (dwCurTime - dwOldTime >= 10) // 0.01초 간격으로 진행.
+		if (dwCurTime - dwOldTime >= 33) // 0.01초 간격으로 진행.
 		{
+			g_fDeltaTime = (int(dwCurTime - dwOldTime)) / 1000.f; // GetTickCount가 1000단위이므로 1000으로 나눠 줌
+			g_fElapsedTime += g_fDeltaTime;
+
 			mainGame.Update();
 			mainGame.Render();
 
 			dwOldTime = dwCurTime;
+
+			++g_nFPS;
 		}
+
+		TextOut(g_hDC, 50, 50, g_strFPS, lstrlen(g_strFPS));
+
+		if (1.f <= g_fElapsedTime)
+		{
+			g_fElapsedTime -= 1.f;
+			swprintf_s(g_strFPS, _T("%d"), g_nFPS);
+			g_nFPS = 0;
+		}
+		
 	}	
 
     return (int) msg.wParam;
 }
 
-//
-//  함수: MyRegisterClass()
-//
-//  목적: 창 클래스를 등록합니다.
-//
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
@@ -103,19 +118,9 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-//
-//   함수: InitInstance(HINSTANCE, int)
-//
-//   목적: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
-//
-//   설명:
-//
-//        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
-//        주 프로그램 창을 만든 다음 표시합니다.
-//
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+   g_hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    RECT rc = { 0, 0, WINCX, WINCY };
 
@@ -125,37 +130,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
    HWND hWnd = CreateWindowW(szWindowClass, L"Hello world", WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
+	   WINCX / 2, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
 
-  g_hDC = CreateCompatibleDC(GetDC(hWnd));
-  g_hBitmap = CreateCompatibleBitmap(GetDC(hWnd),WINCX,WINCY);
-  SelectObject(g_hDC, g_hBitmap);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   g_hWnd = hWnd;
+	g_hWnd = hWnd;
+	g_hDC = GetDC(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   DeleteObject(g_hBitmap);
-
    return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  목적:  주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 응용 프로그램 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
