@@ -11,23 +11,72 @@ CCollsionMgr::~CCollsionMgr()
 {
 }
 
-void CCollsionMgr::CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst)
+bool CCollsionMgr::CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst)
 {
-	RECT rc = {};
-
 	for (auto& pDest : dstLst)
 	{
 		for (auto& pSource : srcLst)
 		{
-			// BOOL IntersectRect(RECT* pOut, const RECT* pIn1, const RECT* pIn2)
-			// 두 사각형의 충돌을 검사하는 API 함수
-			if (IntersectRect(&rc, &(pDest->GetRect()), &(pSource->GetRect())))
+			//기저축에 정렬된 충돌 박스 체크 매우 간단한 충돌알고리즘이다.
+			RECT dstRect = pDest->GetRect();
+			RECT srcRect = pSource->GetRect();
+			//x축에 대하여 겹치는지 체크.
+			if (dstRect.right - srcRect.left > 0 && srcRect.right - dstRect.left>0)
 			{
-				pDest->SetDead(true);
-				pSource->SetDead(true);
+				//y축에 대하여 겹치는지 체크.
+				if (dstRect.bottom - srcRect.top > 0 && srcRect.bottom - dstRect.top>0)
+				{
+					cout <<"hit colider!" << endl;
+					return true;
+				}
 			}
 		}
 	}
+	return false;
+}
+
+bool CCollsionMgr::CollisionRect(const OBJLIST & dstLst, const OBJLIST & srcLst, VECTOR2D* depth)
+{
+	for (auto& pDest : dstLst)
+	{
+		for (auto& pSource : srcLst)
+		{
+			//기저축에 정렬된 충돌 박스 체크 매우 간단한 충돌알고리즘이다.
+			RECT dstRect = pDest->GetRect();
+			RECT srcRect = pSource->GetRect();
+			//x축에 대하여 겹치는지 체크.
+			if (dstRect.right - srcRect.left > 0 && srcRect.right - dstRect.left>0)
+			{
+				//y축에 대하여 겹치는지 체크.
+				if (dstRect.bottom - srcRect.top > 0 && srcRect.bottom - dstRect.top>0)
+				{
+					cout << "hit colider!" << endl;
+					//A는 왼쪽 B는 오른쪽
+					if (dstRect.right < srcRect.right)
+					{
+						depth->x = -pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
+					}
+					//A는 오른쪽 B는 왼쪽
+					else
+					{
+						depth->x = pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
+					}
+					//A는 위 B는 아래
+					if (dstRect.bottom < srcRect.bottom)
+					{
+						depth->y = -pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
+					}
+					//A는 아래 B는 위
+					else 
+					{
+						depth->y = pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
+					}
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 void CCollsionMgr::CollisionSphere(const OBJLIST& dstLst, const OBJLIST& srcLst)
