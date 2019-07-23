@@ -46,6 +46,7 @@ using namespace std;
 #include "CollsionMgr.h"
 #include "ResourceMgr.h"
 #include "PathMgr.h"
+#include "KeyboardMgr.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

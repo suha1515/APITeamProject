@@ -28,7 +28,7 @@ void CPlayer::Initialize()
 
 	m_tInfo.fSpeed = 350.f;
 
-	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
 }
@@ -77,7 +77,7 @@ void CPlayer::KeyInput()
 {
 	VECTOR2D vector(0, 0);
 	// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
-	if (CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
+	if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
 	{
 		m_tInfo.fX += vector.x;
 		m_tInfo.fY += vector.y;

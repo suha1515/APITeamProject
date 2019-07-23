@@ -2,14 +2,9 @@
 #include "CollsionMgr.h"
 #include "GameObject.h"
 
-CCollsionMgr::CCollsionMgr()
-{
-}
+DEFINE_SINGLE_TONE(CCollsionMgr)
 
-
-CCollsionMgr::~CCollsionMgr()
-{
-}
+void CCollsionMgr::Initialize() {};
 
 bool CCollsionMgr::CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst)
 {

@@ -30,5 +30,12 @@ private:
 	//메인게임에서 모든 오브젝를 관리하니 접근가능하게
 	//-정보성-
 	OBJLIST	m_ObjLst[OBJECT_END];
+
+
+	// 매니저
+	CCollsionMgr* m_pCollsionMgr;
+	CPathMgr* m_pPathMgr;
+	CResourceMgr* m_pResourceMgr;
+	CKeyboardMgr* m_pKeyboardMgr;
 };
 

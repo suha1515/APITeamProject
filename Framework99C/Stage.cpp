@@ -18,7 +18,7 @@ void CStage::Initialize()
 	m_tInfo.fCX = WINCX;
 	m_tInfo.fCY = WINCY;
 
-	m_pTexture = CResourceMgr::LoadTexture("Stage_1", _T("Stage/StageBack/Stage_1.bmp"));
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Stage_1", _T("Stage/StageBack/Stage_1.bmp"));
 	m_pTexture->SetKeyEnable(false);
 }
 

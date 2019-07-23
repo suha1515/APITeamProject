@@ -25,9 +25,17 @@ void CMaingame::Initialize()
 	oldbitmap = (HBITMAP)SelectObject(m_hMemDC, bitmap);
 	srand((unsigned)time(nullptr));
 
-	CPathMgr::Initialize();
+	// CollisionMgr
+	m_pCollsionMgr = CCollsionMgr::GetInstance();
 
-	CResourceMgr::Initialize(m_hInst, m_hDC);
+	// PathMgr
+	m_pPathMgr = CPathMgr::GetInstance();
+
+	// ResourceMgr
+	m_pResourceMgr = CResourceMgr::GetInstance();
+
+	// KeyboardMgr
+	m_pKeyboardMgr = CKeyboardMgr::GetInstance();
 
 	CGameObject* pGameObject = nullptr;
 
@@ -108,4 +116,11 @@ void CMaingame::Release()
 		for_each(m_ObjLst[i].begin(), m_ObjLst[i].end(), SafeDelete<CGameObject*>);
 		m_ObjLst[i].clear();
 	}	
+
+	// 매니저 해제
+	CCollsionMgr::DeleteInstance();
+	CPathMgr::DeleteInstance();
+	CResourceMgr::DeleteInstance();
+	CKeyboardMgr::DeleteInstance();
+
 }
