@@ -4,6 +4,8 @@
 
 CMonster::CMonster()
 {
+	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
+	m_ObjLst[OBJECT_MONSTER].push_back(this);
 }
 
 
@@ -19,7 +21,9 @@ void CMonster::Initialize()
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 
-	m_fSpeed = 0.f;
+
+	m_tInfo.fSpeed = 300.f;
+
 	m_pTexture = CResourceMgr::LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 	m_pTexture->SetColorKey(RGB(0, 128, 128));
 }
@@ -45,11 +49,18 @@ void CMonster::Render(HDC hDC)
 void CMonster::Release()
 {
 	m_pTexture->SafeDelete();
+	
+	// 삭제시 리스트에서 오브젝트를 삭제
+	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_MONSTER].begin(), m_ObjLst[OBJECT_MONSTER].end(), this);
+	if (iter_find != m_ObjLst[OBJECT_MONSTER].end())
+	{
+		m_ObjLst[OBJECT_MONSTER].erase(iter_find);
+	}
 }
 
 void CMonster::IsMoving()
 {
-	m_tInfo.fX += m_fSpeed * DELTA_TIME;
+	m_tInfo.fX += m_tInfo.fSpeed  * DELTA_TIME;
 	CGameObject::UpdateRect();
 
 	if (m_tRect.left < 0.f)
@@ -66,5 +77,5 @@ void CMonster::IsOutRange()
 	CGameObject::UpdateRect();
 
 	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
-		m_fSpeed *= -1;
+		m_tInfo.fSpeed *= -1;
 }

@@ -47,5 +47,5 @@ using namespace std;
 #include "ResourceMgr.h"
 #include "PathMgr.h"
 
-//#pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
+#pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

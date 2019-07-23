@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-
+OBJLIST CGameObject::m_ObjLst[OBJECT_END];
 CGameObject::CGameObject()
-	: m_fSpeed(0.f), m_bIsDead(false)
+	:  m_bIsDead(false)
 {
 }
 

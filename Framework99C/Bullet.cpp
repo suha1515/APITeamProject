@@ -5,6 +5,8 @@
 CBullet::CBullet()
 	: m_eDirection(BULLET_UP)
 {
+	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
+	m_ObjLst[OBJLECT_BULLET].push_back(this);
 }
 
 
@@ -23,7 +25,8 @@ void CBullet::Initialize()
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 
-	m_fSpeed = 1800.f;
+	m_tInfo.fSpeed = 600.f;
+
 	m_pTexture = CResourceMgr::LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 }
@@ -48,6 +51,12 @@ void CBullet::Render(HDC hDC)
 void CBullet::Release()
 {
 	m_pTexture->SafeDelete();
+	// 삭제시 리스트에서 오브젝트를 삭제
+	OBJLIST::iterator iter_find = find(m_ObjLst[OBJLECT_BULLET].begin(), m_ObjLst[OBJLECT_BULLET].end(), this);
+	if (iter_find != m_ObjLst[OBJLECT_BULLET].end())
+	{
+		m_ObjLst[OBJLECT_BULLET].erase(iter_find);
+	}
 }
 
 void CBullet::IsMoving()
@@ -55,16 +64,16 @@ void CBullet::IsMoving()
 	switch (m_eDirection)
 	{
 	case BULLET_LEFT:
-		m_tInfo.fX -= m_fSpeed * DELTA_TIME;
+		m_tInfo.fX -= m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	case BULLET_RIGHT:
-		m_tInfo.fX += m_fSpeed * DELTA_TIME;
+		m_tInfo.fX += m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	case BULLET_UP:
-		m_tInfo.fY -= m_fSpeed * DELTA_TIME;
+		m_tInfo.fY -= m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	case BULLET_DOWN:
-		m_tInfo.fY += m_fSpeed * DELTA_TIME;
+		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	}
 }

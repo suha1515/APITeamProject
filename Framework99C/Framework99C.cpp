@@ -91,6 +91,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			swprintf_s(g_strFPS, _T("%d"), g_nFPS);
 			g_nFPS = 0;
 		}
+		
 	}	
 
     return (int) msg.wParam;
