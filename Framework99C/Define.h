@@ -15,7 +15,7 @@
 #define NO_EVENT 0
 #define DEAD_OBJ 1
 
-#define MAXIMUM_MISSILE 4
+#define MAXIMUM_MISSILE 7
 
 #define __DEFINE_H__
 #endif

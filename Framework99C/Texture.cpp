@@ -3,10 +3,11 @@
 
 
 CTexture::CTexture()
-	:m_hMemDC(NULL)
+	:m_hMemDC(NULL), nTextureRef(0)
 {
-	m_bColorKeyEnable = false;
+	m_bColorKeyEnable = true;
 	m_tColorKey = RGB(255, 0, 255);
+	AddRef();
 }
 
 
@@ -36,7 +37,23 @@ bool CTexture::LoadTexture(HINSTANCE hInst, HDC hDC, const string & strKey, cons
 	if(!m_hBitmap)
 		m_hBitmap = (HBITMAP)LoadImage(hInst, strPath.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
+	m_hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBitmap); // Q.매번 출력전에 선택해줘야되는거같은데이유는?!
+	GetObject(m_hBitmap, sizeof(BITMAP), &m_tBit);
 	return true;
+}
+
+void CTexture::AddRef()
+{
+	nTextureRef++;
+}
+
+void CTexture::SafeDelete()
+{
+	nTextureRef--;
+	if (0 == nTextureRef)
+	{
+		delete this;
+	}
 }
 
 BITMAP CTexture::GetBitmap()
@@ -54,21 +71,31 @@ COLORREF CTexture::GetColorKey()
 	return m_tColorKey;
 }
 
-void CTexture::Render(HDC hDC)
+void CTexture::DrawTexture(HDC hDC, IMGINFO& imgInfo)
 {
-	m_hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBitmap); // Q.매번 출력전에 선택해줘야되는거같은데이유는?!
-	GetObject(m_hBitmap, sizeof(BITMAP), &m_tBit);
-}
-
-void CTexture::SetPivot(INFO pivot)
-{
-	m_tPivot = pivot;
+	if (m_bColorKeyEnable)
+	{
+		TransparentBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
+			imgInfo.fImgCX, imgInfo.fImgCY, m_hMemDC, 0, 0, m_tBit.bmWidth / maxX , m_tBit.bmHeight, m_tColorKey);
+	}
+	else
+	{
+		BitBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
+			imgInfo.fImgCX, imgInfo.fImgCY, m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
+				//BitBlt(hDC, 0,0,WINCX,WINCY,m_hMemDC, 0, imgInfo.fY, SRCCOPY);
+	}
 }
 
 void CTexture::SetColorKey(COLORREF colorKey)
 {
 	m_tColorKey = colorKey;
 }
+
+void CTexture::SetKeyEnable(bool keyEnable)
+{
+	m_bColorKeyEnable = keyEnable;
+}
+
 
 HDC CTexture::GetDC()
 {

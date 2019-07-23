@@ -11,6 +11,19 @@ typedef struct tagInfo
 	float fSpeed = 0.f;
 }INFO;
 
+typedef struct tagImgInfo
+{
+	// 중심 좌표
+	float fX = 0.f;
+	float fY = 0.f;
+	// 이미지 피봇
+	float fPivotX = 0.f;
+	float fPivotY = 0.f;
+	// 이미지 크기
+	float fImgCX = 0.f;
+	float fImgCY = 0.f;
+
+}IMGINFO;
 //2차원상 벡터를 표현하기위한 구조체
 //-정보성-
 typedef struct tVector2D

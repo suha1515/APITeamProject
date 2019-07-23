@@ -25,9 +25,10 @@ void CBullet::Initialize()
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 
-
 	m_tInfo.fSpeed = 600.f;
+
 	m_pTexture = CResourceMgr::LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
+	m_pTexture->SetColorKey(RGB(255, 255, 255));
 }
 
 int CBullet::Update()
@@ -38,18 +39,18 @@ int CBullet::Update()
 	IsMoving();
 	IsOutRange();	
 	CGameObject::UpdateRect();
-
+	CGameObject::UpdateImgInfo(m_tInfo.fCX * 6, m_tInfo.fCY * 10);
 	return NO_EVENT;
 }
 
 void CBullet::Render(HDC hDC)
 {
-	m_pTexture->Render(hDC);
-	TransparentBlt(hDC, m_tInfo.fX - (48 / 2), m_tInfo.fY - (50 / 2), 48, 48, m_pTexture->GetDC(), 0, 0, 48, 48, RGB(255, 255, 255));
+	m_pTexture->DrawTexture(hDC, m_tImgInfo);
 }
 
 void CBullet::Release()
 {
+	m_pTexture->SafeDelete();
 	// 삭제시 리스트에서 오브젝트를 삭제
 	OBJLIST::iterator iter_find = find(m_ObjLst[OBJLECT_BULLET].begin(), m_ObjLst[OBJLECT_BULLET].end(), this);
 	if (iter_find != m_ObjLst[OBJLECT_BULLET].end())
