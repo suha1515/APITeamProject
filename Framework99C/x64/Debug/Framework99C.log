@@ -1,6 +1,9 @@
-﻿  CommonMonster.cpp
-c:\users\administrator\desktop\apiteamproject\framework99c\commonmonster.cpp(46): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\desktop\apiteamproject\framework99c\commonmonster.cpp(47): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\administrator\desktop\apiteamproject\framework99c\commonmonster.cpp(91): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  MidBoss.cpp
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(47): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(48): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(52): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(101): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\administrator\desktop\apiteamproject\framework99c\midboss.cpp(107): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Framework99C.vcxproj -> C:\Users\Administrator\Desktop\APITeamProject\x64\Debug\Framework99C.exe
   Framework99C.vcxproj -> C:\Users\Administrator\Desktop\APITeamProject\x64\Debug\Framework99C.pdb (Full PDB)

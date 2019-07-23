@@ -14,7 +14,7 @@ public:
 private:
 	virtual void Release() override;
 
-protected:
+private:
 	void IsMoving();
 	virtual void IsFire() override;
 

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "CommonMonster.h"
+#include "MidBoss.h"
 #include "Stage.h"
 
 CMaingame::CMaingame()	
@@ -47,10 +48,10 @@ void CMaingame::Initialize()
 		//float y = float(rand() % (WINCY - 200)) + 100.f;
 
 		//pGameObject = CAbstractFactory<CMonster>::CreateObject();
-		pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
+		pGameObject = CAbstractFactory<CMidBoss>::CreateObject();
 		// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(&m_ObjLst[OBJECT_PLAYER]);
+		dynamic_cast<CMidBoss*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+		dynamic_cast<CMidBoss*>(pGameObject)->SetPlayer(&m_ObjLst[OBJECT_PLAYER]);
 		m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	}
 }
