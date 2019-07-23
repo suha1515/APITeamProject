@@ -11,7 +11,7 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
-	Release();
+	//Release();
 }
 
 void CPlayer::SetBulletLst(OBJLIST* pBulletLst)
@@ -100,8 +100,7 @@ void CPlayer::KeyInput()
 	// BUTTON_A : 키보드를 누를 경우 최대 4개의 미사일까지 발사
 	if (!m_bArrButton[BUTTON_A] && (GetAsyncKeyState('A') & 0x8000))
 	{
-		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-
+		CreateBullet(BULLET_UP);
 		if (!(--nMaximumBullet))
 		{
 			m_bArrButton[BUTTON_A] = true;
@@ -111,12 +110,13 @@ void CPlayer::KeyInput()
 	if (!GetAsyncKeyState('A'))
 		m_bArrButton[BUTTON_A] = false;
 
-	// BUTTON_S : 필살기 버튼 연속입력 방지
-	if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
-	{
-		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-		m_bArrButton[BUTTON_S] = true;
-	}
+		// BUTTON_S : 필살기 버튼 연속입력 방지
+		if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
+		{
+			CreateBullet(BULLET_UP);
+			m_bArrButton[BUTTON_S] = true;
+			m_bIsAttack = true;
+		}
 	if (!GetAsyncKeyState('S'))
 		m_bArrButton[BUTTON_S] = false;
 	//if (GetAsyncKeyState('W') & 0x8000)

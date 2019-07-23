@@ -7,14 +7,12 @@ public:
 	~CSpawnManager();
 
 public:
-	void SetEnemyPool();
-	void SpawnEnemy(int spawnTime);
+	void SetEnemyPool(SPAWN_INFO* enemy);
+	void SpawnEnemy();
 	void RenderSpawnLocation();
 
 
 private:
-	OBJLIST m_EnemyPool;
+	list<SPAWN_INFO*> m_EnemyPool;
 	VECTOR2D m_SpawnLocation[7];
-
-
 };

@@ -4,6 +4,7 @@
 
 CStage::CStage()
 {
+	m_ObjLst[OBJECT_STAGE].push_back(this);
 }
 
 
@@ -41,4 +42,9 @@ void CStage::Render(HDC hDC)
 
 void CStage::Release()
 {
+	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_STAGE].begin(), m_ObjLst[OBJECT_STAGE].end(), this);
+	if (iter_find != m_ObjLst[OBJECT_STAGE].end())
+	{
+		m_ObjLst[OBJECT_STAGE].erase(iter_find);
+	}
 }

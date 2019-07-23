@@ -24,6 +24,12 @@ const RECT & CGameObject::GetRect() const
 	return m_tRect;
 }
 
+const bool CGameObject::GetDead() const
+{
+
+	return m_bIsDead;
+}
+
 void CGameObject::SetPos(float x, float y)
 {
 	m_tInfo.fX = x;

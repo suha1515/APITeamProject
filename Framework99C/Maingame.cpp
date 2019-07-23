@@ -31,13 +31,13 @@ void CMaingame::Initialize()
 	CGameObject* pGameObject = nullptr;
 
 	// Stage
-	pGameObject = CAbstractFactory<CStage>::CreateObject();
-	m_ObjLst[OBJECT_STAGE].push_back(pGameObject);
+	CAbstractFactory<CStage>::CreateObject();
+	//m_ObjLst[OBJECT_STAGE].push_back(pGameObject);
 
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
-	dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
-	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
+	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
 	// Monster
 	for (int i = 0; i < 1; ++i)
@@ -46,7 +46,7 @@ void CMaingame::Initialize()
 		//float y = float(rand() % (WINCY - 200)) + 100.f;
 
 		pGameObject = CAbstractFactory<CMonster>::CreateObject();
-		m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+		//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	}
 }
 
@@ -56,17 +56,18 @@ void CMaingame::Update()
 	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
 	for (int i = 0; i < OBJECT_END; ++i)
 	{
-		OBJLIST::iterator iter_Begin = m_ObjLst[i].begin();
-		OBJLIST::iterator iter_End = m_ObjLst[i].end();
+		OBJLIST::iterator iter_Begin = CGameObject::m_ObjLst[i].begin();
+		OBJLIST::iterator iter_End = CGameObject::m_ObjLst[i].end();
 
-		for (; iter_Begin != iter_End; )
+		for (; iter_Begin != iter_End;)
 		{
 			int iEvent = (*iter_Begin)->Update();
 
 			if (DEAD_OBJ == iEvent)
 			{
-				SafeDelete(*iter_Begin);
-				iter_Begin = m_ObjLst[i].erase(iter_Begin);
+				SafeDelete((*iter_Begin));
+				iter_Begin = CGameObject::m_ObjLst[i].erase(iter_Begin);
+				//++iter_Begin;
 			}
 			else
 				++iter_Begin;
@@ -74,7 +75,7 @@ void CMaingame::Update()
 	}	
 
 	CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
-	//CCollsionMgr::CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+  //CCollsionMgr::CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
 }
 
 void CMaingame::Render()
@@ -83,8 +84,14 @@ void CMaingame::Render()
 	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
 	for (int i = 0; i < OBJECT_END; ++i)
 	{
-		for (auto& pObject : m_ObjLst[i])
-			pObject->Render(m_hMemDC);
+		OBJLIST::iterator iter_Begin = CGameObject::m_ObjLst[i].begin();
+		OBJLIST::iterator iter_End = CGameObject::m_ObjLst[i].end();
+		for (; iter_Begin != iter_End;)
+		{
+			(*iter_Begin)->Render(m_hMemDC);
+			++iter_Begin;
+		}
+			
 	}
 
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
