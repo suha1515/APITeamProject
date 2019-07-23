@@ -91,10 +91,10 @@ void CMidBoss::IsFire()
 {
 	if (m_fCoolDown < 0)
 	{
-		m_fCoolDown2 -= DELTA_TIME;
+		//m_fCoolDown2 -= DELTA_TIME;
 
 		// 쿨다운이 0초가 되었을 때 양쪽 5연사를 하도록
-		if (m_fCoolDown2 < 0)
+		if (true)
 		{
 			m_fAngle = GetAngle(m_pPlayerLst->front(), &m_Barrel);
 			CGameObject* pBullet1 = new CMonBullet;
@@ -108,13 +108,14 @@ void CMidBoss::IsFire()
 			m_pBulletLst->push_back(pBullet2);
 			dynamic_cast<CMonBullet*>(pBullet2)->SetAngle(m_fAngle);
 
-			m_fCoolDown2 += 1.f;
+			//m_fCoolDown2 += 1.f;
 			++m_iShotCount;
 		}
 
 		if (m_iShotCount > 5)
 		{
 			m_fCoolDown += 3.f;
+			m_iShotCount = 0;
 		}
 	}
 
