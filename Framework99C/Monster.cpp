@@ -3,6 +3,7 @@
 
 
 CMonster::CMonster()
+	:m_iMonType(0)
 {
 	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
 	m_ObjLst[OBJECT_MONSTER].push_back(this);
@@ -58,6 +59,50 @@ void CMonster::Release()
 	}
 }
 
+float CMonster::GetAngle(CGameObject* pDesObj, CGameObject* pSrcObj)
+{
+	float fAngle = atan2(pDesObj->GetInfo().fY - pSrcObj->GetInfo().fY, pDesObj->GetInfo().fX - pSrcObj->GetInfo().fX) * 180 / PI;
+	if (fAngle < 0)
+		fAngle += 360;
+
+	return fAngle;
+}
+
+float CMonster::GetAngle(CGameObject* pDesObj, POINT* pPoint)
+{
+	float fAngle = atan2(pDesObj->GetInfo().fY - pPoint->y, pDesObj->GetInfo().fX - pPoint->x) * 180 / PI;
+	if (fAngle < 0)
+		fAngle += 360;
+
+	return fAngle;
+}
+
+void CMonster::SetDamaged(int dmg)
+{
+	m_iHP -= dmg;
+
+	if (m_iHP <= 0)
+	{
+		m_bIsDead = true;
+	}
+
+}
+
+void CMonster::SetBulletLst(OBJLIST * pBulletLst)
+{
+	m_pBulletLst = pBulletLst;
+}
+
+void CMonster::SetPlayer(OBJLIST * pPlayer)
+{
+	m_pPlayerLst = pPlayer;
+}
+
+void CMonster::SetMonType(int iType)
+{
+	m_iMonType = iType;
+}
+
 void CMonster::IsMoving()
 {
 	m_tInfo.fX += m_tInfo.fSpeed  * DELTA_TIME;
@@ -78,4 +123,8 @@ void CMonster::IsOutRange()
 
 	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
 		m_tInfo.fSpeed *= -1;
+}
+
+void CMonster::IsFire()
+{
 }

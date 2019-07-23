@@ -16,8 +16,34 @@ public:
 private:
 	virtual void Release() override;
 
-private:
+public:
+	// 객체 간의 중점을 기준으로 각도를 측정하거나, 플레이어-몬스터의 총구 간의 각도를 측정함.
+	float GetAngle(CGameObject* pDesObj, CGameObject* pSrcObj);
+	float GetAngle(CGameObject* pDesObj, POINT* pPoint);
+
+public:
+	void SetDamaged(int dmg);
+	void SetBulletLst(OBJLIST* pBulletLst);
+	void SetPlayer(OBJLIST* pPlayer);
+
+public:
+	void SetMonType(int iType);
+
+protected:
 	void IsMoving();
 	void IsOutRange();
+	virtual void IsFire();
+
+protected:
+	int m_iMonType;
+	int m_iHP;
+	int m_iScore;
+	float m_fAngle;
+	float m_fCoolDown;
+
+	POINT m_Barrel;
+
+	OBJLIST* m_pBulletLst;
+	OBJLIST* m_pPlayerLst;
 };
 

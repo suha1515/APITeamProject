@@ -145,6 +145,7 @@
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollsionMgr.h" />
+    <ClInclude Include="CommonMonster.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Extern.h" />
@@ -152,6 +153,8 @@
     <ClInclude Include="Function.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Maingame.h" />
+    <ClInclude Include="MidBoss.h" />
+    <ClInclude Include="MonBullet.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="Player.h" />
@@ -167,9 +170,12 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollsionMgr.cpp" />
+    <ClCompile Include="CommonMonster.cpp" />
     <ClCompile Include="Framework99C.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Maingame.cpp" />
+    <ClCompile Include="MidBoss.cpp" />
+    <ClCompile Include="MonBullet.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="Player.cpp" />

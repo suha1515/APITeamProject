@@ -7,7 +7,9 @@
 #define WINCX 700
 #define WINCY 1000
 
-#define DELTA_TIME (g_fDeltaTime * g_fTimeScale)
+#define PI 3.14f
+
+#define DELTA_TIME ((g_fDeltaTime) * (g_fTimeScale))
 
 #define ROOT_PATH "ROOT_PATH"
 #define TEXTURE_PATH "TEXTURE_PATH"

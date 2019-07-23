@@ -44,7 +44,7 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 			return pTexture;
 		}
 	}
-
+	pTexture->AddRef();
 	m_mapTexture.insert(unordered_map<string, CTexture*>::value_type(strKey, pTexture));
 
 	return pTexture;

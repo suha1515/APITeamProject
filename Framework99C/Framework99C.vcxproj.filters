@@ -40,6 +40,18 @@
     <Filter Include="97.Managers\03.PathMgr">
       <UniqueIdentifier>{ebcaba24-5a47-4990-bc50-89e33efbef20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.GameObject\02.Monster\01.MidBoss">
+      <UniqueIdentifier>{d6dc3d66-32f2-4e9d-8cc1-e4dfe9d4b15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\02.Monster\02.Boss">
+      <UniqueIdentifier>{a5283f72-963d-46f9-aa62-d44ad094847e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\02.Monster\00.CommonMonster">
+      <UniqueIdentifier>{5965e7ec-4e5d-4d6e-a9e7-76bc118b65e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\04.MonBullet">
+      <UniqueIdentifier>{44c8056c-9c09-4e53-a938-7084bdb4c414}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework99C.h">
@@ -105,6 +117,15 @@
     <ClInclude Include="PathMgr.h">
       <Filter>97.Managers\03.PathMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CommonMonster.h">
+      <Filter>01.GameObject\02.Monster\00.CommonMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonBullet.h">
+      <Filter>01.GameObject\04.MonBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="MidBoss.h">
+      <Filter>01.GameObject\02.Monster\01.MidBoss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework99C.cpp">
@@ -142,6 +163,15 @@
     </ClCompile>
     <ClCompile Include="PathMgr.cpp">
       <Filter>97.Managers\03.PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonMonster.cpp">
+      <Filter>01.GameObject\02.Monster\00.CommonMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonBullet.cpp">
+      <Filter>01.GameObject\04.MonBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="MidBoss.cpp">
+      <Filter>01.GameObject\02.Monster\01.MidBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
