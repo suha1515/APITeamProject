@@ -79,9 +79,6 @@ void CMaingame::Update()
 
 void CMaingame::Render()
 {
-	CMonster monster;
-	monster.Update();
-	monster.Render(m_hDC);
 
 	// 이터레이터 패턴 (반복자 패턴)
 	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.

@@ -28,7 +28,7 @@ void CPlayer::Initialize()
 
 	m_tInfo.fSpeed = 350.f;
 
-	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player.bmp"));
+	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
 }
