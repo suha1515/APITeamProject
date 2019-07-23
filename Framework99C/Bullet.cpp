@@ -27,7 +27,7 @@ void CBullet::Initialize()
 
 	m_tInfo.fSpeed = 600.f;
 
-	m_pTexture = CResourceMgr::LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 }
 

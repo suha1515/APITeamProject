@@ -29,7 +29,7 @@ void CCommonMonster::Initialize()
 
 		m_fCoolDown = 2.f;
 
-		m_pTexture = CResourceMgr::LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
 		break;
 	}

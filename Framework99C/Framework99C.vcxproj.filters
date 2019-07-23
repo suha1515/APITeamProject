@@ -52,6 +52,9 @@
     <Filter Include="01.GameObject\04.MonBullet">
       <UniqueIdentifier>{44c8056c-9c09-4e53-a938-7084bdb4c414}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Managers\04.KeyboardMgr">
+      <UniqueIdentifier>{ba783a78-c71c-4d66-8d69-62e64ee451ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework99C.h">
@@ -126,6 +129,9 @@
     <ClInclude Include="MidBoss.h">
       <Filter>01.GameObject\02.Monster\01.MidBoss</Filter>
     </ClInclude>
+    <ClInclude Include="KeyboardMgr.h">
+      <Filter>97.Managers\04.KeyboardMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework99C.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="MidBoss.cpp">
       <Filter>01.GameObject\02.Monster\01.MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMgr.cpp">
+      <Filter>97.Managers\04.KeyboardMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

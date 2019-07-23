@@ -1,15 +1,7 @@
 #include "stdafx.h"
 #include "PathMgr.h"
 
-unordered_map<string, wstring> CPathMgr::m_mapPath;
-
-CPathMgr::CPathMgr()
-{
-}
-
-CPathMgr::~CPathMgr()
-{
-}
+DEFINE_SINGLE_TONE(CPathMgr)
 
 void CPathMgr::Initialize()
 {

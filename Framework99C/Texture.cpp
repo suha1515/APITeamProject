@@ -25,7 +25,7 @@ bool CTexture::LoadTexture(HINSTANCE hInst, HDC hDC, const string & strKey, cons
 		m_hMemDC = CreateCompatibleDC(hDC);
 
 	// 전체 경로
-	const TCHAR* pPath = CPathMgr::FindPath(strPathKey);
+	const TCHAR* pPath = CPathMgr::GetInstance()->FindPath(strPathKey);
 
 	wstring strPath;
 
