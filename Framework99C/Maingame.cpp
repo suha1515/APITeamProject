@@ -48,24 +48,50 @@ void CMaingame::Initialize()
 	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
 	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
-	// Monster
-	for (int i = 0; i < 1; ++i)
-	{
-		//float x = float(rand() % (WINCX - 200)) + 100.f;
-		//float y = float(rand() % (WINCY - 200)) + 100.f;
+	//// Monster
+	//for (int i = 0; i < 1; ++i)
+	//{
+	//	//float x = float(rand() % (WINCX - 200)) + 100.f;
+	//	//float y = float(rand() % (WINCY - 200)) + 100.f;
 
-		//pGameObject = CAbstractFactory<CMonster>::CreateObject();
-		pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
-		// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(&m_ObjLst[OBJECT_PLAYER]);
+	//	//pGameObject = CAbstractFactory<CMonster>::CreateObject();
+	//	pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
+	//	// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
+	//	//dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
 
-		//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
-	}
+	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+	//}
+	SPAWN_INFO monsterPool[4];
+	monsterPool[0].spawnPos_x = 150;
+	monsterPool[0].spawnPos_y = -100;
+	monsterPool[0].spawnTime = 6500;
+	monsterPool[0].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[1].spawnPos_x = 250;
+	monsterPool[1].spawnPos_y = -100;
+	monsterPool[1].spawnTime = 6400;
+	monsterPool[1].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[2].spawnPos_x = 350;
+	monsterPool[2].spawnPos_y = -100;
+	monsterPool[2].spawnTime = 6300;
+	monsterPool[2].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[3].spawnPos_x = 450;
+	monsterPool[3].spawnPos_y = -100;
+	monsterPool[3].spawnTime = 6200;
+	monsterPool[3].type = MONSTER_TYPE::DEFAULT;
+
+	m_SpawnMonster.SetEnemyPool(monsterPool[0]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[2]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[3]);
 }
 
 void CMaingame::Update()
 {
+	m_SpawnMonster.SpawnEnemy();
 	// 이터레이터 패턴 (반복자 패턴)
 	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
 	for (int i = 0; i < OBJECT_END; ++i)
@@ -89,7 +115,7 @@ void CMaingame::Update()
 	}	
 
 
-	CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+	m_pCollsionMgr->CollisionRect(CGameObject::m_ObjLst[OBJECT_MONSTER], CGameObject::m_ObjLst[OBJLECT_BULLET]);
   //CCollsionMgr::CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
 }
 
@@ -121,8 +147,8 @@ void CMaingame::Release()
 
 	for (int i = 0; i < OBJECT_END; ++i)
 	{
-		for_each(m_ObjLst[i].begin(), m_ObjLst[i].end(), SafeDelete<CGameObject*>);
-		m_ObjLst[i].clear();
+		for_each(CGameObject::m_ObjLst[i].begin(), CGameObject::m_ObjLst[i].end(), SafeDelete<CGameObject*>);
+		CGameObject::m_ObjLst[i].clear();
 	}	
 
 	// 매니저 해제

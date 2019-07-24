@@ -14,8 +14,7 @@ public:
 	bool CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst,VECTOR2D* depth);
 	void CollisionSphere(const OBJLIST& dstLst, const OBJLIST& srcLst);
 
-	static bool CollisionRectEX(const OBJLIST& dstLst, const OBJLIST& srcLst);
-	static void CollisionSphere(const OBJLIST& dstLst, const OBJLIST& srcLst);
+	bool CollisionRectEX(const OBJLIST& dstLst, const OBJLIST& srcLst);
 
 private:
 	bool CheckSphere(const CGameObject* pDest, const CGameObject* pSource);

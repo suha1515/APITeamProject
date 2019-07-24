@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SpawnManager.h"
+#include "CommonMonster.h"
 
 CSpawnManager::CSpawnManager()
 {
@@ -18,26 +19,38 @@ CSpawnManager::~CSpawnManager()
 {
 }
 
-void CSpawnManager::SetEnemyPool(SPAWN_INFO* enemy)
+void CSpawnManager::SetEnemyPool(SPAWN_INFO enemy)
 {
 	m_EnemyPool.push_back(enemy);
 }
 
 void CSpawnManager::SpawnEnemy()
 {
-	list<SPAWN_INFO*>::iterator iter_begin = m_EnemyPool.begin();
-	list<SPAWN_INFO*>::iterator iter_end = m_EnemyPool.end();
+	list<SPAWN_INFO>::iterator iter_begin = m_EnemyPool.begin();
+	list<SPAWN_INFO>::iterator iter_end = m_EnemyPool.end();
 
 	for (; iter_begin != iter_end;)
 	{
-		for (int i = 0; i < sizeof((*iter_begin)->enemy) / sizeof(SPAWN_INFO); ++i)
+		SPAWN_INFO info = *iter_begin;
+		
+		if (info.spawnTime > CGameManager::GetInstance()->GetStageProgress())
 		{
-			//몬스터 스폰구간
+			if (info.type == MONSTER_TYPE::DEFAULT)
+			{
+				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
+				object->SetPos(info.spawnPos_x, info.spawnPos_y);
+				dynamic_cast<CCommonMonster*>(object)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
+			}
+			iter_begin = m_EnemyPool.erase(iter_begin);
 		}
-		iter_begin = m_EnemyPool.erase(iter_begin);
+		else
+		{
+			++iter_begin;
+		}
 	}
 }
 
 void CSpawnManager::RenderSpawnLocation()
 {
+
 }

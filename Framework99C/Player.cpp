@@ -76,16 +76,16 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir)
 void CPlayer::KeyInput()
 {
 	VECTOR2D vector(0, 0);
-	// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
-	if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
-	{
-		m_tInfo.fX += vector.x;
-		m_tInfo.fY += vector.y;
-	}
-	else
-	{
+	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
+	//if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
+	//{
+	//	m_tInfo.fX += vector.x;
+	//	m_tInfo.fY += vector.y;
+	//}
+	//else
+	//{
 
-	CCollsionMgr::CollisionRectEX(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER]);
+	CCollsionMgr::GetInstance()->CollisionRectEX(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER]);
 		//플레이어 영역 제한 버벅거리는거 없음.
 		if (m_tRect.left > 0)
 		{

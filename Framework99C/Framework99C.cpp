@@ -84,11 +84,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 
 		TextOut(g_hDC, 50, 50, g_strFPS, lstrlen(g_strFPS));
+		TCHAR stageProress[10];
+		TextOut(g_hDC, 50, 100, stageProress, lstrlen(stageProress));
 
 		if (1.f <= g_fElapsedTime)
 		{
 			g_fElapsedTime -= 1.f;
 			swprintf_s(g_strFPS, _T("%d"), g_nFPS);
+			swprintf_s(stageProress, _T("%d"), CGameManager::GetInstance()->GetStageProgress());
 			g_nFPS = 0;
 		}
 		

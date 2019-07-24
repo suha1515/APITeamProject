@@ -93,9 +93,9 @@ void CMonster::SetBulletLst(OBJLIST * pBulletLst)
 	m_pBulletLst = pBulletLst;
 }
 
-void CMonster::SetPlayer(OBJLIST * pPlayer)
+void CMonster::SetPlayer(CGameObject * pPlayer)
 {
-	m_pPlayerLst = pPlayer;
+	m_pPlayer = pPlayer;
 }
 
 void CMonster::SetMonType(int iType)

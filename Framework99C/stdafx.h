@@ -41,12 +41,14 @@ using namespace std;
 #include "Function.h"
 #include "Struct.h"
 
+
 // Manager Headers
 #include "AbstractFactory.h"
 #include "CollsionMgr.h"
 #include "ResourceMgr.h"
 #include "PathMgr.h"
 #include "KeyboardMgr.h"
+#include "GameManager.h"
 #include "SpawnManager.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")

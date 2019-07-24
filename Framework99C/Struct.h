@@ -39,9 +39,10 @@ typedef struct tVector2D
 //-Á¤º¸¼º-
 typedef struct tSpawn_INFO
 {
-	CMonster* enemy;
+	MONSTER_TYPE type;
 	int spawnPos_x;
 	int spawnPos_y;
+	int spawnTime;
 }SPAWN_INFO;
 
 #define __STRUCT_H__
