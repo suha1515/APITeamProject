@@ -2,6 +2,7 @@
 
 class CTexture
 {
+	friend class CAnimator;
 	friend class ResourceMgr;
 	friend class CAnimator;
 

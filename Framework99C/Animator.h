@@ -13,7 +13,8 @@ public:
 		float maxX, float maxY, float elapsedTime, float limitTime);
 	bool DeleteAnimInfo(int iIdx);
 
-	void RunAnim(int iIdx, HDC hDC, IMGINFO& imgInfo);
+	void RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
+
 
 private:
 	vector<ANIMINFO> m_vecAnimInfo;

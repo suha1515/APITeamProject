@@ -65,7 +65,7 @@ bool CAnimator::DeleteAnimInfo(int iIdx)
 	return true;
 }
 
-void CAnimator::RunAnim(int iIdx, HDC hDC, IMGINFO& imgInfo)
+void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX - tmpAnim->fMinX);
