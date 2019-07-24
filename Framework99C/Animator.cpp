@@ -10,6 +10,7 @@ CAnimator::CAnimator()
 
 CAnimator::~CAnimator()
 {
+
 }
 
 bool CAnimator::AddAnimInfo(ANIMINFO animInfo)
@@ -80,7 +81,7 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 
 	switch (tmpAnim->tAnimType)
 	{
-	case AT_DEFAULT:
+	case AT_LOOP:
 	{
 		if ((tmpAnim->fCurX >= tmpAnim->fEndX) && (tmpAnim->fCurY >= tmpAnim->fEndY))
 		{
@@ -104,7 +105,7 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	{
 		TransparentBlt(hDC,
 			imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
-			imgInfo.fImgCX, imgInfo.fImgCY,
+			imgInfo.fImgCX * imgInfo.fScaleX, imgInfo.fImgCY * imgInfo.fScaleY,
 			tmpAnim->pTexture->m_hMemDC,
 			((tmpAnim->pTexture->m_tBit.bmWidth) / tmpAnim->fMaxX) * tmpAnim->fCurX,
 			((tmpAnim->pTexture->m_tBit.bmHeight) / tmpAnim->fMaxY) * tmpAnim->fCurY,

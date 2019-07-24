@@ -23,14 +23,16 @@ typedef struct tagImgInfo
 	// 이미지 크기
 	float fImgCX = 0.f;
 	float fImgCY = 0.f;
-
+	// 이미지 늘이기
+	float fScaleX = 1.f;
+	float fScaleY = 1.f;
 }IMGINFO;
 
 class CTexture;
 typedef struct tagAnimInfo
 {
 	CTexture* pTexture = nullptr;
-	ANIMATION_TYPE tAnimType = AT_DEFAULT;
+	ANIMATION_TYPE tAnimType = AT_LOOP;
 
 	// 시작 위치
 	float fMinX = 0.f;
@@ -55,7 +57,6 @@ typedef struct tagAnimInfo
 	float fLimitTime = 0.f;
 
 } ANIMINFO;
-
 
 //2차원상 벡터를 표현하기위한 구조체
 //-정보성-

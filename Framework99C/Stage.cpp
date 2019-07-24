@@ -16,8 +16,8 @@ void CStage::Initialize()
 {
 	m_tInfo.fX = 0;
 	m_tInfo.fY = 8030.f - WINCY;
-	m_tInfo.fCX = WINCX;
-	m_tInfo.fCY = WINCY;
+	m_tInfo.fCX = 700.f;
+	m_tInfo.fCY = 8030.f;
 	CGameManager::GetInstance()->SetStageProgress(m_tInfo.fY);
 	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Stage_1", _T("Stage/StageBack/Stage_1.bmp"));
 	m_pTexture->SetKeyEnable(false);

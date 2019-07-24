@@ -15,6 +15,7 @@ public:
 
 	void RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
 
+
 private:
 	vector<ANIMINFO> m_vecAnimInfo;
 };
