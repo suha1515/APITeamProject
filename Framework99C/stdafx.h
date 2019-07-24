@@ -42,6 +42,10 @@ using namespace std;
 #include "Struct.h"
 
 
+#include "Texture.h"
+#include "Animator.h"
+
+
 // Manager Headers
 #include "AbstractFactory.h"
 #include "CollsionMgr.h"

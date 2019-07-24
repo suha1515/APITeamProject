@@ -42,6 +42,12 @@ private:
 
 	int wingCount;	
 	bool m_bArrButton[BUTTON_END];
+
+
+	//--------Test-----------
+	//CAnimator* m_pAnimator;
+
 	bool m_bIsAttack = false;
+
 };
 

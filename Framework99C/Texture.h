@@ -1,6 +1,7 @@
 #pragma once
 class CTexture
 {
+	friend class CAnimator;
 	friend class ResourceMgr;
 public:
 	CTexture();

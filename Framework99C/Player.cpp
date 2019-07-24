@@ -56,6 +56,10 @@ void CPlayer::Initialize()
 
 	m_tInfo.fSpeed = 350.f;
 
+
+
+	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Move_TB_A.bmp"));
+
 	m_WingManLoc[0].x = m_tInfo.fX - 50;
 	m_WingManLoc[0].y = m_tInfo.fY + 50;
 
@@ -71,29 +75,45 @@ void CPlayer::Initialize()
 	wingCount = 0;
 
 	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
+
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
+	//--------Test-----------
+	//m_pAnimator = new CAnimator;
+	//m_pAnimator->AddAnimInfo(m_pTexture, AT_DEFAULT, 0, 0, 7, 1, 0.f, 1.f);
 }
 
 int CPlayer::Update()
 {
 	KeyInput();
 	CGameObject::UpdateRect();
+
+	//CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY * 76.f/33.f);
+	//m_pTexture->SetXY(0.f, 2.f);
+
 	UpdateWingMan();
 	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
 	m_pTexture->SetXY(0.f, 2.f);
+
 
 	return NO_EVENT;
 }
 
 void CPlayer::Render(HDC hDC)
 {
+
+	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
+
+	//--------Test-----------
+	//m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+
 	m_pTexture->DrawTexture(hDC, m_tImgInfo);
 	//디버그용
 	/*Rectangle(hDC, m_WingManLoc[0].x - 10, m_WingManLoc[0].y - 10, m_WingManLoc[0].x + 10, m_WingManLoc[0].y + 10);
 	Rectangle(hDC, m_WingManLoc[1].x - 10, m_WingManLoc[1].y - 10, m_WingManLoc[1].x + 10, m_WingManLoc[1].y + 10);
 	Rectangle(hDC, m_WingManLoc[2].x - 10, m_WingManLoc[2].y - 10, m_WingManLoc[2].x + 10, m_WingManLoc[2].y + 10);
 	Rectangle(hDC, m_WingManLoc[3].x - 10, m_WingManLoc[3].y - 10, m_WingManLoc[3].x + 10, m_WingManLoc[3].y + 10);*/
+
 }
 
 void CPlayer::Release()
