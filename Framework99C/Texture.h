@@ -1,7 +1,10 @@
 #pragma once
+
 class CTexture
 {
 	friend class ResourceMgr;
+	friend class CAnimator;
+
 public:
 	CTexture();
 	~CTexture();
@@ -17,7 +20,7 @@ public:
 	BITMAP GetBitmap();
 	bool GetKeyEnable();
 	COLORREF GetColorKey();
-	void DrawTexture(HDC hDC, IMGINFO& imgInfo);
+	void DrawTexture(HDC hDC, IMGINFO& imgInfo, float maxX = 1, float maxY = 1, float scaleX = 1.f, float scaleY = 1.f);
 	
 
 public:

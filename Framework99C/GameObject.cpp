@@ -56,4 +56,12 @@ void CGameObject::UpdateImgInfo(float CImgX, float CImgY)
 	m_tImgInfo.fImgCY = CImgY;
 	m_tImgInfo.fPivotX = (m_tInfo.fX - m_tRect.left) / m_tInfo.fCX;
 	m_tImgInfo.fPivotY = (m_tInfo.fY - m_tRect.top) / m_tInfo.fCY;
+
+}
+
+void CGameObject::UpdateImgInfo(float CImgX, float CImgY, float scaleX, float scaleY)
+{
+	UpdateImgInfo(CImgY, CImgY);
+	m_tImgInfo.fScaleX = scaleX;
+	m_tImgInfo.fScaleY = scaleY;
 }

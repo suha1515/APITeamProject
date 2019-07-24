@@ -41,6 +41,8 @@ using namespace std;
 #include "Function.h"
 #include "Struct.h"
 
+#include "Texture.h"
+#include "Animator.h"
 
 // Manager Headers
 #include "AbstractFactory.h"

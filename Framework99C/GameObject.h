@@ -25,6 +25,7 @@ protected:
 protected:
 	void UpdateRect();
 	void UpdateImgInfo(float CImgX, float CImgY);
+	void UpdateImgInfo(float CImgX, float CImgY, float scaleX, float scaleY);
 
 protected:
 	INFO	m_tInfo;
