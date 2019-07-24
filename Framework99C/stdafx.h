@@ -41,8 +41,10 @@ using namespace std;
 #include "Function.h"
 #include "Struct.h"
 
+
 #include "Texture.h"
 #include "Animator.h"
+
 
 // Manager Headers
 #include "AbstractFactory.h"
@@ -50,6 +52,9 @@ using namespace std;
 #include "ResourceMgr.h"
 #include "PathMgr.h"
 #include "KeyboardMgr.h"
+#include "GameManager.h"
+#include "SpawnManager.h"
+#include "ObjectMgr.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

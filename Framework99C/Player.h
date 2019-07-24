@@ -15,6 +15,9 @@ public:
 
 public:
 	void SetBulletLst(OBJLIST* pBulletLst);
+	void AddWingMan();
+	void UpdateWingMan();
+	POINT* GetWingManPos();
 
 public:
 	// CGameObject을(를) 통해 상속됨
@@ -26,17 +29,25 @@ private:
 	virtual void Release() override;
 
 private:
+	//총알 발사
 	CGameObject* CreateBullet();
 	CGameObject* CreateBullet(BULLET_DIRECTION eDir);
 	void KeyInput();
 
 private:	
-	OBJLIST*	m_pBulletLst;
+	//OBJLIST*	m_pBulletLst;
+	//플레이어 보조 오브젝트(윙맨) 위치
+	POINT		m_WingManLoc[4];
+	CGameObject*    m_WingMan[4];
 
+	int wingCount;	
 	bool m_bArrButton[BUTTON_END];
 
 
 	//--------Test-----------
-	CAnimator* m_pAnimator;
+	//CAnimator* m_pAnimator;
+
+	bool m_bIsAttack = false;
+
 };
 

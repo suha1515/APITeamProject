@@ -41,66 +41,66 @@ void CMaingame::Initialize()
 
 	// Stage
 	pGameObject = CAbstractFactory<CStage>::CreateObject();
-	m_ObjLst[OBJECT_STAGE].push_back(pGameObject);
+	CObjectMgr::GetInstance()->AddObject(OBJECT_STAGE, pGameObject);
+	//m_ObjLst[OBJECT_STAGE].push_back(pGameObject);
 
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
-	dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
-	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
+	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
+	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
-	// Monster
-	for (int i = 0; i < 1; ++i)
-	{
-		//float x = float(rand() % (WINCX - 200)) + 100.f;
-		//float y = float(rand() % (WINCY - 200)) + 100.f;
+	//// Monster
+	//for (int i = 0; i < 1; ++i)
+	//{
+	//	//float x = float(rand() % (WINCX - 200)) + 100.f;
+	//	//float y = float(rand() % (WINCY - 200)) + 100.f;
 
-		//pGameObject = CAbstractFactory<CMonster>::CreateObject();
-		pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
-		// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
-		dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(&m_ObjLst[OBJECT_PLAYER]);
-		m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
-	}
+	//	//pGameObject = CAbstractFactory<CMonster>::CreateObject();
+	//	pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
+	//	// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
+	//	//dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
+
+	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+	//}
+	SPAWN_INFO monsterPool[4];
+	monsterPool[0].spawnPos_x = 150;
+	monsterPool[0].spawnPos_y = -100;
+	monsterPool[0].spawnTime = 6500;
+	monsterPool[0].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[1].spawnPos_x = 250;
+	monsterPool[1].spawnPos_y = -100;
+	monsterPool[1].spawnTime = 6400;
+	monsterPool[1].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[2].spawnPos_x = 350;
+	monsterPool[2].spawnPos_y = -100;
+	monsterPool[2].spawnTime = 6300;
+	monsterPool[2].type = MONSTER_TYPE::DEFAULT;
+
+	monsterPool[3].spawnPos_x = 450;
+	monsterPool[3].spawnPos_y = -100;
+	monsterPool[3].spawnTime = 6200;
+	monsterPool[3].type = MONSTER_TYPE::DEFAULT;
+
+	m_SpawnMonster.SetEnemyPool(monsterPool[0]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[2]);
+	m_SpawnMonster.SetEnemyPool(monsterPool[3]);
 }
 
 void CMaingame::Update()
 {
-	// 이터레이터 패턴 (반복자 패턴)
-	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
-	for (int i = 0; i < OBJECT_END; ++i)
-	{
-		OBJLIST::iterator iter_Begin = m_ObjLst[i].begin();
-		OBJLIST::iterator iter_End = m_ObjLst[i].end();
-
-		for (; iter_Begin != iter_End; )
-		{
-			int iEvent = (*iter_Begin)->Update();
-
-			if (DEAD_OBJ == iEvent)
-			{
-				SafeDelete(*iter_Begin);
-				iter_Begin = m_ObjLst[i].erase(iter_Begin);
-			}
-			else
-				++iter_Begin;
-		}
-	}	
-
-	//CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
-	//CCollsionMgr::CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+	m_SpawnMonster.SpawnEnemy();
+	CObjectMgr::GetInstance()->Update();
 }
 
 void CMaingame::Render()
 {
-
-	// 이터레이터 패턴 (반복자 패턴)
-	// 다형적인 클래스들을 공통된 컨테이너에 담아 반복자로 일괄처리하는 디자인 패턴.
-	for (int i = 0; i < OBJECT_END; ++i)
-	{
-		for (auto& pObject : m_ObjLst[i])
-			pObject->Render(m_hMemDC);
-	}
-
+	CObjectMgr::GetInstance()->Render(m_hMemDC);
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
 }	
 
@@ -110,12 +110,6 @@ void CMaingame::Release()
 	bitmap = (HBITMAP)SelectObject(m_hMemDC, oldbitmap);
 	DeleteObject(bitmap);
 	DeleteDC(m_hMemDC);
-
-	for (int i = 0; i < OBJECT_END; ++i)
-	{
-		for_each(m_ObjLst[i].begin(), m_ObjLst[i].end(), SafeDelete<CGameObject*>);
-		m_ObjLst[i].clear();
-	}	
 
 	// 매니저 해제
 	CCollsionMgr::DeleteInstance();

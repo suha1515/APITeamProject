@@ -9,6 +9,7 @@ typedef struct tagInfo
 	float fCX = 0.f;
 	float fCY = 0.f;
 	float fSpeed = 0.f;
+
 }INFO;
 
 typedef struct tagImgInfo
@@ -60,10 +61,22 @@ typedef struct tagAnimInfo
 //-정보성-
 typedef struct tVector2D
 {
+	tVector2D() {};
 	tVector2D(int _x, int _y) :x(_x), y(_y) {};
 	int x;
 	int y;
 }VECTOR2D;
+
+//몬스터 스폰을 위한 구조체
+//-정보성-
+typedef struct tSpawn_INFO
+{
+	MONSTER_TYPE type;
+	
+	int spawnPos_x;
+	int spawnPos_y;
+	int spawnTime;
+}SPAWN_INFO;
 
 #define __STRUCT_H__
 #endif

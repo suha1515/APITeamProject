@@ -5,8 +5,6 @@
 
 CCommonMonster::CCommonMonster()
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
-	m_ObjLst[OBJECT_MONSTER].push_back(this);
 }
 
 
@@ -59,14 +57,6 @@ int CCommonMonster::Update()
 void CCommonMonster::Release()
 {
 	m_pTexture->SafeDelete();
-
-	// 삭제시 리스트에서 오브젝트를 삭제
-	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_MONSTER].begin(), m_ObjLst[OBJECT_MONSTER].end(), this);
-	if (iter_find != m_ObjLst[OBJECT_MONSTER].end())
-	{
-		m_ObjLst[OBJECT_MONSTER].erase(iter_find);
-	}
-
 }
 
 void CCommonMonster::IsMoving()
@@ -88,13 +78,12 @@ void CCommonMonster::IsFire()
 	case 0:
 		if (m_fCoolDown < 0)
 		{
-			CGameObject* pObject = new CMonBullet;
+			CGameObject* pObject;
 			pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
-
-			m_fAngle = GetAngle(m_pPlayerLst->front(), &m_Barrel);
-
+			m_fAngle = GetAngle(m_pPlayer, &m_Barrel);
 			dynamic_cast<CMonBullet*>(pObject)->SetAngle(m_fAngle);
-			m_pBulletLst->push_back(pObject);
+			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
+			//m_ObjLst[OBJECT_MONBULLET].push_back(pObject);
 
 
 			m_fCoolDown += 2.f;

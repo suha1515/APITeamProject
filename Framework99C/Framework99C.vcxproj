@@ -22,13 +22,13 @@
     <ProjectGuid>{E79496AC-BE9D-47B0-A6F0-4A2DBA009181}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Framework99C</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -152,22 +152,26 @@
     <ClInclude Include="Extern.h" />
     <ClInclude Include="Framework99C.h" />
     <ClInclude Include="Function.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="KeyboardMgr.h" />
     <ClInclude Include="Maingame.h" />
     <ClInclude Include="MidBoss.h" />
     <ClInclude Include="MonBullet.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceMgr.h" />
+    <ClInclude Include="SpawnManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Typedef.h" />
+    <ClInclude Include="WingMan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
@@ -175,15 +179,18 @@
     <ClCompile Include="CollsionMgr.cpp" />
     <ClCompile Include="CommonMonster.cpp" />
     <ClCompile Include="Framework99C.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyboardMgr.cpp" />
     <ClCompile Include="Maingame.cpp" />
     <ClCompile Include="MidBoss.cpp" />
     <ClCompile Include="MonBullet.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceMgr.cpp" />
+    <ClCompile Include="SpawnManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -192,6 +199,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="WingMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Framework99C.rc" />

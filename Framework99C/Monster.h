@@ -24,7 +24,7 @@ public:
 public:
 	void SetDamaged(int dmg);
 	void SetBulletLst(OBJLIST* pBulletLst);
-	void SetPlayer(OBJLIST* pPlayer);
+	void SetPlayer(CGameObject* pPlayer);
 
 public:
 	void SetMonType(int iType);
@@ -44,6 +44,6 @@ protected:
 	POINT m_Barrel;
 
 	OBJLIST* m_pBulletLst;
-	OBJLIST* m_pPlayerLst;
+	CGameObject* m_pPlayer;
 };
 

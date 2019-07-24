@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-OBJLIST CGameObject::m_ObjLst[OBJECT_END];
 CGameObject::CGameObject()
 	:  m_bIsDead(false)
 {
@@ -22,6 +21,12 @@ const RECT & CGameObject::GetRect() const
 {
 	// TODO: 여기에 반환 구문을 삽입합니다.
 	return m_tRect;
+}
+
+const bool CGameObject::GetDead() const
+{
+
+	return m_bIsDead;
 }
 
 void CGameObject::SetPos(float x, float y)

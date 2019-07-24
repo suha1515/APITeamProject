@@ -5,8 +5,7 @@
 CMonBullet::CMonBullet()
 	:m_iDmg(1)
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
-	m_ObjLst[OBJECT_MONBULLET].push_back(this);
+
 }
 
 
@@ -48,12 +47,6 @@ void CMonBullet::Release()
 {
 	m_pTexture->SafeDelete();
 	// 삭제시 리스트에서 오브젝트를 삭제
-	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_MONBULLET].begin(), m_ObjLst[OBJECT_MONBULLET].end(), this);
-	if (iter_find != m_ObjLst[OBJECT_MONBULLET].end())
-	{
-		m_ObjLst[OBJECT_MONBULLET].erase(iter_find);
-	}
-
 }
 
 void CMonBullet::SetAngle(float fAngle)

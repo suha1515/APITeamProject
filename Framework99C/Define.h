@@ -54,5 +54,11 @@ void T::DeleteInstance()\
 	}\
 }
 
+#define NULL_CHECK(ptr) \
+if(nullptr ==(ptr)) return ;
+
+#define NULL_CHECK_RETURN(ptr, val) \
+if(nullptr ==(ptr)) return val;
+
 #define __DEFINE_H__
 #endif

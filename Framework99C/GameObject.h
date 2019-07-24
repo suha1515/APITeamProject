@@ -8,6 +8,7 @@ public:
 public:
 	const INFO& GetInfo() const;
 	const RECT& GetRect() const;
+	const bool GetDead() const;
 
 public:
 	void SetPos(float x, float y);
@@ -32,10 +33,6 @@ protected:
 
 	
 	bool	m_bIsDead;
-
-	// 모든 게임오브젝트는 이 멤버변수에 들어간다.
-	// -정보성-
-	static OBJLIST	m_ObjLst[OBJECT_END];
 
 	CTexture* m_pTexture;
 

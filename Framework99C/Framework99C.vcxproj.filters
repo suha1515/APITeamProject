@@ -1,62 +1,121 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="98.Headers">
-      <UniqueIdentifier>{82891dfa-bbea-44fa-b3c3-eb3b81b95786}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="99.Default">
-      <UniqueIdentifier>{632324ea-b366-4764-9e0a-e630d204f009}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00.Maingame">
-      <UniqueIdentifier>{6676e2ce-6b58-4d21-a7e4-2b666bf4e144}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject">
-      <UniqueIdentifier>{c48bf8de-4daa-4057-b490-9495efbd2c86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\00.Player">
-      <UniqueIdentifier>{5d2ac3d9-109a-420e-8be4-c6122ac43e88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\01.Bullet">
-      <UniqueIdentifier>{c75c9d60-7564-410e-836c-d505201d2de5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\02.Monster">
-      <UniqueIdentifier>{40f4ace4-8ce7-4964-857c-a3cdda14f474}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers">
-      <UniqueIdentifier>{4907189a-697e-452c-8888-2996776fc849}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers\00.AbstractFactory">
-      <UniqueIdentifier>{2e27d6ec-ac81-468e-a5c6-735abbd8e968}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers\01.CollsionMgr">
-      <UniqueIdentifier>{512ec8eb-a49e-4423-a5db-8a02875ae997}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\03.Stage">
-      <UniqueIdentifier>{af03ffae-80cd-41df-8738-3e5c3ea59f97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers\02.ResourceMgr">
-      <UniqueIdentifier>{bec10d55-95fd-48f4-97b4-bf83c420e11d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers\03.PathMgr">
-      <UniqueIdentifier>{ebcaba24-5a47-4990-bc50-89e33efbef20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\02.Monster\01.MidBoss">
-      <UniqueIdentifier>{d6dc3d66-32f2-4e9d-8cc1-e4dfe9d4b15f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\02.Monster\02.Boss">
-      <UniqueIdentifier>{a5283f72-963d-46f9-aa62-d44ad094847e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\02.Monster\00.CommonMonster">
-      <UniqueIdentifier>{5965e7ec-4e5d-4d6e-a9e7-76bc118b65e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.GameObject\04.MonBullet">
-      <UniqueIdentifier>{44c8056c-9c09-4e53-a938-7084bdb4c414}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Managers\04.KeyboardMgr">
-      <UniqueIdentifier>{ba783a78-c71c-4d66-8d69-62e64ee451ab}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="CommonMonster.cpp" />
+    <ClCompile Include="KeyboardMgr.cpp" />
+    <ClCompile Include="MidBoss.cpp" />
+    <ClCompile Include="MonBullet.cpp" />
+    <ClCompile Include="Maingame.cpp">
+      <Filter>00.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>01.GameObject\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>01.GameObject\01.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>01.GameObject\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>01.GameObject\03.Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CollsionMgr.cpp">
+      <Filter>97.Managers\01.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceMgr.cpp">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="PathMgr.cpp">
+      <Filter>97.Managers\03.PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>97.Managers\04.SpawnMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework99C.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>01.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>97.Managers\05.GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="WingMan.cpp">
+      <Filter>01.GameObject\00.Player\00.WingMan</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMgr.cpp">
+      <Filter>97.Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonMonster.h" />
+    <ClInclude Include="KeyboardMgr.h" />
+    <ClInclude Include="MidBoss.h" />
+    <ClInclude Include="MonBullet.h" />
+    <ClInclude Include="Maingame.h">
+      <Filter>00.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>01.GameObject\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>01.GameObject\01.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>01.GameObject\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>01.GameObject\03.Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>97.Managers\00.AbstractFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="CollsionMgr.h">
+      <Filter>97.Managers\01.CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceMgr.h">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="PathMgr.h">
+      <Filter>97.Managers\03.PathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>97.Managers\04.SpawnMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>97.Managers\02.ResourceMgr</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Framework99C.cpp">
+    <ClInclude Include="Function.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
     <ClInclude Include="Framework99C.h">
       <Filter>99.Default</Filter>
     </ClInclude>
@@ -69,86 +128,9 @@
     <ClInclude Include="targetver.h">
       <Filter>99.Default</Filter>
     </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Maingame.h">
-      <Filter>00.Maingame</Filter>
-    </ClInclude>
-    <ClInclude Include="Extern.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>01.GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Function.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>01.GameObject\00.Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>01.GameObject\01.Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Typedef.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>01.GameObject\02.Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractFactory.h">
-      <Filter>97.Managers\00.AbstractFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="CollsionMgr.h">
-      <Filter>97.Managers\01.CollsionMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>01.GameObject\03.Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>97.Managers\02.ResourceMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceMgr.h">
-      <Filter>97.Managers\02.ResourceMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="PathMgr.h">
-      <Filter>97.Managers\03.PathMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonMonster.h">
-      <Filter>01.GameObject\02.Monster\00.CommonMonster</Filter>
-    </ClInclude>
-    <ClInclude Include="MonBullet.h">
-      <Filter>01.GameObject\04.MonBullet</Filter>
-    </ClInclude>
-    <ClInclude Include="MidBoss.h">
-      <Filter>01.GameObject\02.Monster\01.MidBoss</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardMgr.h">
-      <Filter>97.Managers\04.KeyboardMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>97.Managers\02.ResourceMgr</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Framework99C.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Maingame.cpp">
-      <Filter>00.Maingame</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>01.GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>01.GameObject\00.Player</Filter>
     </ClCompile>
@@ -188,6 +170,17 @@
     <ClCompile Include="Animator.cpp">
       <Filter>97.Managers\02.ResourceMgr</Filter>
     </ClCompile>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>97.Managers\05.GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="WingMan.h">
+      <Filter>01.GameObject\00.Player\00.WingMan</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMgr.h">
+      <Filter>97.Managers</Filter>
+    </ClInclude>
+
   </ItemGroup>
   <ItemGroup>
     <Image Include="Framework99C.ico">
@@ -198,11 +191,61 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="00.MainGame">
+      <UniqueIdentifier>{0254debc-f239-4a70-aaa7-c6f87b48acda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject">
+      <UniqueIdentifier>{cf9ddf5f-203f-4af8-9d00-d34cd4ae4c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\00.Player">
+      <UniqueIdentifier>{94e19e6f-b63c-4ccf-b66a-55778e8e2987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\01.Bullet">
+      <UniqueIdentifier>{aa51e4f1-05e2-47d1-8bb9-4cc714981bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\02.Monster">
+      <UniqueIdentifier>{f0d7b4ac-cf7c-45be-b487-2c907beb3ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\03.Stage">
+      <UniqueIdentifier>{d4d84147-7d9d-444e-8e5b-ea8091ee19c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers">
+      <UniqueIdentifier>{0b9298ec-b3d7-4930-95d7-3c74fe79ddd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\00.AbstractFactory">
+      <UniqueIdentifier>{614a9c0a-f099-4420-8b96-a7744b9c0044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\01.CollisionMgr">
+      <UniqueIdentifier>{e33c37dc-d565-4271-a679-dec4f6e40764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\02.ResourceMgr">
+      <UniqueIdentifier>{df98b381-98f0-4f47-a534-90b49048ce35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\03.PathMgr">
+      <UniqueIdentifier>{6e9b25f5-bc3a-4402-b1e9-fd50aa58d38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\04.SpawnMgr">
+      <UniqueIdentifier>{8c7889dc-d63b-4327-9291-b785b07d1d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Headers">
+      <UniqueIdentifier>{adf81fba-c501-46b3-99f0-289fe18ce583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{3ede4a6b-62a9-4efe-948a-70a0c5ae15ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\05.GameManager">
+      <UniqueIdentifier>{bafea232-b20d-4ae7-b847-6ece7094e5e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.GameObject\00.Player\00.WingMan">
+      <UniqueIdentifier>{4b63405c-a232-4354-ba16-d39badfa91a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="Framework99C.rc">
       <Filter>99.Default</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

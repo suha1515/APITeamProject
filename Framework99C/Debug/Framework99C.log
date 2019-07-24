@@ -1,11 +1,2 @@
-﻿  stdafx.cpp
-  Player.cpp
-  Monster.cpp
-  Maingame.cpp
-  GameObject.cpp
-  Framework99C.cpp
-  CollsionMgr.cpp
-  Bullet.cpp
-  코드를 생성하고 있습니다...
-  Framework99C.vcxproj -> D:\김태윤\99C\3개월차\Framework99C\Debug\Framework99C.exe
-  Framework99C.vcxproj -> D:\김태윤\99C\3개월차\Framework99C\Debug\Framework99C.pdb (Full PDB)
+﻿  Framework99C.vcxproj -> C:\Users\JBS\Documents\GitHub\팀과제\APITeamProject\Debug\Framework99C.exe
+  Framework99C.vcxproj -> C:\Users\JBS\Documents\GitHub\팀과제\APITeamProject\Debug\Framework99C.pdb (Full PDB)
