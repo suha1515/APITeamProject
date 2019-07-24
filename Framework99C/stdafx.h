@@ -47,6 +47,7 @@ using namespace std;
 #include "ResourceMgr.h"
 #include "PathMgr.h"
 #include "KeyboardMgr.h"
+#include "SpawnManager.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

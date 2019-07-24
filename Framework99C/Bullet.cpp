@@ -5,14 +5,16 @@
 CBullet::CBullet()
 	: m_eDirection(BULLET_UP)
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
+
 	m_ObjLst[OBJLECT_BULLET].push_back(this);
+
+	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
 }
 
 
 CBullet::~CBullet()
 {
-	Release();
+	//Release();
 }
 
 void CBullet::SetDirection(BULLET_DIRECTION eDir)
@@ -55,6 +57,7 @@ void CBullet::Release()
 	OBJLIST::iterator iter_find = find(m_ObjLst[OBJLECT_BULLET].begin(), m_ObjLst[OBJLECT_BULLET].end(), this);
 	if (iter_find != m_ObjLst[OBJLECT_BULLET].end())
 	{
+		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		m_ObjLst[OBJLECT_BULLET].erase(iter_find);
 	}
 }
@@ -73,7 +76,6 @@ void CBullet::IsMoving()
 		m_tInfo.fY -= m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	case BULLET_DOWN:
-		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		break;
 	}
 }
@@ -84,5 +86,9 @@ void CBullet::IsOutRange()
 
 	if (0 >= m_tRect.left || 0 >= m_tRect.top
 		|| WINCX <= m_tRect.right || WINCY <= m_tRect.bottom)
+	{
 		m_bIsDead = true;
+		//Release();
+	}
+		
 }

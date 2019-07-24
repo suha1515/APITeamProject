@@ -12,7 +12,7 @@ CMonster::CMonster()
 
 CMonster::~CMonster()
 {
-	Release();
+	//Release();
 }
 
 void CMonster::Initialize()

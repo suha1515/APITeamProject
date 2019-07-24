@@ -30,7 +30,7 @@ bool CCollsionMgr::CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst)
 	return false;
 }
 
-bool CCollsionMgr::CollisionRect(const OBJLIST & dstLst, const OBJLIST & srcLst, VECTOR2D* depth)
+bool CCollsionMgr::CollisionRectEX(const OBJLIST & dstLst, const OBJLIST & srcLst)
 {
 	for (auto& pDest : dstLst)
 	{
@@ -45,27 +45,43 @@ bool CCollsionMgr::CollisionRect(const OBJLIST & dstLst, const OBJLIST & srcLst,
 				//y축에 대하여 겹치는지 체크.
 				if (dstRect.bottom - srcRect.top > 0 && srcRect.bottom - dstRect.top>0)
 				{
+					float FX = pDest->GetInfo().fX;
+					float FY = pDest->GetInfo().fY;
+					
+					float fx = pDest->GetInfo().fCX*0.5f + pSource->GetInfo().fCX*0.5f;
+					float fy = pDest->GetInfo().fCY*0.5f + pSource->GetInfo().fCY*0.5f;
+					float depthX =fx-fabs(pDest->GetInfo().fX - pSource->GetInfo().fX);
+					float depthY =fy-fabs(pDest->GetInfo().fY - pSource->GetInfo().fY);
 					cout << "hit colider!" << endl;
-					//A는 왼쪽 B는 오른쪽
-					if (dstRect.right < srcRect.right)
+
+					//x축으로 깊이 더 들어갈 경우. (y축을 민다)
+					if (depthX > depthY)
 					{
-						depth->x = -pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
+						//A는 위 B는 아래
+						if (dstRect.bottom < srcRect.bottom)
+						{
+							pDest->SetPos(FX, FY - depthY);
+						}
+						//A는 아래 B는 위
+						else
+						{
+							pDest->SetPos(FX, FY + depthY);
+						}
 					}
-					//A는 오른쪽 B는 왼쪽
 					else
 					{
-						depth->x = pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
-					}
-					//A는 위 B는 아래
-					if (dstRect.bottom < srcRect.bottom)
-					{
-						depth->y = -pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
-					}
-					//A는 아래 B는 위
-					else 
-					{
-						depth->y = pDest->GetInfo().fSpeed*DELTA_TIME*fabsf(pSource->GetInfo().fSpeed*DELTA_TIME);
-					}
+						//A는 왼쪽 B는 오른쪽
+						if (dstRect.right < srcRect.right)
+						{
+							pDest->SetPos(FX - depthX, FY);
+						}
+						//A는 오른쪽 B는 왼쪽
+						else
+						{
+							pDest->SetPos(FX + depthX, FY);
+						}
+
+					}		
 					return true;
 				}
 			}

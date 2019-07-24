@@ -34,5 +34,6 @@ private:
 	OBJLIST*	m_pBulletLst;
 
 	bool m_bArrButton[BUTTON_END];
+	bool m_bIsAttack = false;
 };
 
