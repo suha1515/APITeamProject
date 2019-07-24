@@ -50,6 +50,7 @@ using namespace std;
 #include "KeyboardMgr.h"
 #include "GameManager.h"
 #include "SpawnManager.h"
+#include "ObjectMgr.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

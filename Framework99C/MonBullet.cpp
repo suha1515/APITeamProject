@@ -5,8 +5,7 @@
 CMonBullet::CMonBullet()
 	:m_iDmg(1)
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
-	m_ObjLst[OBJECT_MONBULLET].push_back(this);
+
 }
 
 

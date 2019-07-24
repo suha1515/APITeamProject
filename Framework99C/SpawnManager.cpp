@@ -28,6 +28,7 @@ void CSpawnManager::SpawnEnemy()
 {
 	list<SPAWN_INFO>::iterator iter_begin = m_EnemyPool.begin();
 	list<SPAWN_INFO>::iterator iter_end = m_EnemyPool.end();
+	CObjectMgr* objMgr = CObjectMgr::GetInstance();
 
 	for (; iter_begin != iter_end;)
 	{
@@ -39,7 +40,8 @@ void CSpawnManager::SpawnEnemy()
 			{
 				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
-				dynamic_cast<CCommonMonster*>(object)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
+				dynamic_cast<CCommonMonster*>(object)->SetPlayer(objMgr->GetPlayer());
+				objMgr->AddObject(OBJECT_MONSTER, object);
 			}
 			iter_begin = m_EnemyPool.erase(iter_begin);
 		}

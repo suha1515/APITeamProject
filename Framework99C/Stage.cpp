@@ -4,7 +4,7 @@
 
 CStage::CStage()
 {
-	m_ObjLst[OBJECT_STAGE].push_back(this);
+
 }
 
 

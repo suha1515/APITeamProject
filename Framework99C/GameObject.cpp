@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-OBJLIST CGameObject::m_ObjLst[OBJECT_END];
 CGameObject::CGameObject()
 	:  m_bIsDead(false)
 {

@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -158,6 +158,7 @@
     <ClInclude Include="MidBoss.h" />
     <ClInclude Include="MonBullet.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Typedef.h" />
+    <ClInclude Include="WingMan.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
@@ -182,6 +184,7 @@
     <ClCompile Include="MidBoss.cpp" />
     <ClCompile Include="MonBullet.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceMgr.cpp" />
@@ -194,6 +197,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="WingMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Framework99C.rc" />
