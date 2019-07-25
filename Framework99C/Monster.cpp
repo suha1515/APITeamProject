@@ -3,7 +3,6 @@
 
 
 CMonster::CMonster()
-	:m_iMonType(0)
 {
 
 }
@@ -16,7 +15,7 @@ CMonster::~CMonster()
 
 void CMonster::Initialize()
 {
-	m_tInfo.fX = WINCX/2.f;
+	m_tInfo.fX = WINCX / 2.f;
 	m_tInfo.fY = 200.f;
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
@@ -85,14 +84,28 @@ void CMonster::SetBulletLst(OBJLIST * pBulletLst)
 	m_pBulletLst = pBulletLst;
 }
 
-void CMonster::SetPlayer(CGameObject * pPlayer)
+void CMonster::SetMonType(MONSTER_TYPE monType,MONSTER_FIRETYPE fireType,MONSTER_MOVETYPE moveType, int various)
 {
-	m_pPlayer = pPlayer;
+	m_MonType = monType;
+	m_FireType = fireType;
+	m_MoveType = moveType;
+	m_Various = various;
 }
 
-void CMonster::SetMonType(int iType)
+void CMonster::SetDistance()
 {
-	m_iMonType = iType;
+	m_pTarget = CObjectMgr::GetInstance()->GetPlayer();
+
+	float fX = m_tInfo.fX - m_pTarget->GetInfo().fX;
+	float fY = m_tInfo.fY - m_pTarget->GetInfo().fY;
+	m_fDistance = sqrtf(fX * fX + fY * fY);
+
+}
+
+void CMonster::SetBarrel(POINT* pBarrel, float fX, float fY)
+{
+	pBarrel->x = m_tInfo.fX + fX;
+	pBarrel->y = m_tInfo.fY + fY;
 }
 
 void CMonster::IsMoving()
@@ -102,7 +115,7 @@ void CMonster::IsMoving()
 
 	if (m_tRect.left < 0.f)
 		m_tInfo.fX += 0.f - m_tRect.left;
-	else if(m_tRect.right > WINCX)
+	else if (m_tRect.right > WINCX)
 		m_tInfo.fX -= m_tRect.right - WINCX;
 
 	CGameObject::UpdateRect();
@@ -111,10 +124,10 @@ void CMonster::IsMoving()
 
 void CMonster::IsOutRange()
 {
-	CGameObject::UpdateRect();
+	/*CGameObject::UpdateRect();
 
 	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
-		m_tInfo.fSpeed *= -1;
+		m_tInfo.fSpeed *= -1;*/
 }
 
 void CMonster::IsFire()
