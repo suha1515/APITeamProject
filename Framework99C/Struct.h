@@ -49,6 +49,7 @@ typedef struct tagAnimInfo
 	float fEndY = 0.f;
 
 	// 애니메이션 진행시간
+	float fAccumulatedTime = 0.f;
 	float fElapsedTime = 0.f;
 	float fLimitTime = 0.f;
 

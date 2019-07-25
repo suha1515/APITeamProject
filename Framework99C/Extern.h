@@ -10,6 +10,7 @@ extern HBITMAP g_hBitmap;
 
 extern float g_fDeltaTime;
 extern float g_fElapsedTime;
+extern float g_fGameTime;
 extern float g_fTimeScale;
 
 // Å°º¸µå

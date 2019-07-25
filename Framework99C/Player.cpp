@@ -79,11 +79,17 @@ void CPlayer::Initialize()
 
 
 	// TEST ---------------------------------------------------
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player", _T("stage/player/Move_TB_A.bmp"));
-	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 7, 1, 6, 0, 0, 0, 0.f, 1.f);
+
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player_default", _T("Stage/Player/Player.bmp"));
+	m_pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.f);
+
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player", _T("Stage/Player/Move_TB_A.bmp"));
+	m_pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 7, 1, 0, 0, 6, 0, 1.f);
+
 	// --------------------------------------------------------
 
 }
@@ -97,7 +103,6 @@ int CPlayer::Update()
 	//m_pTexture->SetXY(0.f, 2.f);
 
 	UpdateWingMan();
-	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 76.f / 33.f);
 	//m_pTexture->SetXY(0.f, 2.f);
 
 
@@ -109,7 +114,16 @@ void CPlayer::Render(HDC hDC)
 	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
 
 	// TEST ---------------------------------------------------
-	m_pAnimator->RunReversedAnim(0, hDC, m_tImgInfo);
+	if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
+	{
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 76.f / 33.f);
+		m_pAnimator->RunAnim(1, hDC, m_tImgInfo);
+	}
+	else
+	{
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
+		m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	}
 	// --------------------------------------------------------
 
 	//디버그용
@@ -140,6 +154,7 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir)
 
 void CPlayer::KeyInput()
 {
+	CKeyboardMgr::GetInstance()->Update();
 	VECTOR2D vector(0, 0);
 	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
 	//if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))

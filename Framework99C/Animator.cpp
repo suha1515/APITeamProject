@@ -22,7 +22,7 @@ bool CAnimator::AddAnimInfo(ANIMINFO animInfo)
 }
 
 bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float maxX, float maxY,
-	float startX, float startY, float endX, float endY, float elapsedTime, float limitTime)
+	float startX, float startY, float endX, float endY, float limitTime)
 {
 	ANIMINFO tTmpInfo;
 
@@ -35,7 +35,6 @@ bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float m
 	tTmpInfo.fStartY = startY;
 	tTmpInfo.fEndX = endX;
 	tTmpInfo.fEndY = endY;
-	tTmpInfo.fElapsedTime = elapsedTime;
 	tTmpInfo.fLimitTime = limitTime;
 
 	m_vecAnimInfo.push_back(tTmpInfo);
@@ -73,28 +72,12 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
-	tmpAnim->fElapsedTime += g_fDeltaTime;
-
-	switch (tmpAnim->tAnimType)
+	if (g_fGameTime > tmpAnim->fAccumulatedTime)
 	{
-	case AT_LOOP:
-	{
-		if ((tmpAnim->fCurX >= tmpAnim->fEndX) && (tmpAnim->fCurY >= tmpAnim->fEndY))
-		{
-			tmpAnim->fCurX = tmpAnim->fStartX;
-			tmpAnim->fCurY = tmpAnim->fStartY;
-		}
-	}
-	break;
-	case AT_RETAIN:
-	{
-		if ((tmpAnim->fCurX >= tmpAnim->fEndX) && (tmpAnim->fCurY >= tmpAnim->fEndY))
-		{
-			tmpAnim->fCurX = tmpAnim->fEndX;
-			tmpAnim->fCurY = tmpAnim->fEndY;
-		}
-	}
-	break;
+		tmpAnim->fCurX = tmpAnim->fStartX;
+		tmpAnim->fCurY = tmpAnim->fStartY;
+		tmpAnim->fElapsedTime = 0.f;
+		tmpAnim->fAccumulatedTime = g_fGameTime;
 	}
 
 	if (tmpAnim->pTexture->m_bColorKeyEnable)
@@ -114,6 +97,8 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
 	}
 
+	tmpAnim->fAccumulatedTime += g_fDeltaTime;
+	tmpAnim->fElapsedTime += g_fDeltaTime;
 
 	while (tmpAnim->fElapsedTime >= fUnitTime)
 	{
@@ -121,16 +106,34 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 
 		if (tmpAnim->fCurX > tmpAnim->fEndX)
 		{
-			tmpAnim->fCurX = tmpAnim->fStartX;
 			tmpAnim->fCurY += fUnitFrame;
 
-			if (tmpAnim->fCurY > tmpAnim->fEndY)
-			{
-				tmpAnim->fCurX = tmpAnim->fEndX;
-				tmpAnim->fCurY = tmpAnim->fEndY;
-			}
+			if (tmpAnim->fCurY <= tmpAnim->fEndY)
+				tmpAnim->fCurX = tmpAnim->fStartX;
 		}
 		tmpAnim->fElapsedTime -= fUnitTime;
+	}
+
+	switch (tmpAnim->tAnimType)
+	{
+	case AT_LOOP:
+	{
+		if ((tmpAnim->fCurX > tmpAnim->fEndX) && (tmpAnim->fCurY > tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fStartX;
+			tmpAnim->fCurY = tmpAnim->fStartY;
+		}
+	}
+	break;
+	case AT_RETAIN:
+	{
+		if ((tmpAnim->fCurX > tmpAnim->fEndX) && (tmpAnim->fCurY > tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fEndX;
+			tmpAnim->fCurY = tmpAnim->fEndY;
+		}
+	}
+	break;
 	}
 }
 
@@ -140,30 +143,6 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = -1.f;
 
-	tmpAnim->fElapsedTime += g_fDeltaTime;
-
-	switch (tmpAnim->tAnimType)
-	{
-	case AT_LOOP:
-	{
-		if ((tmpAnim->fCurX <= tmpAnim->fEndX) && (tmpAnim->fCurY <= tmpAnim->fEndY))
-		{
-			tmpAnim->fCurX = tmpAnim->fStartX;
-			tmpAnim->fCurY = tmpAnim->fStartY;
-		}
-	}
-	break;
-	case AT_RETAIN:
-	{
-		if ((tmpAnim->fCurX <= tmpAnim->fEndX) && (tmpAnim->fCurY <= tmpAnim->fEndY))
-		{
-			tmpAnim->fCurX = tmpAnim->fEndX;
-			tmpAnim->fCurY = tmpAnim->fEndY;
-		}
-	}
-	break;
-	}
-
 	if (tmpAnim->pTexture->m_bColorKeyEnable)
 	{
 		TransparentBlt(hDC,
@@ -181,6 +160,7 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
 	}
 
+	tmpAnim->fElapsedTime += g_fDeltaTime;
 
 	while (tmpAnim->fElapsedTime >= fUnitTime)
 	{
@@ -188,15 +168,33 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 
 		if (tmpAnim->fCurX < tmpAnim->fEndX)
 		{
-			tmpAnim->fCurX = tmpAnim->fStartX;
 			tmpAnim->fCurY += fUnitFrame;
 
-			if (tmpAnim->fCurY < tmpAnim->fEndY)
-			{
-				tmpAnim->fCurX = tmpAnim->fEndX;
-				tmpAnim->fCurY = tmpAnim->fEndY;
-			}
+			if (tmpAnim->fCurY >= tmpAnim->fEndY)
+				tmpAnim->fCurX = tmpAnim->fStartX;
 		}
 		tmpAnim->fElapsedTime -= fUnitTime;
+	}
+
+	switch (tmpAnim->tAnimType)
+	{
+	case AT_LOOP:
+	{
+		if ((tmpAnim->fCurX < tmpAnim->fEndX) && (tmpAnim->fCurY < tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fStartX;
+			tmpAnim->fCurY = tmpAnim->fStartY;
+		}
+	}
+	break;
+	case AT_RETAIN:
+	{
+		if ((tmpAnim->fCurX < tmpAnim->fEndX) && (tmpAnim->fCurY < tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fEndX;
+			tmpAnim->fCurY = tmpAnim->fEndY;
+		}
+	}
+	break;
 	}
 }

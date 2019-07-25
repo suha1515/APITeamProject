@@ -10,7 +10,7 @@ public:
 public:
 	bool AddAnimInfo(ANIMINFO animInfo);
 	bool AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float maxX, float maxY,
-		float startX, float startY, float endX, float endY, float elapsedTime, float limitTime);
+		float startX, float startY, float endX, float endY, float limitTime);
 	bool DeleteAnimInfo(int iIdx);
 
 	void RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
