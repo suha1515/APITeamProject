@@ -28,6 +28,7 @@ public:
 	void SetMonType(MONSTER_TYPE monType, MONSTER_FIRETYPE fireType, MONSTER_MOVETYPE moveType,int various=0);
 	void SetDistance();
 	void SetBarrel(POINT* pBarrel, float fX, float fY);
+	void DropItem();
 
 
 protected:

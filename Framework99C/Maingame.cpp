@@ -77,6 +77,8 @@ void CMaingame::Initialize()
 	monsterPool[0].monster_type = MONSTER_TYPE::DEFAULT;
 	monsterPool[0].fire_type = MONSTER_FIRETYPE::SINGLE;
 	monsterPool[0].move_type = MONSTER_MOVETYPE::DOWN;
+	monsterPool[0].monster_various = 0;
+
 
 
 	monsterPool[1].spawnPos_x = 250;
@@ -85,13 +87,16 @@ void CMaingame::Initialize()
 	monsterPool[1].monster_type = MONSTER_TYPE::DEFAULT;
 	monsterPool[1].fire_type = MONSTER_FIRETYPE::BRUST_2;
 	monsterPool[1].move_type = MONSTER_MOVETYPE::LEFT;
+	monsterPool[1].monster_various = 1;
+
 
 	monsterPool[2].spawnPos_x = 350;
 	monsterPool[2].spawnPos_y = -100;
 	monsterPool[2].spawnTime = 6300;
 	monsterPool[2].monster_type = MONSTER_TYPE::MIDDLE;
-	monsterPool[2].fire_type = MONSTER_FIRETYPE::BRUST_3;
+	monsterPool[2].fire_type = MONSTER_FIRETYPE::AUTO;
 	monsterPool[2].move_type = MONSTER_MOVETYPE::RIGHT;
+	monsterPool[2].monster_various = 0;
 
 	monsterPool[3].spawnPos_x = 450;
 	monsterPool[3].spawnPos_y = -100;
@@ -99,6 +104,7 @@ void CMaingame::Initialize()
 	monsterPool[3].monster_type = MONSTER_TYPE::DEFAULT;
 	monsterPool[3].fire_type = MONSTER_FIRETYPE::AUTO;
 	monsterPool[3].move_type = MONSTER_MOVETYPE::TO_PLAYERX;
+	monsterPool[3].monster_various = 3;
 
 	m_SpawnMonster.SetEnemyPool(monsterPool[0]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[1]);

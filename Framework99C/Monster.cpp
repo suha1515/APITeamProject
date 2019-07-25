@@ -108,6 +108,18 @@ void CMonster::SetBarrel(POINT* pBarrel, float fX, float fY)
 	pBarrel->y = m_tInfo.fY + fY;
 }
 
+void CMonster::DropItem()
+{
+	if (m_bIsDead)
+	{
+		if (m_Various == 3)
+		{
+			// 드롭아이템
+
+		}
+	}
+}
+
 void CMonster::IsMoving()
 {
 	m_tInfo.fX += m_tInfo.fSpeed  * DELTA_TIME;
