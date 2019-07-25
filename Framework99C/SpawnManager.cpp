@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpawnManager.h"
 #include "CommonMonster.h"
+#include "MidBoss.h"
 
 CSpawnManager::CSpawnManager()
 {
@@ -36,11 +37,18 @@ void CSpawnManager::SpawnEnemy()
 		
 		if (info.spawnTime > CGameManager::GetInstance()->GetStageProgress())
 		{
-			if (info.type == MONSTER_TYPE::DEFAULT)
+			if (info.monster_type == MONSTER_TYPE::DEFAULT)
 			{
 				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
-				dynamic_cast<CCommonMonster*>(object)->SetPlayer(objMgr->GetPlayer());
+				dynamic_cast<CCommonMonster*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type,info.monster_various);
+				objMgr->AddObject(OBJECT_MONSTER, object);
+			}
+			else if (info.monster_type == MONSTER_TYPE::MIDDLE)
+			{
+				CGameObject *object = CAbstractFactory<CMidBoss>::CreateObject();
+				object->SetPos(info.spawnPos_x, info.spawnPos_y);
+				dynamic_cast<CMidBoss*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type, info.monster_various);
 				objMgr->AddObject(OBJECT_MONSTER, object);
 			}
 			iter_begin = m_EnemyPool.erase(iter_begin);
