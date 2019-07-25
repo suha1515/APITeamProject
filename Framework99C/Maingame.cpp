@@ -69,7 +69,7 @@ void CMaingame::Initialize()
 	monsterPool[0].spawnPos_x = 150;
 	monsterPool[0].spawnPos_y = -100;
 	monsterPool[0].spawnTime = 6500;
-	monsterPool[0].type = MONSTER_TYPE::MIDDLE;
+	monsterPool[0].type = MONSTER_TYPE::DEFAULT;
 
 	monsterPool[1].spawnPos_x = 250;
 	monsterPool[1].spawnPos_y = -100;

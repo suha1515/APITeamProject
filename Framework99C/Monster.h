@@ -24,11 +24,10 @@ public:
 public:
 	void SetDamaged(int dmg);
 	void SetBulletLst(OBJLIST* pBulletLst);
+	void SetPlayer(CGameObject* pPlayer);
 
+public:
 	void SetMonType(int iType);
-	void SetDistance();
-	void SetBarrel(POINT* pBarrel, float fX, float fY);
-
 
 protected:
 	void IsMoving();
@@ -39,16 +38,12 @@ protected:
 	int m_iMonType;
 	int m_iHP;
 	int m_iScore;
-	int m_iShotCount;
 	float m_fAngle;
 	float m_fCoolDown;
-	float m_fDistance;
 
 	POINT m_Barrel;
-	POINT m_Barrel2;
-
-	CGameObject* m_pTarget;
 
 	OBJLIST* m_pBulletLst;
+	CGameObject* m_pPlayer;
 };
 
