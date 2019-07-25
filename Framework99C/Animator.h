@@ -9,11 +9,12 @@ public:
 
 public:
 	bool AddAnimInfo(ANIMINFO animInfo);
-	bool AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float minX, float minY,
-		float maxX, float maxY, float elapsedTime, float limitTime);
+	bool AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float maxX, float maxY,
+		float startX, float startY, float endX, float endY, float limitTime);
 	bool DeleteAnimInfo(int iIdx);
 
 	void RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
+	void RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
 
 
 private:
