@@ -1,22 +1,73 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "WingMan.h"
 
 CPlayer::CPlayer()
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
-	m_ObjLst[OBJECT_PLAYER].push_back(this);
 }
 
 
 CPlayer::~CPlayer()
 {
-	Release();
+	//Release();
 }
 
 void CPlayer::SetBulletLst(OBJLIST* pBulletLst)
 {
-	m_pBulletLst = pBulletLst;
+}
+
+void CPlayer::AddWingMan()
+{
+	CGameObject* pGameObj = new CWingMan;
+	pGameObj->SetPos(m_WingManLoc[wingCount].x, m_WingManLoc[wingCount].y);
+	dynamic_cast<CWingMan*>(pGameObj)->SetLocation(&m_WingManLoc[wingCount]);
+	CObjectMgr::GetInstance()->AddObject(OBJECT_WINGMAN,pGameObj);
+	m_WingMan[wingCount] = pGameObj;
+	++wingCount;
+}
+
+void CPlayer::UpdateWingMan()
+{
+	//차지샷 스킬 활성화시
+	if (m_chargeWIngman)
+	{
+		//활성화후 사용중아니면 플레이어를 따라다니고
+		// 사용하게 되면 조건문을 빠져나가 해당 위치를 고수하게 된다.
+		if (!m_chargeShot)
+		{
+			m_WingManLoc[0].x = m_tInfo.fX - 60;
+			m_WingManLoc[0].y = m_tInfo.fY - 100;
+
+			m_WingManLoc[1].x = m_tInfo.fX + 60;
+			m_WingManLoc[1].y = m_tInfo.fY - 100;
+
+			m_WingManLoc[2].x = m_tInfo.fX - 120;
+			m_WingManLoc[2].y = m_tInfo.fY - 120;
+
+			m_WingManLoc[3].x = m_tInfo.fX + 120;
+			m_WingManLoc[3].y = m_tInfo.fY - 120;
+		}
+	}
+	else
+	{
+		m_WingManLoc[0].x = m_tInfo.fX - 50;
+		m_WingManLoc[0].y = m_tInfo.fY + 50;
+
+		m_WingManLoc[1].x = m_tInfo.fX + 50;
+		m_WingManLoc[1].y = m_tInfo.fY + 50;
+
+		m_WingManLoc[2].x = m_tInfo.fX - 100;
+		m_WingManLoc[2].y = m_tInfo.fY + 70;
+
+		m_WingManLoc[3].x = m_tInfo.fX + 100;
+		m_WingManLoc[3].y = m_tInfo.fY + 70;
+	}
+}
+
+POINT * CPlayer::GetWingManPos()
+{
+	return m_WingManLoc;
 }
 
 void CPlayer::Initialize()
@@ -28,8 +79,39 @@ void CPlayer::Initialize()
 
 	m_tInfo.fSpeed = 350.f;
 
-	m_pTexture = CResourceMgr::LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
+
+
+	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Move_TB_A.bmp"));
+
+	m_WingManLoc[0].x = m_tInfo.fX - 50;
+	m_WingManLoc[0].y = m_tInfo.fY + 50;
+
+	m_WingManLoc[1].x = m_tInfo.fX + 50;
+	m_WingManLoc[1].y = m_tInfo.fY + 50;
+
+	m_WingManLoc[2].x = m_tInfo.fX - 100;
+	m_WingManLoc[2].y = m_tInfo.fY + 70;
+
+	m_WingManLoc[3].x = m_tInfo.fX + 100;
+	m_WingManLoc[3].y = m_tInfo.fY + 70;
+
+	wingCount = 0;
+	fFireRate = 0.f;
+	fWingFireRate = 0.0f;
+	chargeTime = 0;
+	chargeShotTime = 0.0f;
+
+	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
+	//m_pTexture->SetColorKey(RGB(255, 255, 255));
+
+
+	// TEST ---------------------------------------------------
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player", _T("stage/player/Move_TB_A.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
+
+	m_pAnimator = new CAnimator;
+	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 0, 0, 7, 1, 0.f, 1.f);
+	// --------------------------------------------------------
 
 }
 
@@ -37,27 +119,37 @@ int CPlayer::Update()
 {
 	KeyInput();
 	CGameObject::UpdateRect();
-	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
-	m_pTexture->SetXY(0.f, 2.f);
+
+	//CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY * 76.f/33.f);
+	//m_pTexture->SetXY(0.f, 2.f);
+
+	UpdateWingMan();
+	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 76.f / 33.f);
+	//m_pTexture->SetXY(0.f, 2.f);
+
 
 	return NO_EVENT;
 }
 
 void CPlayer::Render(HDC hDC)
 {
-	m_pTexture->DrawTexture(hDC, m_tImgInfo);
+	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
+
+	// TEST ---------------------------------------------------
+	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	// --------------------------------------------------------
+
+	//디버그용
+	/*Rectangle(hDC, m_WingManLoc[0].x - 10, m_WingManLoc[0].y - 10, m_WingManLoc[0].x + 10, m_WingManLoc[0].y + 10);
+	Rectangle(hDC, m_WingManLoc[1].x - 10, m_WingManLoc[1].y - 10, m_WingManLoc[1].x + 10, m_WingManLoc[1].y + 10);
+	Rectangle(hDC, m_WingManLoc[2].x - 10, m_WingManLoc[2].y - 10, m_WingManLoc[2].x + 10, m_WingManLoc[2].y + 10);
+	Rectangle(hDC, m_WingManLoc[3].x - 10, m_WingManLoc[3].y - 10, m_WingManLoc[3].x + 10, m_WingManLoc[3].y + 10);*/
+
 }
 
 void CPlayer::Release()
 {
 	m_pTexture->SafeDelete();
-	
-	// 삭제시 리스트에서 오브젝트를 삭제
-	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_PLAYER].begin(), m_ObjLst[OBJECT_PLAYER].end(), this);
-	if (iter_find != m_ObjLst[OBJECT_PLAYER].end())
-	{
-		m_ObjLst[OBJECT_PLAYER].erase(iter_find);
-	}
 }
 
 CGameObject* CPlayer::CreateBullet()
@@ -76,46 +168,119 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir)
 void CPlayer::KeyInput()
 {
 	VECTOR2D vector(0, 0);
-	// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
-	if (CCollsionMgr::CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
-	{
-		m_tInfo.fX += vector.x;
-		m_tInfo.fY += vector.y;
-	}
-	else
-	{
+	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
+	//if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_MONSTER],&vector))
+	//{
+	//	m_tInfo.fX += vector.x;
+	//	m_tInfo.fY += vector.y;
+	//}
+	//else
+	//{
+	CObjectMgr* objMgr = CObjectMgr::GetInstance();
+	CCollsionMgr::GetInstance()->CollisionRectEX(objMgr->GetObjectList(OBJECT_PLAYER), objMgr->GetObjectList(OBJECT_MONSTER));
 		//플레이어 영역 제한 버벅거리는거 없음.
 		if (m_tRect.left > 0)
 		{
-			if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+			if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
 				m_tInfo.fX -= m_tInfo.fSpeed  * DELTA_TIME;
 		}
 		if (m_tRect.right < WINCX)
 		{
-			if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+			if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
 				m_tInfo.fX += m_tInfo.fSpeed  * DELTA_TIME;
 		}
 		if (m_tRect.top > 0)
 		{
-			if (GetAsyncKeyState(VK_UP) & 0x8000)
-				m_tInfo.fY -= m_tInfo.fSpeed  * DELTA_TIME;
+			if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
+				m_tInfo.fY -= m_tInfo.fSpeed  * DELTA_TIME;		
 		}
 		if (m_tRect.bottom < WINCY)
 		{
-			if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+			if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_DOWN))
 				m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		}
+	static int nMaximumBullet = MAXIMUM_MISSILE;
+
+#pragma region PLAYER_SHOOTING
+
+	if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_SPECIAL))
+	{
+		//공격버튼을 3초간 누르고, 차지샷 스킬 사용중이 아닐때 ,또한 윙맨의 개수는 2개 이상이어야 차지샷 가능
+		if (chargeTime >= 2.f&&m_chargeShot == false&&wingCount>2)
+		{
+			//윙맨들의 위치를 앞으로 보낸다.
+			// 공격버튼에서 손떼기 전까지는 윙맨도 공격하지 않는다.
+			m_chargeWIngman = true;
+		}
+		//그 외에는 연사력만큼 총알을 발사한다.
+		else
+		{		// 연사력 결정
+			if (fFireRate >= 0.1f)
+			{
+				fFireRate = TIME + 1.f / fFireRate;
+				CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP));
+				if (!m_chargeShot)
+				{
+					//윙맨들 사격
+					for (int i = 0; i < wingCount; ++i)
+					{
+						dynamic_cast<CWingMan*>(m_WingMan[i])->Fire();
+					}
+				}
+				fFireRate -= fFireRate;
+			}
+			chargeTime += DELTA_TIME;
+			fFireRate += DELTA_TIME;
+			cout << chargeTime << endl;
+		}
+
+	}
+	//공격버튼에서 떼면
+	// 2초간 차지 했으면 차지샷 아니면 차지타임 초기화
+	if (CKeyboardMgr::GetInstance()->KeyUp(KEY_SPECIAL))
+	{
+		cout << "공격키 땜" << endl;
+		if (m_chargeWIngman)
+		{
+			m_chargeShot = true;
+		}
+		chargeTime -= chargeTime;
 	}
 
-	static int nMaximumBullet = MAXIMUM_MISSILE;
+	if (m_chargeShot)
+	{
+		//윙맨들은 차지샷 사용시 5초간 그자리에서 발사한다.
+		if (chargeShotTime <= 5.0f)
+		{
+			if (fWingFireRate >= 0.1f)
+			{
+				for (int i = 0; i < wingCount; ++i)
+				{
+					dynamic_cast<CWingMan*>(m_WingMan[i])->Fire();
+				}
+				fWingFireRate -= fWingFireRate;
+			}
+			fWingFireRate += DELTA_TIME;
+			chargeShotTime += DELTA_TIME;
+		}
+		else
+		{
+			//5초가 지난후 윙맨들은 자기자리로 돌아가고 
+			// 차지스킬샷도 해제
+			m_chargeShot = false;
+			m_chargeWIngman = false;
+			chargeShotTime -= chargeShotTime;
+			chargeTime -= chargeTime;
+		}
+	}
+#pragma endregion
 
 	
 
 	// BUTTON_A : 키보드를 누를 경우 최대 4개의 미사일까지 발사
 	if (!m_bArrButton[BUTTON_A] && (GetAsyncKeyState('A') & 0x8000))
 	{
-		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-
+		CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET,CreateBullet(BULLET_UP));
 		if (!(--nMaximumBullet))
 		{
 			m_bArrButton[BUTTON_A] = true;
@@ -125,14 +290,20 @@ void CPlayer::KeyInput()
 	if (!GetAsyncKeyState('A'))
 		m_bArrButton[BUTTON_A] = false;
 
-	// BUTTON_S : 필살기 버튼 연속입력 방지
-	if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
-	{
-		m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-		m_bArrButton[BUTTON_S] = true;
-	}
-	if (!GetAsyncKeyState('S'))
-		m_bArrButton[BUTTON_S] = false;
+		// BUTTON_S : 필살기 버튼 연속입력 방지
+	//	if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
+	//	{
+	//		CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP));
+	//		//윙맨들 사격
+	//		for (int i = 0; i < wingCount; ++i)
+	//		{
+	//			dynamic_cast<CWingMan*>(m_WingMan[i])->Fire();
+	//		}
+	//		m_bArrButton[BUTTON_S] = true;
+	//		m_bIsAttack = true;
+	//	}
+	//if (!GetAsyncKeyState('S'))
+	//	m_bArrButton[BUTTON_S] = false;
 	//if (GetAsyncKeyState('W') & 0x8000)
 	//	m_pBulletLst->push_back(CreateBullet(BULLET_UP));
 	//if (GetAsyncKeyState('D') & 0x8000)

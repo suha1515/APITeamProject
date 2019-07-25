@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-OBJLIST CGameObject::m_ObjLst[OBJECT_END];
 CGameObject::CGameObject()
 	:  m_bIsDead(false)
 {
@@ -22,6 +21,12 @@ const RECT & CGameObject::GetRect() const
 {
 	// TODO: 여기에 반환 구문을 삽입합니다.
 	return m_tRect;
+}
+
+const bool CGameObject::GetDead() const
+{
+
+	return m_bIsDead;
 }
 
 void CGameObject::SetPos(float x, float y)
@@ -51,4 +56,12 @@ void CGameObject::UpdateImgInfo(float CImgX, float CImgY)
 	m_tImgInfo.fImgCY = CImgY;
 	m_tImgInfo.fPivotX = (m_tInfo.fX - m_tRect.left) / m_tInfo.fCX;
 	m_tImgInfo.fPivotY = (m_tInfo.fY - m_tRect.top) / m_tInfo.fCY;
+
+}
+
+void CGameObject::UpdateImgInfo(float CImgX, float CImgY, float scaleX, float scaleY)
+{
+	UpdateImgInfo(CImgY, CImgY);
+	m_tImgInfo.fScaleX = scaleX;
+	m_tImgInfo.fScaleY = scaleY;
 }
