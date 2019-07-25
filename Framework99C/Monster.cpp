@@ -85,14 +85,25 @@ void CMonster::SetBulletLst(OBJLIST * pBulletLst)
 	m_pBulletLst = pBulletLst;
 }
 
-void CMonster::SetPlayer(CGameObject * pPlayer)
-{
-	m_pPlayer = pPlayer;
-}
-
 void CMonster::SetMonType(int iType)
 {
 	m_iMonType = iType;
+}
+
+void CMonster::SetDistance()
+{
+	m_pTarget = CObjectMgr::GetInstance()->GetPlayer();
+
+	float fX = m_tInfo.fX - m_pTarget->GetInfo().fX;
+	float fY = m_tInfo.fY - m_pTarget->GetInfo().fY;
+	m_fDistance = sqrtf(fX * fX + fY * fY);
+
+}
+
+void CMonster::SetBarrel(POINT* pBarrel, float fX, float fY)
+{
+	pBarrel->x = m_tInfo.fX + fX;
+	pBarrel->y = m_tInfo.fY + fY;
 }
 
 void CMonster::IsMoving()

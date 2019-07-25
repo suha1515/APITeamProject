@@ -1,61 +1,10 @@
-﻿  stdafx.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\function.h(27): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\function.h(28): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Bullet.cpp
-  Animator.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(111): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(110): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(108): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(107): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(118): warning C4244: '인수': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(117): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  CollsionMgr.cpp
-  CommonMonster.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\commonmonster.cpp(45): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\commonmonster.cpp(46): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\commonmonster.cpp(82): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Framework99C.cpp
-  GameManager.cpp
-  GameObject.cpp
-  KeyboardMgr.cpp
-  Maingame.cpp
-  MidBoss.cpp
-  MonBullet.cpp
-  Monster.cpp
-  ObjectMgr.cpp
-  PathMgr.cpp
-  Player.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(23): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(32): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(33): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(35): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(36): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(38): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(39): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(41): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(42): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(63): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(64): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(66): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(67): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(69): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(70): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(72): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(73): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ResourceMgr.cpp
-  SpawnManager.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\spawnmanager.cpp(42): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Stage.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\stage.cpp(21): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\stage.cpp(31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Texture.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\texture.cpp(79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\texture.cpp(78): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\texture.cpp(84): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\texture.cpp(83): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  WingMan.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\wingman.cpp(30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\wingman.cpp(41): warning C4244: '인수': 'float'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  Framework99C.vcxproj -> C:\Users\bsj10\OneDrive\문서\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
+﻿  MidBoss.cpp
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(146): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(152): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(173): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(179): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(185): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(208): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\midboss.cpp(215): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Framework99C.vcxproj -> E:\[프로그래밍 공부]\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
+  Framework99C.vcxproj -> .\Debug\Framework99C_Debugx32.pdb (Full PDB)

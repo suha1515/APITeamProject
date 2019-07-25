@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpawnManager.h"
 #include "CommonMonster.h"
+#include "MidBoss.h"
 
 CSpawnManager::CSpawnManager()
 {
@@ -40,9 +41,19 @@ void CSpawnManager::SpawnEnemy()
 			{
 				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
-				dynamic_cast<CCommonMonster*>(object)->SetPlayer(objMgr->GetPlayer());
+				dynamic_cast<CMonster*>(object)->SetMonType(0);	// ObjMgr로 관리할지?
+				//dynamic_cast<CCommonMonster*>(object)->SetPlayer(objMgr->GetPlayer());
 				objMgr->AddObject(OBJECT_MONSTER, object);
 			}
+			if (info.type == MONSTER_TYPE::MIDDLE)
+			{
+				CGameObject *object = CAbstractFactory<CMidBoss>::CreateObject();
+				object->SetPos(info.spawnPos_x, info.spawnPos_y);
+				dynamic_cast<CMonster*>(object)->SetMonType(2);	// ObjMgr로 관리할지?
+				//dynamic_cast<CCommonMonster*>(object)->SetPlayer(objMgr->GetPlayer());
+				objMgr->AddObject(OBJECT_MONSTER, object);
+			}
+
 			iter_begin = m_EnemyPool.erase(iter_begin);
 		}
 		else
