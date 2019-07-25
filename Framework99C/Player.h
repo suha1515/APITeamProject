@@ -40,7 +40,11 @@ private:
 	POINT		m_WingManLoc[4];
 	CGameObject*    m_WingMan[4];
 
-	int wingCount;	
+	int wingCount;
+	float fFireRate;
+	float fWingFireRate;
+	float chargeTime;
+	float chargeShotTime;
 	bool m_bArrButton[BUTTON_END];
 
 
@@ -48,6 +52,8 @@ private:
 	//CAnimator* m_pAnimator;
 
 	bool m_bIsAttack = false;
+	bool m_chargeShot = false;
+	bool m_chargeWIngman = false;
 
 
 	// TEST ---------------------------------------------------

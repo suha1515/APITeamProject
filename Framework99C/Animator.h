@@ -1,21 +1,20 @@
-
 #pragma once
+
 class CTexture;
-class CAnimator
+
+class Animator
 {
 public:
-	CAnimator();
-	~CAnimator();
+	Animator();
+	~Animator();
 
 public:
-	bool AddAnimInfo(ANIMINFO animInfo);
-	bool AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float minX, float minY,
-		float maxX, float maxY, float elapsedTime, float limitTime);
-	bool DeleteAnimInfo(int iIdx);
+	void AddTexture(CTexture* pTexture);
 
-	void RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo);
-
+public:
+	void RunClip(int iIdx); // 애니메이션 실행
 
 private:
-	vector<ANIMINFO> m_vecAnimInfo;
+	vector<CTexture*> m_vecTexture;
 };
+
