@@ -143,6 +143,14 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = -1.f;
 
+	if (g_fTotalTime > tmpAnim->fAccumulatedTime)
+	{
+		tmpAnim->fCurX = tmpAnim->fStartX;
+		tmpAnim->fCurY = tmpAnim->fStartY;
+		tmpAnim->fElapsedTime = 0.f;
+		tmpAnim->fAccumulatedTime = g_fTotalTime;
+	}
+
 	if (tmpAnim->pTexture->m_bColorKeyEnable)
 	{
 		TransparentBlt(hDC,
@@ -160,6 +168,7 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
 	}
 
+	tmpAnim->fAccumulatedTime += g_fDeltaTime;
 	tmpAnim->fElapsedTime += g_fDeltaTime;
 
 	while (tmpAnim->fElapsedTime >= fUnitTime)

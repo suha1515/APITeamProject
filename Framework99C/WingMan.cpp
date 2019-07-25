@@ -12,7 +12,7 @@ CWingMan::CWingMan()
 	m_pTexture->SetColorKey(RGB(0, 128, 128));
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 0, 0, 2, 1, 0.f, 1.f);
+	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.f);
 }
 CWingMan::~CWingMan()
 {

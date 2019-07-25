@@ -21,7 +21,7 @@ void CMonBullet::Initialize()
 
 	m_tInfo.fSpeed = 10.f;
 
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Magic_Elec3.bmp"));
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet", _T("Stage/Bullet/Magic_Elec3.bmp"));
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
 }
