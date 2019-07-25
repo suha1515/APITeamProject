@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "CommonMonster.h"
+#include "MidBoss.h"
 #include "Stage.h"
 
 CMaingame::CMaingame()	
@@ -46,6 +47,24 @@ void CMaingame::Initialize()
 
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
+<<<<<<< HEAD
+	dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
+	m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+
+	// Monster
+	for (int i = 0; i < 1; ++i)
+	{
+		//float x = float(rand() % (WINCX - 200)) + 100.f;
+		//float y = float(rand() % (WINCY - 200)) + 100.f;
+
+		//pGameObject = CAbstractFactory<CMonster>::CreateObject();
+		pGameObject = CAbstractFactory<CMidBoss>::CreateObject();
+		// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
+		dynamic_cast<CMidBoss*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+		dynamic_cast<CMidBoss*>(pGameObject)->SetPlayer(&m_ObjLst[OBJECT_PLAYER]);
+		m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+	}
+=======
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
 	//윙맨 추가 -테스트-
 	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
@@ -94,6 +113,7 @@ void CMaingame::Initialize()
 	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[2]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[3]);
+>>>>>>> master
 }
 
 void CMaingame::Update()

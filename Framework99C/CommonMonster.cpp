@@ -23,9 +23,9 @@ void CCommonMonster::Initialize()
 		m_tInfo.fY = 200.f;
 		m_tInfo.fCX = 100.f;
 		m_tInfo.fCY = 100.f;
-		m_tInfo.fSpeed = 80.f;
+		m_tInfo.fSpeed = 180.f;
 
-		m_fCoolDown = 2.f;
+		m_fCoolDown = 1.f;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
