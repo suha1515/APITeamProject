@@ -40,7 +40,6 @@ void CWingMan::Move()
 
 	float dist = Distance(m_tInfo.fX, m_tInfo.fY, (*m_Location).x, (*m_Location).y);
 	
-	cout << dist << endl;
 	if (dist > 20)
 	{
 		float fx = (*m_Location).x - m_tInfo.fX;

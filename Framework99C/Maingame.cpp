@@ -47,7 +47,11 @@ void CMaingame::Initialize()
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
+	//윙맨 추가 -테스트-
 	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	//dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
 	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
 	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
@@ -95,6 +99,7 @@ void CMaingame::Initialize()
 void CMaingame::Update()
 {
 	m_SpawnMonster.SpawnEnemy();
+	CKeyboardMgr::GetInstance()->Update();
 	CObjectMgr::GetInstance()->Update();
 }
 

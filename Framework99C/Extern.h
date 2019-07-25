@@ -11,6 +11,7 @@ extern HBITMAP g_hBitmap;
 extern float g_fDeltaTime;
 extern float g_fElapsedTime;
 extern float g_fTimeScale;
+extern float g_fTotalTime;
 
 // Å°º¸µå
 extern const DWORD KEY_UP;
