@@ -25,7 +25,7 @@ bool CTexture::LoadTexture(HINSTANCE hInst, HDC hDC, const string & strKey, cons
 		m_hMemDC = CreateCompatibleDC(hDC);
 
 	// 전체 경로
-	const TCHAR* pPath = CPathMgr::FindPath(strPathKey);
+	const TCHAR* pPath = CPathMgr::GetInstance()->FindPath(strPathKey);
 
 	wstring strPath;
 
@@ -71,12 +71,12 @@ COLORREF CTexture::GetColorKey()
 	return m_tColorKey;
 }
 
-void CTexture::DrawTexture(HDC hDC, IMGINFO& imgInfo)
+void CTexture::DrawTexture(HDC hDC, IMGINFO& imgInfo, float maxX, float maxY, float scaleX, float scaleY)
 {
 	if (m_bColorKeyEnable)
 	{
 		TransparentBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
-			imgInfo.fImgCX, imgInfo.fImgCY, m_hMemDC, 0, 0, m_tBit.bmWidth / maxX , m_tBit.bmHeight, m_tColorKey);
+			imgInfo.fImgCX * scaleX, imgInfo.fImgCY * scaleY, m_hMemDC, 0, 0, m_tBit.bmWidth / maxX, m_tBit.bmHeight / maxY, m_tColorKey);
 	}
 	else
 	{

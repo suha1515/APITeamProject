@@ -2,17 +2,16 @@
 
 class CPathMgr
 {
-public:
-	CPathMgr();
-	~CPathMgr();
-
-public:
-	static void Initialize();
-	static bool CreatePath(const string& strKey, const TCHAR* pPath,
-		const string& strBaseKey = ROOT_PATH);
-	static const TCHAR* FindPath(const string& strKey);
+	DECLARE_SINGLE_TONE(CPathMgr)
 
 private:
-	static unordered_map<string, wstring> m_mapPath;
+	void Initialize();
+public:
+	bool CreatePath(const string& strKey, const TCHAR* pPath,
+		const string& strBaseKey = ROOT_PATH);
+	const TCHAR* FindPath(const string& strKey);
+
+private:
+	unordered_map<string, wstring> m_mapPath;
 };
 

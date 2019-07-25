@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c</FILEPATH>
+      <FILENAME>player.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CPlayer::m_WingManLoc' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CPlayer::{ctor}</FUNCTION>
+    <DECORATED>??0CPlayer@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c</FILEPATH>
+      <FILENAME>player.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CPlayer::wingCount' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CPlayer::{ctor}</FUNCTION>
+    <DECORATED>??0CPlayer@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c</FILEPATH>
+      <FILENAME>player.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CPlayer::m_WingMan' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CPlayer::{ctor}</FUNCTION>
+    <DECORATED>??0CPlayer@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c</FILEPATH>
+      <FILENAME>player.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CPlayer::m_bArrButton' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CPlayer::{ctor}</FUNCTION>
+    <DECORATED>??0CPlayer@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c</FILEPATH>
+      <FILENAME>player.cpp</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>9</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CPlayer::m_pAnimator' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CPlayer::{ctor}</FUNCTION>
+    <DECORATED>??0CPlayer@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

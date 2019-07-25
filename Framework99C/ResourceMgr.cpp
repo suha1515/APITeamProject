@@ -2,24 +2,13 @@
 #include "ResourceMgr.h"
 #include "Texture.h"
 
-unordered_map<string, CTexture*> CResourceMgr::m_mapTexture;
-HINSTANCE	CResourceMgr::m_hInst = NULL;
-HDC			CResourceMgr::m_hDC = NULL;
 
+DEFINE_SINGLE_TONE(CResourceMgr)
 
-CResourceMgr::CResourceMgr()
+void CResourceMgr::Initialize()
 {
-}
-
-
-CResourceMgr::~CResourceMgr()
-{
-}
-
-void CResourceMgr::Initialize(HINSTANCE hInst, HDC hDC)
-{
-	m_hInst = hInst;
-	m_hDC = hDC;
+	m_hInst = g_hInst;
+	m_hDC = g_hDC;
 }
 
 CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileName,
