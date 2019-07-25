@@ -21,5 +21,7 @@ protected:
 private:
 	CGameObject* CreateBullet();
 	POINT*		 m_Location;
+
+	CAnimator* m_pAnimator;
 };
 
