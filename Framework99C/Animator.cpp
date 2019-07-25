@@ -21,8 +21,8 @@ bool CAnimator::AddAnimInfo(ANIMINFO animInfo)
 	return true;
 }
 
-bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float minX, float minY,
-	float maxX, float maxY, float elapsedTime, float limitTime)
+bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float maxX, float maxY,
+	float startX, float startY, float endX, float endY, float elapsedTime, float limitTime)
 {
 	ANIMINFO tTmpInfo;
 
@@ -30,9 +30,11 @@ bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float m
 	tTmpInfo.tAnimType = animType;
 	tTmpInfo.fMaxX = maxX;
 	tTmpInfo.fMaxY = maxY;
-	tTmpInfo.fMinX = minX;
-	tTmpInfo.fMinY = minY;
 
+	tTmpInfo.fStartX = startX;
+	tTmpInfo.fStartY = startY;
+	tTmpInfo.fEndX = endX;
+	tTmpInfo.fEndY = endY;
 	tTmpInfo.fElapsedTime = elapsedTime;
 	tTmpInfo.fLimitTime = limitTime;
 
@@ -68,16 +70,10 @@ bool CAnimator::DeleteAnimInfo(int iIdx)
 void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
-	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX - tmpAnim->fMinX);
+	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
 	tmpAnim->fElapsedTime += g_fDeltaTime;
-
-	tmpAnim->fStartX = tmpAnim->fMinX;
-	tmpAnim->fStartY = tmpAnim->fMinY;
-	tmpAnim->fEndX = tmpAnim->fMaxX - 1.f;
-	tmpAnim->fEndY = tmpAnim->fMaxY - 1.f;
-
 
 	switch (tmpAnim->tAnimType)
 	{
@@ -116,7 +112,6 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	{
 		BitBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
-		//BitBlt(hDC, 0,0,WINCX,WINCY,m_hMemDC, 0, imgInfo.fY, SRCCOPY);
 	}
 
 
@@ -130,6 +125,73 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 			tmpAnim->fCurY += fUnitFrame;
 
 			if (tmpAnim->fCurY > tmpAnim->fEndY)
+			{
+				tmpAnim->fCurX = tmpAnim->fEndX;
+				tmpAnim->fCurY = tmpAnim->fEndY;
+			}
+		}
+		tmpAnim->fElapsedTime -= fUnitTime;
+	}
+}
+
+void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
+{
+	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
+	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
+	float fUnitFrame = -1.f;
+
+	tmpAnim->fElapsedTime += g_fDeltaTime;
+
+	switch (tmpAnim->tAnimType)
+	{
+	case AT_LOOP:
+	{
+		if ((tmpAnim->fCurX <= tmpAnim->fEndX) && (tmpAnim->fCurY <= tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fStartX;
+			tmpAnim->fCurY = tmpAnim->fStartY;
+		}
+	}
+	break;
+	case AT_RETAIN:
+	{
+		if ((tmpAnim->fCurX <= tmpAnim->fEndX) && (tmpAnim->fCurY <= tmpAnim->fEndY))
+		{
+			tmpAnim->fCurX = tmpAnim->fEndX;
+			tmpAnim->fCurY = tmpAnim->fEndY;
+		}
+	}
+	break;
+	}
+
+	if (tmpAnim->pTexture->m_bColorKeyEnable)
+	{
+		TransparentBlt(hDC,
+			imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
+			imgInfo.fImgCX * imgInfo.fScaleX, imgInfo.fImgCY * imgInfo.fScaleY,
+			tmpAnim->pTexture->m_hMemDC,
+			((tmpAnim->pTexture->m_tBit.bmWidth) / tmpAnim->fMaxX) * tmpAnim->fCurX,
+			((tmpAnim->pTexture->m_tBit.bmHeight) / tmpAnim->fMaxY) * tmpAnim->fCurY,
+			(tmpAnim->pTexture->m_tBit.bmWidth) / tmpAnim->fMaxX, (tmpAnim->pTexture->m_tBit.bmHeight) / tmpAnim->fMaxY,
+			tmpAnim->pTexture->m_tColorKey);
+	}
+	else
+	{
+		BitBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
+			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
+	}
+
+
+	while (tmpAnim->fElapsedTime >= fUnitTime)
+	{
+		tmpAnim->fCurX += fUnitFrame;
+
+		if (tmpAnim->fCurX < tmpAnim->fEndX)
+		{
+			tmpAnim->fCurX = tmpAnim->fStartX;
+			tmpAnim->fCurY += fUnitFrame;
+
+			if (tmpAnim->fCurY < tmpAnim->fEndY)
 			{
 				tmpAnim->fCurX = tmpAnim->fEndX;
 				tmpAnim->fCurY = tmpAnim->fEndY;

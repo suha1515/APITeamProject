@@ -34,20 +34,16 @@ typedef struct tagAnimInfo
 	CTexture* pTexture = nullptr;
 	ANIMATION_TYPE tAnimType = AT_LOOP;
 
-	// 시작 위치
-	float fMinX = 0.f;
-	float fMinY = 0.f;
-
 	// 총 길이
 	float fMaxX = 1.f;
 	float fMaxY = 1.f;
 
+	float fStartX = 0.f;
+	float fStartY = 0.f;
+	
 	// 현재 위치
 	float fCurX = 0.f;
 	float fCurY = 0.f;
-
-	float fStartX = 0.f;
-	float fStartY = 0.f;
 
 	float fEndX = 0.f;
 	float fEndY = 0.f;

@@ -83,7 +83,7 @@ void CPlayer::Initialize()
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 
 	m_pAnimator = new CAnimator;
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 0, 0, 7, 1, 0.f, 1.f);
+	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 7, 1, 6, 0, 0, 0, 0.f, 1.f);
 	// --------------------------------------------------------
 
 }
@@ -109,7 +109,7 @@ void CPlayer::Render(HDC hDC)
 	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
 
 	// TEST ---------------------------------------------------
-	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	m_pAnimator->RunReversedAnim(0, hDC, m_tImgInfo);
 	// --------------------------------------------------------
 
 	//디버그용

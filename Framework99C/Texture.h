@@ -4,7 +4,6 @@ class CTexture
 {
 	friend class CAnimator;
 	friend class ResourceMgr;
-	friend class CAnimator;
 
 public:
 	CTexture();
@@ -28,12 +27,12 @@ public:
 	void SetColorKey(COLORREF colorKey);
 	void SetKeyEnable(bool keyEnable);
 
-	//test
-	void SetXY(float x, float _maxX)
-	{
-		startX = x;
-		maxX = _maxX;
-	}
+	////test
+	//void SetXY(float x, float _maxX)
+	//{
+	//	startX = x;
+	//	maxX = _maxX;
+	//}
 private:
 	int nTextureRef;
 	HDC m_hMemDC;
@@ -46,7 +45,7 @@ private:
 	COLORREF m_tColorKey;
 
 	// test
-	float startX = 0.f;
-	float maxX = 1.f;
+	//float startX = 0.f;
+	//float maxX = 1.f;
 };
 

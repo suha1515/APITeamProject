@@ -37,6 +37,7 @@ void CMaingame::Initialize()
 	// KeyboardMgr
 	m_pKeyboardMgr = CKeyboardMgr::GetInstance();
 
+
 	CGameObject* pGameObject = nullptr;
 
 	// Stage
@@ -116,5 +117,4 @@ void CMaingame::Release()
 	CPathMgr::DeleteInstance();
 	CResourceMgr::DeleteInstance();
 	CKeyboardMgr::DeleteInstance();
-
 }

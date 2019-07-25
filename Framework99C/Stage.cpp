@@ -27,7 +27,7 @@ int CStage::Update()
 {
 	if (0 < m_tInfo.fY)
 	{
-		m_tInfo.fY -= 100.f * DELTA_TIME;
+		m_tInfo.fY -= STAGE_SPEED * DELTA_TIME;
 		CGameManager::GetInstance()->SetStageProgress(m_tInfo.fY);
 	}
 	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
