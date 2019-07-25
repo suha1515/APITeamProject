@@ -79,7 +79,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			
 			g_fTotalTime += g_fDeltaTime;
 
-
 			mainGame.Update();
 			mainGame.Render();
 

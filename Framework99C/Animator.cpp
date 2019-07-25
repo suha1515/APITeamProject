@@ -72,12 +72,12 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
-	if (g_fGameTime > tmpAnim->fAccumulatedTime)
+	if (g_fTotalTime > tmpAnim->fAccumulatedTime)
 	{
 		tmpAnim->fCurX = tmpAnim->fStartX;
 		tmpAnim->fCurY = tmpAnim->fStartY;
 		tmpAnim->fElapsedTime = 0.f;
-		tmpAnim->fAccumulatedTime = g_fGameTime;
+		tmpAnim->fAccumulatedTime = g_fTotalTime;
 	}
 
 	if (tmpAnim->pTexture->m_bColorKeyEnable)
