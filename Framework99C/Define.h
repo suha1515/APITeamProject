@@ -11,6 +11,7 @@
 #define PI 3.14f
 
 #define DELTA_TIME ((g_fDeltaTime) * (g_fTimeScale))
+#define TIME	(g_fTotalTime)
 
 #define ROOT_PATH "ROOT_PATH"
 #define TEXTURE_PATH "TEXTURE_PATH"

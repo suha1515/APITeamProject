@@ -1,16 +1,1 @@
-﻿  Animator.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(91): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(89): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(87): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(86): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(97): warning C4244: '인수': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(154): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(153): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(152): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(150): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(160): warning C4244: '인수': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(159): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Framework99C.vcxproj -> C:\Users\bsj10\OneDrive\문서\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
+﻿

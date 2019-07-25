@@ -48,7 +48,11 @@ void CMaingame::Initialize()
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
+	//윙맨 추가 -테스트-
 	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	//dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
 	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
 	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
 
@@ -70,22 +74,31 @@ void CMaingame::Initialize()
 	monsterPool[0].spawnPos_x = 150;
 	monsterPool[0].spawnPos_y = -100;
 	monsterPool[0].spawnTime = 6500;
-	monsterPool[0].type = MONSTER_TYPE::DEFAULT;
+	monsterPool[0].monster_type = MONSTER_TYPE::DEFAULT;
+	monsterPool[0].fire_type = MONSTER_FIRETYPE::SINGLE;
+	monsterPool[0].move_type = MONSTER_MOVETYPE::DOWN;
+
 
 	monsterPool[1].spawnPos_x = 250;
 	monsterPool[1].spawnPos_y = -100;
 	monsterPool[1].spawnTime = 6400;
-	monsterPool[1].type = MONSTER_TYPE::DEFAULT;
+	monsterPool[1].monster_type = MONSTER_TYPE::DEFAULT;
+	monsterPool[1].fire_type = MONSTER_FIRETYPE::BRUST_2;
+	monsterPool[1].move_type = MONSTER_MOVETYPE::LEFT;
 
 	monsterPool[2].spawnPos_x = 350;
 	monsterPool[2].spawnPos_y = -100;
 	monsterPool[2].spawnTime = 6300;
-	monsterPool[2].type = MONSTER_TYPE::DEFAULT;
+	monsterPool[2].monster_type = MONSTER_TYPE::MIDDLE;
+	monsterPool[2].fire_type = MONSTER_FIRETYPE::BRUST_3;
+	monsterPool[2].move_type = MONSTER_MOVETYPE::RIGHT;
 
 	monsterPool[3].spawnPos_x = 450;
 	monsterPool[3].spawnPos_y = -100;
 	monsterPool[3].spawnTime = 6200;
-	monsterPool[3].type = MONSTER_TYPE::DEFAULT;
+	monsterPool[3].monster_type = MONSTER_TYPE::DEFAULT;
+	monsterPool[3].fire_type = MONSTER_FIRETYPE::AUTO;
+	monsterPool[3].move_type = MONSTER_MOVETYPE::TO_PLAYERX;
 
 	m_SpawnMonster.SetEnemyPool(monsterPool[0]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
@@ -96,6 +109,7 @@ void CMaingame::Initialize()
 void CMaingame::Update()
 {
 	m_SpawnMonster.SpawnEnemy();
+	CKeyboardMgr::GetInstance()->Update();
 	CObjectMgr::GetInstance()->Update();
 }
 

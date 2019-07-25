@@ -69,8 +69,11 @@ typedef struct tVector2D
 //-Á¤º¸¼º-
 typedef struct tSpawn_INFO
 {
-	MONSTER_TYPE type;
-	
+	MONSTER_TYPE monster_type;
+	MONSTER_FIRETYPE fire_type;
+	MONSTER_MOVETYPE move_type;
+	int monster_various;
+
 	int spawnPos_x;
 	int spawnPos_y;
 	int spawnTime;

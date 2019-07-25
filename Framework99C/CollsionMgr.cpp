@@ -61,7 +61,7 @@ bool CCollsionMgr::CollisionRectEX(const OBJLIST & dstLst, const OBJLIST & srcLs
 						if (dstRect.bottom < srcRect.bottom)
 						{
 							pDest->SetPos(FX, FY - depthY);
-						}
+						} 
 						//A는 아래 B는 위
 						else
 						{

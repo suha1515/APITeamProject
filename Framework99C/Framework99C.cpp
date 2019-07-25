@@ -16,6 +16,7 @@ float g_fDeltaTime;
 float g_fElapsedTime;
 float g_fGameTime;
 float g_fTimeScale = 1.f;
+float g_fTotalTime = 0.f;
 // FPS 관련 변수
 TCHAR g_strFPS[10];
 int g_nFPS;
@@ -75,7 +76,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			g_fDeltaTime = (int(dwCurTime - dwOldTime)) / 1000.f; // GetTickCount가 1000단위이므로 1000으로 나눠 줌
 			g_fElapsedTime += g_fDeltaTime;
-			g_fGameTime += g_fDeltaTime;
+			
+			g_fTotalTime += g_fDeltaTime;
+
 
 			mainGame.Update();
 			mainGame.Render();
