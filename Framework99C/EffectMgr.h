@@ -7,6 +7,7 @@ public:
 	void Initialize();
 	void AddEffect(EFFECT key);
 	void AnimateEffect(HDC hDC, IMGINFO imgInfo);
+	void SetImgInfo(IMGINFO imgInfo);
 
 public:
 	void DeleteAnimator();

@@ -29,6 +29,7 @@ void CEffectMgr::AnimateEffect(HDC hDC, IMGINFO imgInfo)
 	}
 }
 
+
 void CEffectMgr::DeleteAnimator()
 {
 	if (m_pAnimator)

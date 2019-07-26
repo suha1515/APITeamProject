@@ -92,7 +92,7 @@ int CCommonMonster::Update()
 	IsMoving();
 	IsOutRange();
 	IsFire();
-	CMonster::DropItem();
+	CMonster::IsDead();
 	CGameObject::UpdateRect();
 	
 

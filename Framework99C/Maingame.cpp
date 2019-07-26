@@ -57,6 +57,8 @@ void CMaingame::Initialize()
 	// Item Test
 	pGameObject = CAbstractFactory<CItems>::CreateObject();
 	pGameObject->SetPos(100, 100);
+	dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::SPECIAL);
+	dynamic_cast<CItems*>(pGameObject)->Initialize();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_ITEM, pGameObject);
 
 

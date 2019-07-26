@@ -1,10 +1,49 @@
-﻿cl : 명령줄 warning D9028: 최소 다시 빌드에 실패했습니다. 정상 빌드로 되돌립니다.
-  CommonMonster.cpp
-c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\commonmonster.cpp(164): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\commonmonster.cpp(178): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\commonmonster.cpp(203): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Items.cpp
-  코드를 생성하고 있습니다...
-  LINK : .\Debug\Framework99C_Debugx32.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+﻿  Player.cpp
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(24): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(40): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(41): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(43): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(44): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(46): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(47): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(49): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(50): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(55): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(56): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(58): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(59): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(61): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(62): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(64): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(65): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(72): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(73): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(76): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(77): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(80): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(81): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(84): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(85): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(88): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(89): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(148): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(149): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(151): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(152): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(154): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(155): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(157): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(158): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(161): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(162): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(165): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(166): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(169): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(170): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(173): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(174): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(177): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(178): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jbs\documents\github\팀과제\apiteamproject\framework99c\player.cpp(289): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Framework99C.vcxproj -> C:\Users\JBS\Documents\GitHub\팀과제\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
   Framework99C.vcxproj -> .\Debug\Framework99C_Debugx32.pdb (Full PDB)
