@@ -102,7 +102,7 @@ int CCommonMonster::Update()
 void CCommonMonster::Render(HDC hDC)
 {
 	CGameObject::UpdateImgInfo(100.f, 100.f);
-	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 }
 
 void CCommonMonster::Release()
