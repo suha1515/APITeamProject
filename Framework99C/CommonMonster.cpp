@@ -36,6 +36,8 @@ void CCommonMonster::Initialize()
 	m_tInfo.fCY = 100.f;
 	m_iShotCount = 0;
 
+	m_pAnimator = new CAnimator;
+
 	switch (m_Various)
 	{
 	case 0:
@@ -44,35 +46,37 @@ void CCommonMonster::Initialize()
 
 		m_fCoolDown = 1.f;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster1", _T("Stage/Monster/Monster_1.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 1:
 		m_tInfo.fSpeed = 200.f;
 		m_iHP = 2;
 
 		m_fCoolDown = 1.f;
-
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster2", _T("Stage/Monster/Monster_2.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 2:
-		m_tInfo.fSpeed = 150.f;
+		m_tInfo.fSpeed = 350.f;
 		m_iHP = 3;
 
 		m_fCoolDown = 1.f;
-
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster3", _T("Stage/Monster/Monster_3.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 3:
-		m_tInfo.fSpeed = 450.f;
+		m_tInfo.fSpeed = 550.f;
 		m_iHP = 4;
 
 		m_fCoolDown = 1.f;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster1", _T("Stage/Monster/Monster_1.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	}
 
@@ -84,7 +88,7 @@ int CCommonMonster::Update()
 		return DEAD_OBJ;
 
 	SetDistance();
-	SetBarrel(&m_Barrel, 0.f, 100.f);
+	SetBarrel(&m_Barrel, 0.f, 20.f);
 
 	IsMoving();
 	IsOutRange();
@@ -94,6 +98,29 @@ int CCommonMonster::Update()
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 
 	return NO_EVENT;
+}
+
+void CCommonMonster::Render(HDC hDC)
+{
+	switch (m_Various)
+	{
+	case 0:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 1:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 2:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 3:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	}
 }
 
 void CCommonMonster::Release()
@@ -113,7 +140,7 @@ void CCommonMonster::IsMoving()
 	case 1:
 		// øÏ«œ«‚ ¿Ãµø
 		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
-		m_tInfo.fX += (m_tInfo.fSpeed * 0.5f) * DELTA_TIME;
+		m_tInfo.fX += (m_tInfo.fSpeed * 0.3f) * DELTA_TIME;
 		CGameObject::UpdateRect();
 		break;
 	case 2:
@@ -154,7 +181,7 @@ void CCommonMonster::IsFire()
 			CGameObject* pObject;
 			pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
 			m_fAngle = GetAngle(m_pTarget, &m_Barrel);
-			dynamic_cast<CMonBullet*>(pObject)->SetInfo(BOMB, m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->SetInfo(SMALL, m_fAngle);
 			dynamic_cast<CMonBullet*>(pObject)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
 
@@ -201,6 +228,22 @@ void CCommonMonster::IsFire()
 			}
 
 		}
+		break;
+	case 4:
+		// ∆¯≈∫ ≈ı«œ
+		if (m_fCoolDown < 0)
+		{
+			CGameObject* pObject;
+			pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
+			m_fAngle = GetAngle(m_pTarget, &m_Barrel);
+			dynamic_cast<CMonBullet*>(pObject)->SetInfo(BOMB, m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->Initialize();
+			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
+
+			m_fCoolDown += 3.f;
+		}
+
+		break;
 
 	}
 

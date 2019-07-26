@@ -74,8 +74,8 @@ void CMaingame::Initialize()
 	monsterPool[0].spawnPos_y = -100;
 	monsterPool[0].spawnTime = 6500;
 	monsterPool[0].monster_type = MONSTER_TYPE::DEFAULT;
-	monsterPool[0].fire_type = MONSTER_FIRETYPE::SINGLE;
-	monsterPool[0].move_type = MONSTER_MOVETYPE::DOWN;
+	monsterPool[0].fire_type = MONSTER_FIRETYPE::BOMBING;
+	monsterPool[0].move_type = MONSTER_MOVETYPE::RIGHT;
 	monsterPool[0].monster_various = 0;
 
 
@@ -84,16 +84,16 @@ void CMaingame::Initialize()
 	monsterPool[1].spawnPos_y = -100;
 	monsterPool[1].spawnTime = 6400;
 	monsterPool[1].monster_type = MONSTER_TYPE::DEFAULT;
-	monsterPool[1].fire_type = MONSTER_FIRETYPE::BRUST_2;
-	monsterPool[1].move_type = MONSTER_MOVETYPE::LEFT;
-	monsterPool[1].monster_various = 1;
+	monsterPool[1].fire_type = MONSTER_FIRETYPE::SINGLE;
+	monsterPool[1].move_type = MONSTER_MOVETYPE::RIGHT;
+	monsterPool[1].monster_various = 0;
 
 
 	monsterPool[2].spawnPos_x = 350;
 	monsterPool[2].spawnPos_y = -100;
 	monsterPool[2].spawnTime = 6300;
-	monsterPool[2].monster_type = MONSTER_TYPE::MIDDLE;
-	monsterPool[2].fire_type = MONSTER_FIRETYPE::AUTO;
+	monsterPool[2].monster_type = MONSTER_TYPE::DEFAULT;
+	monsterPool[2].fire_type = MONSTER_FIRETYPE::SINGLE;
 	monsterPool[2].move_type = MONSTER_MOVETYPE::RIGHT;
 	monsterPool[2].monster_various = 0;
 
@@ -101,9 +101,9 @@ void CMaingame::Initialize()
 	monsterPool[3].spawnPos_y = -100;
 	monsterPool[3].spawnTime = 6200;
 	monsterPool[3].monster_type = MONSTER_TYPE::DEFAULT;
-	monsterPool[3].fire_type = MONSTER_FIRETYPE::AUTO;
-	monsterPool[3].move_type = MONSTER_MOVETYPE::TO_PLAYERX;
-	monsterPool[3].monster_various = 3;
+	monsterPool[3].fire_type = MONSTER_FIRETYPE::SINGLE;
+	monsterPool[3].move_type = MONSTER_MOVETYPE::RIGHT;
+	monsterPool[3].monster_various = 0;
 
 	m_SpawnMonster.SetEnemyPool(monsterPool[0]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
@@ -122,7 +122,7 @@ void CMaingame::Update()
 void CMaingame::Render()
 {
 	CObjectMgr::GetInstance()->Render(m_hMemDC);
-	IMGINFO testInfo = { 500, 400, 0.5, 0.5, 200, 200, 1, 1 };
+	IMGINFO testInfo(500, 400, 0.5, 0.5, 200, 200, 1, 1 );
 	CEffectMgr::GetInstance()->AnimateEffect(m_hMemDC, testInfo);
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
 }	

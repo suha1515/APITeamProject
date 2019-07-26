@@ -42,6 +42,7 @@ void CSpawnManager::SpawnEnemy()
 				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
 				dynamic_cast<CCommonMonster*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type,info.monster_various);
+				dynamic_cast<CCommonMonster*>(object)->Initialize();
 				objMgr->AddObject(OBJECT_MONSTER, object);
 			}
 			else if (info.monster_type == MONSTER_TYPE::MIDDLE)
@@ -49,6 +50,8 @@ void CSpawnManager::SpawnEnemy()
 				CGameObject *object = CAbstractFactory<CMidBoss>::CreateObject();
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
 				dynamic_cast<CMidBoss*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type, info.monster_various);
+				dynamic_cast<CMidBoss*>(object)->Initialize();
+
 				objMgr->AddObject(OBJECT_MONSTER, object);
 			}
 			iter_begin = m_EnemyPool.erase(iter_begin);

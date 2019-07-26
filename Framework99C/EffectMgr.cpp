@@ -11,7 +11,7 @@ void CEffectMgr::Initialize()
 	CTexture* pTmpTexture = CResourceMgr::GetInstance()->LoadTexture("MiniPlane_Destroy", _T("Stage/Effect/Effect_2.bmp"));
 	pTmpTexture->SetColorKey(RGB(255, 255, 255));
 	
-	ANIMINFO* pTmpAnim = new ANIMINFO { pTmpTexture , AT_ONCE_DESTROY, 15, 1, 0, 0, 0, 0, 14, 0, 0.f, 0.f, 2.f };
+	ANIMINFO* pTmpAnim = new ANIMINFO(pTmpTexture , AT_ONCE_DESTROY, 15, 1, 0, 0, 14, 0, 2.f);
 	m_mapEffect.insert(unordered_map<EFFECT, ANIMINFO*>::value_type(E_MINIPLANE_DESTROIED, pTmpAnim));
 }
 

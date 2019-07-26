@@ -10,6 +10,7 @@ public:
 public:
 	virtual void Initialize() override;
 	virtual int Update() override;
+	virtual void Render(HDC hDC) override;
 
 private:
 	virtual void Release() override;
@@ -25,5 +26,6 @@ private:
 	float m_fAngle2;
 	float m_fCoolDown2;
 
+	CAnimator* m_pAnimator;
 };
 

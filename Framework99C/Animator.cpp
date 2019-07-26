@@ -46,7 +46,7 @@ bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float m
 	ANIMINFO tTmpInfo;
 
 	tTmpInfo.pTexture = pTexture;
-	tTmpInfo.tAnimType = animType;
+	tTmpInfo.eAnimType = animType;
 	tTmpInfo.fMaxX = maxX;
 	tTmpInfo.fMaxY = maxY;
 
@@ -133,7 +133,7 @@ void CAnimator::AnimateClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		tmpAnim->fElapsedTime -= fUnitTime;
 	}
 
-	switch (tmpAnim->tAnimType)
+	switch (tmpAnim->eAnimType)
 	{
 	case AT_LOOP:
 	{
@@ -212,7 +212,7 @@ void CAnimator::AnimateReversedClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		tmpAnim->fElapsedTime -= fUnitTime;
 	}
 
-	switch (tmpAnim->tAnimType)
+	switch (tmpAnim->eAnimType)
 	{
 	case AT_LOOP:
 	{
