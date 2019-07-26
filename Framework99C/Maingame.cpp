@@ -4,6 +4,8 @@
 #include "Monster.h"
 #include "CommonMonster.h"
 #include "Stage.h"
+#include "Items.h"
+
 
 CMaingame::CMaingame()	
 {
@@ -20,6 +22,7 @@ void CMaingame::Initialize()
 	m_hDC = g_hDC;
 	m_hInst = g_hInst;
 	m_hMemDC = CreateCompatibleDC(m_hDC);
+
 
 	bitmap = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
 	oldbitmap = (HBITMAP)SelectObject(m_hMemDC, bitmap);
@@ -50,25 +53,14 @@ void CMaingame::Initialize()
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
-	//윙맨 추가 -테스트-
-	//dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
-	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
-	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+
+	// Item Test
+	pGameObject = CAbstractFactory<CItems>::CreateObject();
+	pGameObject->SetPos(100, 100);
+	CObjectMgr::GetInstance()->AddObject(OBJECT_ITEM, pGameObject);
+
 
 	//// Monster
-	//for (int i = 0; i < 1; ++i)
-	//{
-	//	//float x = float(rand() % (WINCX - 200)) + 100.f;
-	//	//float y = float(rand() % (WINCY - 200)) + 100.f;
-
-	//	//pGameObject = CAbstractFactory<CMonster>::CreateObject();
-	//	pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
-	//	// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
-	//	//dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
-	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
-
-	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
-	//}
 	SPAWN_INFO monsterPool[4];
 	monsterPool[0].spawnPos_x = 150;
 	monsterPool[0].spawnPos_y = -100;

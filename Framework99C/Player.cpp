@@ -93,6 +93,16 @@ POINT * CPlayer::GetWingManPos()
 	return m_WingManLoc;
 }
 
+void CPlayer::UpdateCollider()
+{
+	CGameObject* pItem = CCollsionMgr::GetInstance()->CollisionRectReturn(this, OBJECT_ITEM);
+	if (pItem)
+	{
+		LevelUp();
+		pItem->SetDead(true);
+	}
+}
+
 void CPlayer::LevelUp()
 {
 	if (m_PowerLevel < 5)
@@ -194,6 +204,7 @@ int CPlayer::Update()
 
 	UpdateWingMan();
 	UpdateBarrel();
+	UpdateCollider();
 	//m_pTexture->SetXY(0.f, 2.f);
 
 
@@ -234,12 +245,11 @@ void CPlayer::Render(HDC hDC)
 	Rectangle(hDC, m_WingManLoc[2].x - 10, m_WingManLoc[2].y - 10, m_WingManLoc[2].x + 10, m_WingManLoc[2].y + 10);
 	Rectangle(hDC, m_WingManLoc[3].x - 10, m_WingManLoc[3].y - 10, m_WingManLoc[3].x + 10, m_WingManLoc[3].y + 10);*/
 
-	Rectangle(hDC, m_Barrel[0].x - 10, m_Barrel[0].y - 10, m_Barrel[0].x + 10, m_Barrel[0].y + 10);
+	/*Rectangle(hDC, m_Barrel[0].x - 10, m_Barrel[0].y - 10, m_Barrel[0].x + 10, m_Barrel[0].y + 10);
 	Rectangle(hDC, m_Barrel[1].x - 10, m_Barrel[1].y - 10, m_Barrel[1].x + 10, m_Barrel[1].y + 10);
 	Rectangle(hDC, m_Barrel[2].x - 10, m_Barrel[2].y - 10, m_Barrel[2].x + 10, m_Barrel[2].y + 10);
 	Rectangle(hDC, m_Barrel[3].x - 10, m_Barrel[3].y - 10, m_Barrel[3].x + 10, m_Barrel[3].y + 10);
-	Rectangle(hDC, m_Barrel[4].x - 10, m_Barrel[4].y - 10, m_Barrel[4].x + 10, m_Barrel[4].y + 10);
-
+	Rectangle(hDC, m_Barrel[4].x - 10, m_Barrel[4].y - 10, m_Barrel[4].x + 10, m_Barrel[4].y + 10);*/
 }
 
 void CPlayer::Release()

@@ -58,6 +58,5 @@ protected:
 	OBJLIST* m_pBulletLst;
 
 	CAnimator* m_pAnimator;
-
 };
 

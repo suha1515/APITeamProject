@@ -163,6 +163,7 @@
     <ClInclude Include="Function.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="KeyboardMgr.h" />
     <ClInclude Include="Maingame.h" />
     <ClInclude Include="MidBoss.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Framework99C.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="KeyboardMgr.cpp" />
     <ClCompile Include="Maingame.cpp" />
     <ClCompile Include="MidBoss.cpp" />

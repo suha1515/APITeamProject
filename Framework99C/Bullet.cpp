@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "Monster.h"
 
 
 CBullet::CBullet()
@@ -36,27 +37,32 @@ void CBullet::Initialize()
 	{
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet_LEVEL1", _T("Stage/Bullet/Bullet_Eg_a.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_damage = 1;
 	}
 	else if (m_BulletType == PLAYER_BULLET_TYPE::LEVEL2)
 	{
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet_LEVEL2", _T("Stage/Bullet/Bullet_Eg_b.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_damage = 2;
 	}
 	else if (m_BulletType == PLAYER_BULLET_TYPE::LEVEL3)
 	{
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet_LEVEL3", _T("Stage/Bullet/Bullet_Eg_c.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_damage = 3;
 	}
 	else if (m_BulletType == PLAYER_BULLET_TYPE::LEVEL4)
 	{
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet_LEVEL4", _T("Stage/Bullet/Bullet_Eg_d.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_damage = 4;
 	}
 	else if (m_BulletType == PLAYER_BULLET_TYPE::WINGMAN)
 	{
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet_WINGMAN", _T("Stage/Bullet/Bullet_Explo.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 3, 1, 0, 0, 2, 0, 1.0f);
+		m_damage = 5;
 	}
 
 	
@@ -69,6 +75,7 @@ int CBullet::Update()
 
 	IsMoving();
 	IsOutRange();	
+	UpdateCollider();
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(m_tInfo.fCX*4 , m_tInfo.fCY*5 );
 	return NO_EVENT;
@@ -78,7 +85,11 @@ void CBullet::Render(HDC hDC)
 {
 	if (m_BulletType == PLAYER_BULLET_TYPE::WINGMAN)
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f, 4.f);
+		
+		CGameObject::UpdateRect();
+		Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 4.f);
+		m_tImgInfo.fPivotY = 0.1f;
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	else
@@ -87,6 +98,17 @@ void CBullet::Render(HDC hDC)
 	}
 	
 	
+}
+
+void CBullet::UpdateCollider()
+{
+	CGameObject* pItem = CCollsionMgr::GetInstance()->CollisionRectReturn(this, OBJECT_MONSTER);
+	if (pItem)
+	{
+		dynamic_cast<CMonster*>(pItem)->SetDamaged(m_damage);
+		//파티클 생성부분
+		m_bIsDead = true;
+	}
 }
 
 void CBullet::Release()

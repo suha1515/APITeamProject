@@ -43,16 +43,16 @@ typedef struct tagImgInfo
 		fScaleX = scaleX;
 		fScaleY = scaleY;
 	}
-	// 중심 좌표	
+	// 중심 좌표
 	float fX;
 	float fY;
-	// 이미지 피봇	
+	// 이미지 피봇
 	float fPivotX;
 	float fPivotY;
-	// 이미지 크기	
+	// 이미지 크기
 	float fImgCX;
 	float fImgCY;
-	// 이미지 늘이기	
+	// 이미지 늘이기
 	float fScaleX;
 	float fScaleY;
 }IMGINFO;
@@ -112,28 +112,27 @@ typedef struct tagAnimInfo
 	CTexture* pTexture;
 	ANIMATION_TYPE eAnimType;
 
-	// 총 길이	
+	// 총 길이
 	float fMaxX;
 	float fMaxY;
 
 	float fStartX;
 	float fStartY;
-
-	// 현재 위치	
+	// 현재 위치
 	float fCurX;
 	float fCurY;
 
 	float fEndX;
 	float fEndY;
 
-	// 애니메이션 진행시간	
+	// 애니메이션 진행시간
 	float fAccumulatedTime;
 	float fElapsedTime;
 	float fLimitTime;
 
-	// 애니메이션 종료여부	
+	// 애니메이션 종료여부
 	bool bIsEnd;
-
+	
 } ANIMINFO;
 
 //2차원상 벡터를 표현하기위한 구조체		

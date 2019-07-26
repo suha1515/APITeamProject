@@ -35,6 +35,7 @@ void CCommonMonster::Initialize()
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 	m_iShotCount = 0;
+	m_pAnimator = new CAnimator;
 
 	m_pAnimator = new CAnimator;
 
@@ -95,7 +96,7 @@ int CCommonMonster::Update()
 	IsFire();
 	CMonster::DropItem();
 	CGameObject::UpdateRect();
-	CGameObject::UpdateImgInfo(300.f, 300.f);
+	
 
 	return NO_EVENT;
 }
