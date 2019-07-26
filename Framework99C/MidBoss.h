@@ -23,6 +23,7 @@ private:
 	POINT m_Barrel4;
 
 	float m_fAngle2;
+	float m_fCoolDown2;
 
 };
 

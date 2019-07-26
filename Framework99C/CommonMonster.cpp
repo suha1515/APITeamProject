@@ -3,8 +3,9 @@
 #include "MonBullet.h"
 
 // 잡몹타입(타입설정에 따른 변경점)
-// 
 /*
+MonType 0~3
+
 이동방식
 0.직선하향이동
 1.직선우하향이동(60도)
@@ -31,16 +32,15 @@ void CCommonMonster::Initialize()
 {
 	// 공통사항
 	// 몬스터마다 크기가 다를 경우 크기값도 개별로 넣어준다.
-	m_tInfo.fX = WINCX / 2.f;
-	m_tInfo.fY = 200.f;
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 	m_iShotCount = 0;
 
-	switch (m_MonType)
+	switch (m_Various)
 	{
 	case 0:
-		m_tInfo.fSpeed = 180.f;
+		m_tInfo.fSpeed = 300.f;
+		m_iHP = 1;
 
 		m_fCoolDown = 1.f;
 
@@ -48,31 +48,31 @@ void CCommonMonster::Initialize()
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
 		break;
 	case 1:
-		m_tInfo.fSpeed = 180.f;
+		m_tInfo.fSpeed = 200.f;
+		m_iHP = 2;
 
 		m_fCoolDown = 1.f;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
-
 		break;
 	case 2:
-		m_tInfo.fSpeed = 180.f;
+		m_tInfo.fSpeed = 150.f;
+		m_iHP = 3;
 
-		m_fCoolDown = 0.2f;
+		m_fCoolDown = 1.f;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
-
 		break;
 	case 3:
-		m_tInfo.fSpeed = 180.f;
+		m_tInfo.fSpeed = 450.f;
+		m_iHP = 4;
 
-		m_fCoolDown = 0.2f;
+		m_fCoolDown = 1.f;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
-
 		break;
 	}
 
@@ -84,29 +84,12 @@ int CCommonMonster::Update()
 		return DEAD_OBJ;
 
 	SetDistance();
-
-	// 총열 위치. 몹의 스프라이트가 확정될 경우 조정필요.
-	// 모든 스프라이트의 위치가 동일할 경우 switch삭제.
-	switch (m_MonType)
-	{
-	case 0:
-		SetBarrel(&m_Barrel, 0.f, 100.f);
-		break;
-	case 1:
-		SetBarrel(&m_Barrel, 0.f, 100.f);
-		break;
-	case 2:
-		SetBarrel(&m_Barrel, 0.f, 100.f);
-		break;
-	case 3:
-		SetBarrel(&m_Barrel, 0.f, 100.f);
-		break;
-
-	}
+	SetBarrel(&m_Barrel, 0.f, 100.f);
 
 	IsMoving();
 	IsOutRange();
 	IsFire();
+	CMonster::DropItem();
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 
@@ -171,7 +154,8 @@ void CCommonMonster::IsFire()
 			CGameObject* pObject;
 			pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
 			m_fAngle = GetAngle(m_pTarget, &m_Barrel);
-			dynamic_cast<CMonBullet*>(pObject)->SetAngle(m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->SetInfo(BOMB, m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
 
 			m_fCoolDown += 2.f;
@@ -184,7 +168,8 @@ void CCommonMonster::IsFire()
 			CGameObject* pObject;
 			pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
 			m_fAngle = GetAngle(m_pTarget, &m_Barrel);
-			dynamic_cast<CMonBullet*>(pObject)->SetAngle(m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pObject)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
 
 			m_fCoolDown += 0.2f;
@@ -208,7 +193,8 @@ void CCommonMonster::IsFire()
 				CGameObject* pObject;
 				pObject = CAbstractFactory<CMonBullet>::CreateObject(m_Barrel.x, m_Barrel.y);
 				m_fAngle = GetAngle(m_pTarget, &m_Barrel);
-				dynamic_cast<CMonBullet*>(pObject)->SetAngle(m_fAngle);
+				dynamic_cast<CMonBullet*>(pObject)->SetInfo(SMALL, m_fAngle);
+				dynamic_cast<CMonBullet*>(pObject)->Initialize();
 				CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pObject);
 
 				m_fCoolDown += 0.1f;

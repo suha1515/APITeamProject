@@ -17,7 +17,7 @@ private:
 	virtual void Release() override;
 
 public:
-	void SetAngle(float fAngle);
+	void SetInfo(BULLET_TYPE bType, float fAngle);
 
 public:
 	void IsOutRange();
@@ -26,5 +26,7 @@ public:
 private:
 	int m_iDmg;
 	float m_fAngle;
+	float m_fFuse;
+	BULLET_TYPE m_BulletType;
 };
 
