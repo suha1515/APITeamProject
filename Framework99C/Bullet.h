@@ -16,6 +16,8 @@ public:
 	virtual void Initialize() override;
 	virtual int Update() override;
 	virtual void Render(HDC hDC) override;
+public:
+	void UpdateCollider();
 
 private:
 	virtual void Release() override;
@@ -29,5 +31,7 @@ private:
 	PLAYER_BULLET_TYPE  m_BulletType;
 
 	CAnimator* m_pAnimator;
+
+	int m_damage;
 };
 

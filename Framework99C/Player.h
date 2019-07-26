@@ -20,6 +20,8 @@ public:
 	void UpdateBarrel();
 	POINT* GetWingManPos();
 
+	void UpdateCollider();
+
 public:
 	void LevelUp();
 

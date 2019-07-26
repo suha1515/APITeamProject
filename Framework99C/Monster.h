@@ -56,5 +56,7 @@ protected:
 	CGameObject* m_pTarget;
 
 	OBJLIST* m_pBulletLst;
+
+	CAnimator* m_pAnimator;
 };
 

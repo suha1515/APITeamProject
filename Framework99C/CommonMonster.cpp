@@ -35,6 +35,7 @@ void CCommonMonster::Initialize()
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
 	m_iShotCount = 0;
+	m_pAnimator = new CAnimator;
 
 	switch (m_Various)
 	{
@@ -44,8 +45,10 @@ void CCommonMonster::Initialize()
 
 		m_fCoolDown = 1.f;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Mon_Normal1", _T("Stage/Monster/Monster_1.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 2.f);
 		break;
 	case 1:
 		m_tInfo.fSpeed = 200.f;
@@ -91,9 +94,15 @@ int CCommonMonster::Update()
 	IsFire();
 	CMonster::DropItem();
 	CGameObject::UpdateRect();
-	CGameObject::UpdateImgInfo(300.f, 300.f);
+	
 
 	return NO_EVENT;
+}
+
+void CCommonMonster::Render(HDC hDC)
+{
+	CGameObject::UpdateImgInfo(100.f, 100.f);
+	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
 }
 
 void CCommonMonster::Release()
