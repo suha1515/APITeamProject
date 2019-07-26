@@ -12,6 +12,7 @@ public:
 	virtual void Render(HDC hDC) override;
 public:
 	void Fire();
+	void ChargeShot();
 	void Move();
 	void SetLocation(POINT* pt);
 
@@ -21,6 +22,8 @@ protected:
 private:
 	CGameObject* CreateBullet();
 	POINT*		 m_Location;
+
+	float		 m_FireRate;
 
 	CAnimator* m_pAnimator;
 };

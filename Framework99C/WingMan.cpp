@@ -45,7 +45,21 @@ void CWingMan::Render(HDC hDC)
 
 void CWingMan::Fire()
 {
-	CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET,CreateBullet());
+	if (m_FireRate > 0.2f)
+	{
+		CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet());
+		m_FireRate -= m_FireRate;
+	}
+	m_FireRate += DELTA_TIME;
+	//CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet());
+}
+
+void CWingMan::ChargeShot()
+{
+	CGameObject* pBullet = CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY - 20);
+	dynamic_cast<CBullet*>(pBullet)->SetBulletType(PLAYER_BULLET_TYPE::LEVEL1);
+	dynamic_cast<CBullet*>(pBullet)->Initialize();
+	CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, pBullet);
 }
 
 void CWingMan::Move()
@@ -81,5 +95,9 @@ void CWingMan::Release()
 
 CGameObject * CWingMan::CreateBullet()
 {
-	return CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY-20);
+	CGameObject* pBullet = CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY - 20);
+	dynamic_cast<CBullet*>(pBullet)->SetBulletType(PLAYER_BULLET_TYPE::WINGMAN);
+	dynamic_cast<CBullet*>(pBullet)->Initialize();
+
+	return pBullet;
 }
