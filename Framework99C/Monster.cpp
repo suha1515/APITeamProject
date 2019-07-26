@@ -136,10 +136,13 @@ void CMonster::IsMoving()
 
 void CMonster::IsOutRange()
 {
-	/*CGameObject::UpdateRect();
+	CGameObject::UpdateRect();
 
-	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
-		m_tInfo.fSpeed *= -1;*/
+	if (-100.f >= m_tRect.left || WINCX + 100.f <= m_tRect.right)
+	{
+		m_bIsDead = true;
+	}
+	
 }
 
 void CMonster::IsFire()
