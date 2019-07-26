@@ -90,7 +90,8 @@ void CBullet::Render(HDC hDC)
 		Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 4.f);
 		m_tImgInfo.fPivotY = 0.1f;
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 	}
 	else
 	{

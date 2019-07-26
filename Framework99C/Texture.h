@@ -26,6 +26,7 @@ public:
 public:
 	void SetColorKey(COLORREF colorKey);
 	void SetKeyEnable(bool keyEnable);
+	void SetImgInfo(IMGINFO imgInfo);
 
 	////test
 	//void SetXY(float x, float _maxX)
@@ -43,6 +44,8 @@ private:
 
 	bool m_bColorKeyEnable;
 	COLORREF m_tColorKey;
+
+	IMGINFO m_tImgInfo;
 
 	// test
 	//float startX = 0.f;

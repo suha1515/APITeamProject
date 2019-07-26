@@ -242,22 +242,27 @@ void CPlayer::Render(HDC hDC)
 	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
 	{
+
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
+		m_pAnimator->SetImgInfo(1, m_tImgInfo);
 		m_pAnimator->AnimateClip(1, hDC, m_tImgInfo);
 	}
 	else if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
 	{
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
+		m_pAnimator->SetImgInfo(2, m_tImgInfo);
 		m_pAnimator->AnimateClip(2, hDC, m_tImgInfo);
 	}
 	else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
 	{
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
+		m_pAnimator->SetImgInfo(3, m_tImgInfo);
 		m_pAnimator->AnimateClip(3, hDC, m_tImgInfo);
 	}
 	else
 	{
 		CGameObject::UpdateImgInfo(100, 100);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	// --------------------------------------------------------
