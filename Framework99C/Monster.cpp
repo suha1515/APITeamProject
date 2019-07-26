@@ -4,8 +4,7 @@
 
 CMonster::CMonster()
 {
-	//모든 게임오브젝트는 생성시 오브젝트 관리 리스트에 포인터를 전달한다.
-	m_ObjLst[OBJECT_MONSTER].push_back(this);
+
 }
 
 
@@ -16,7 +15,7 @@ CMonster::~CMonster()
 
 void CMonster::Initialize()
 {
-	m_tInfo.fX = WINCX/2.f;
+	m_tInfo.fX = WINCX / 2.f;
 	m_tInfo.fY = 200.f;
 	m_tInfo.fCX = 100.f;
 	m_tInfo.fCY = 100.f;
@@ -24,7 +23,8 @@ void CMonster::Initialize()
 
 	m_tInfo.fSpeed = 300.f;
 
-	m_pTexture = CResourceMgr::LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+	m_pTexture->SetColorKey(RGB(255, 255, 255));
 }
 
 int CMonster::Update()
@@ -35,23 +35,88 @@ int CMonster::Update()
 	IsMoving();
 	IsOutRange();
 	CGameObject::UpdateRect();
+	CGameObject::UpdateImgInfo(300.f, 300.f);
 
 	return NO_EVENT;
 }
 
 void CMonster::Render(HDC hDC)
 {
-	m_pTexture->Render(hDC);
-	TransparentBlt(hDC, m_tInfo.fX - (354 /2), m_tInfo.fY - (372 / 2), 354, 372, m_pTexture->GetDC(), 0, 0, 116, 122, RGB(0, 128, 128));
+	m_pTexture->DrawTexture(hDC, m_tImgInfo);
 }
 
 void CMonster::Release()
 {
-	// 삭제시 리스트에서 오브젝트를 삭제
-	OBJLIST::iterator iter_find = find(m_ObjLst[OBJECT_MONSTER].begin(), m_ObjLst[OBJECT_MONSTER].end(), this);
-	if (iter_find != m_ObjLst[OBJECT_MONSTER].end())
+	m_pTexture->SafeDelete();
+}
+
+float CMonster::GetAngle(CGameObject* pDesObj, CGameObject* pSrcObj)
+{
+	float fAngle = atan2(pDesObj->GetInfo().fY - pSrcObj->GetInfo().fY, pDesObj->GetInfo().fX - pSrcObj->GetInfo().fX) * 180 / PI;
+	if (fAngle < 0)
+		fAngle += 360;
+
+	return fAngle;
+}
+
+float CMonster::GetAngle(CGameObject* pDesObj, POINT* pPoint)
+{
+	float fAngle = atan2(pDesObj->GetInfo().fY - pPoint->y, pDesObj->GetInfo().fX - pPoint->x) * 180 / PI;
+	if (fAngle < 0)
+		fAngle += 360;
+
+	return fAngle;
+}
+
+void CMonster::SetDamaged(int dmg)
+{
+	m_iHP -= dmg;
+
+	if (m_iHP <= 0)
 	{
-		m_ObjLst[OBJECT_MONSTER].erase(iter_find);
+		m_bIsDead = true;
+	}
+
+}
+
+void CMonster::SetBulletLst(OBJLIST * pBulletLst)
+{
+	m_pBulletLst = pBulletLst;
+}
+
+void CMonster::SetMonType(MONSTER_TYPE monType,MONSTER_FIRETYPE fireType,MONSTER_MOVETYPE moveType, int various)
+{
+	m_MonType = monType;
+	m_FireType = fireType;
+	m_MoveType = moveType;
+	m_Various = various;
+}
+
+void CMonster::SetDistance()
+{
+	m_pTarget = CObjectMgr::GetInstance()->GetPlayer();
+
+	float fX = m_tInfo.fX - m_pTarget->GetInfo().fX;
+	float fY = m_tInfo.fY - m_pTarget->GetInfo().fY;
+	m_fDistance = sqrtf(fX * fX + fY * fY);
+
+}
+
+void CMonster::SetBarrel(POINT* pBarrel, float fX, float fY)
+{
+	pBarrel->x = m_tInfo.fX + fX;
+	pBarrel->y = m_tInfo.fY + fY;
+}
+
+void CMonster::DropItem()
+{
+	if (m_bIsDead)
+	{
+		if (m_Various == 3)
+		{
+			// 드롭아이템
+
+		}
 	}
 }
 
@@ -62,7 +127,7 @@ void CMonster::IsMoving()
 
 	if (m_tRect.left < 0.f)
 		m_tInfo.fX += 0.f - m_tRect.left;
-	else if(m_tRect.right > WINCX)
+	else if (m_tRect.right > WINCX)
 		m_tInfo.fX -= m_tRect.right - WINCX;
 
 	CGameObject::UpdateRect();
@@ -71,8 +136,12 @@ void CMonster::IsMoving()
 
 void CMonster::IsOutRange()
 {
-	CGameObject::UpdateRect();
+	/*CGameObject::UpdateRect();
 
 	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
-		m_tInfo.fSpeed *= -1;
+		m_tInfo.fSpeed *= -1;*/
+}
+
+void CMonster::IsFire()
+{
 }

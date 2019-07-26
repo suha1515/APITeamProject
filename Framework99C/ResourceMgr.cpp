@@ -2,24 +2,13 @@
 #include "ResourceMgr.h"
 #include "Texture.h"
 
-unordered_map<string, CTexture*> CResourceMgr::m_mapTexture;
-HINSTANCE	CResourceMgr::m_hInst = NULL;
-HDC			CResourceMgr::m_hDC = NULL;
 
+DEFINE_SINGLE_TONE(CResourceMgr)
 
-CResourceMgr::CResourceMgr()
+void CResourceMgr::Initialize()
 {
-}
-
-
-CResourceMgr::~CResourceMgr()
-{
-}
-
-void CResourceMgr::Initialize(HINSTANCE hInst, HDC hDC)
-{
-	m_hInst = hInst;
-	m_hDC = hDC;
+	m_hInst = g_hInst;
+	m_hDC = g_hDC;
 }
 
 CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileName,
@@ -28,7 +17,10 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 	CTexture* pTexture = FindTexture(strKey);
 
 	if (pTexture)
+	{
+		pTexture->AddRef();
 		return pTexture;
+	}
 
 	pTexture = new CTexture;
 
@@ -36,13 +28,12 @@ CTexture * CResourceMgr::LoadTexture(const string & strKey, const TCHAR * pFileN
 	{
 		if (pTexture)
 		{
-			cout << "파일을 불러올 수 없습니다" << endl;
-			delete pTexture;
+			pTexture->SafeDelete();
 			pTexture = nullptr;
 			return pTexture;
 		}
 	}
-
+	pTexture->AddRef();
 	m_mapTexture.insert(unordered_map<string, CTexture*>::value_type(strKey, pTexture));
 
 	return pTexture;

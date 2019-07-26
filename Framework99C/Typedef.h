@@ -4,6 +4,7 @@
 
 class CGameObject;
 class CMonster;
+class CWingMan;
 typedef list<CGameObject*>	OBJLIST;
 
 #define __TYPEDEF_H__

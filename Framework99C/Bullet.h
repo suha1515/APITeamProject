@@ -9,6 +9,7 @@ public:
 
 public:
 	void SetDirection(BULLET_DIRECTION eDir);
+	void SetBulletType(PLAYER_BULLET_TYPE type);
 
 public:
 	// CGameObject을(를) 통해 상속됨
@@ -25,5 +26,8 @@ private:
 
 private:
 	BULLET_DIRECTION	m_eDirection;
+	PLAYER_BULLET_TYPE  m_BulletType;
+
+	CAnimator* m_pAnimator;
 };
 

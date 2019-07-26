@@ -12,6 +12,49 @@ typedef struct tagInfo
 
 }INFO;
 
+typedef struct tagImgInfo
+{
+	// 중심 좌표
+	float fX = 0.f;
+	float fY = 0.f;
+	// 이미지 피봇
+	float fPivotX = 0.f;
+	float fPivotY = 0.f;
+	// 이미지 크기
+	float fImgCX = 0.f;
+	float fImgCY = 0.f;
+	// 이미지 늘이기
+	float fScaleX = 1.f;
+	float fScaleY = 1.f;
+}IMGINFO;
+
+class CTexture;
+typedef struct tagAnimInfo
+{
+	CTexture* pTexture = nullptr;
+	ANIMATION_TYPE tAnimType = AT_LOOP;
+
+	// 총 길이
+	float fMaxX = 1.f;
+	float fMaxY = 1.f;
+
+	float fStartX = 0.f;
+	float fStartY = 0.f;
+	
+	// 현재 위치
+	float fCurX = 0.f;
+	float fCurY = 0.f;
+
+	float fEndX = 0.f;
+	float fEndY = 0.f;
+
+	// 애니메이션 진행시간
+	float fAccumulatedTime = 0.f;
+	float fElapsedTime = 0.f;
+	float fLimitTime = 0.f;
+
+} ANIMINFO;
+
 //2차원상 벡터를 표현하기위한 구조체
 //-정보성-
 typedef struct tVector2D
@@ -26,9 +69,14 @@ typedef struct tVector2D
 //-정보성-
 typedef struct tSpawn_INFO
 {
-	CMonster* enemy;
+	MONSTER_TYPE monster_type;
+	MONSTER_FIRETYPE fire_type;
+	MONSTER_MOVETYPE move_type;
+	int monster_various;
+
 	int spawnPos_x;
 	int spawnPos_y;
+	int spawnTime;
 }SPAWN_INFO;
 
 #define __STRUCT_H__
