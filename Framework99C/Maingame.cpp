@@ -40,6 +40,8 @@ void CMaingame::Initialize()
 	// KeyboardMgr
 	m_pKeyboardMgr = CKeyboardMgr::GetInstance();
 
+	// EffectMgr
+	m_pEffectMgr = CEffectMgr::GetInstance();
 
 	CGameObject* pGameObject = nullptr;
 
@@ -99,6 +101,7 @@ void CMaingame::Initialize()
 	m_SpawnMonster.SetEnemyPool(monsterPool[1]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[2]);
 	m_SpawnMonster.SetEnemyPool(monsterPool[3]);
+	CEffectMgr::GetInstance()->AddEffect(E_MINIPLANE_DESTROIED);
 }
 
 void CMaingame::Update()
@@ -111,6 +114,8 @@ void CMaingame::Update()
 void CMaingame::Render()
 {
 	CObjectMgr::GetInstance()->Render(m_hMemDC);
+	IMGINFO testInfo( 500, 400, 0.5, 0.5, 200, 200, 1, 1 );
+	CEffectMgr::GetInstance()->AnimateEffect(m_hMemDC, testInfo);
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
 }	
 
@@ -126,4 +131,6 @@ void CMaingame::Release()
 	CPathMgr::DeleteInstance();
 	CResourceMgr::DeleteInstance();
 	CKeyboardMgr::DeleteInstance();
+	CEffectMgr::GetInstance()->DeleteAnimator();
+	CEffectMgr::DeleteInstance();
 }

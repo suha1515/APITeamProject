@@ -13,6 +13,25 @@ CAnimator::~CAnimator()
 
 }
 
+void CAnimator::Update()
+{
+	vector<ANIMINFO>::iterator iter;
+	vector<ANIMINFO>::iterator iter_end = m_vecAnimInfo.end();
+
+	for (iter = m_vecAnimInfo.begin(); iter != iter_end;)
+	{
+		if ((*iter).bIsEnd)
+		{
+			iter = m_vecAnimInfo.erase(iter);
+			iter_end = m_vecAnimInfo.end();
+		}
+		else
+			++iter;
+	}
+
+
+}
+
 bool CAnimator::AddAnimInfo(ANIMINFO animInfo)
 {
 	ANIMINFO tTmpInfo = animInfo;
@@ -27,7 +46,7 @@ bool CAnimator::AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float m
 	ANIMINFO tTmpInfo;
 
 	tTmpInfo.pTexture = pTexture;
-	tTmpInfo.tAnimType = animType;
+	tTmpInfo.eAnimType = animType;
 	tTmpInfo.fMaxX = maxX;
 	tTmpInfo.fMaxY = maxY;
 
@@ -66,7 +85,7 @@ bool CAnimator::DeleteAnimInfo(int iIdx)
 	return true;
 }
 
-void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
+void CAnimator::AnimateClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
@@ -114,7 +133,7 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		tmpAnim->fElapsedTime -= fUnitTime;
 	}
 
-	switch (tmpAnim->tAnimType)
+	switch (tmpAnim->eAnimType)
 	{
 	case AT_LOOP:
 	{
@@ -134,10 +153,18 @@ void CAnimator::RunAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		}
 	}
 	break;
+	case AT_ONCE_DESTROY:
+	{
+		if ((tmpAnim->fCurX > tmpAnim->fEndX) && (tmpAnim->fCurY > tmpAnim->fEndY))
+		{
+			tmpAnim->bIsEnd = true;
+		}
+	}
+	break;
 	}
 }
 
-void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
+void CAnimator::AnimateReversedClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
@@ -185,7 +212,7 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		tmpAnim->fElapsedTime -= fUnitTime;
 	}
 
-	switch (tmpAnim->tAnimType)
+	switch (tmpAnim->eAnimType)
 	{
 	case AT_LOOP:
 	{
@@ -205,5 +232,18 @@ void CAnimator::RunReversedAnim(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 		}
 	}
 	break;
+	case AT_ONCE_DESTROY:
+	{
+		if ((tmpAnim->fCurX > tmpAnim->fEndX) && (tmpAnim->fCurY > tmpAnim->fEndY))
+		{
+			tmpAnim->bIsEnd = true;
+		}
 	}
+	break;
+	}
+}
+
+int CAnimator::GetAnimSize()
+{
+	return m_vecAnimInfo.size();
 }

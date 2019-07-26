@@ -14,45 +14,126 @@ typedef struct tagInfo
 
 typedef struct tagImgInfo
 {
+	tagImgInfo()
+	{
+		fX = 0.f;
+		fY = 0.f;
+
+		fPivotX = 0.f;
+		fPivotY = 0.f;
+
+		fImgCX = 0.f;
+		fImgCY = 0.f;
+
+		fScaleX = 1.f;
+		fScaleY = 1.f;
+	}
+
+	tagImgInfo(float x, float y, float pivotX, float pivotY, float imgCX, float imgCY, float scaleX = 1.f, float scaleY = 1.f)
+	{
+		fX = x;
+		fY = y;
+
+		fPivotX = pivotX;
+		fPivotY = pivotY;
+
+		fImgCX = imgCX;
+		fImgCY = imgCY;
+
+		fScaleX = scaleX;
+		fScaleY = scaleY;
+	}
 	// 중심 좌표
-	float fX = 0.f;
-	float fY = 0.f;
+	float fX;
+	float fY;
 	// 이미지 피봇
-	float fPivotX = 0.f;
-	float fPivotY = 0.f;
+	float fPivotX;
+	float fPivotY;
 	// 이미지 크기
-	float fImgCX = 0.f;
-	float fImgCY = 0.f;
+	float fImgCX;
+	float fImgCY;
 	// 이미지 늘이기
-	float fScaleX = 1.f;
-	float fScaleY = 1.f;
+	float fScaleX;
+	float fScaleY;
 }IMGINFO;
 
 class CTexture;
 typedef struct tagAnimInfo
 {
-	CTexture* pTexture = nullptr;
-	ANIMATION_TYPE tAnimType = AT_LOOP;
+	tagAnimInfo()
+	{
+		pTexture = nullptr;
+		eAnimType = AT_LOOP;
+
+		fMaxX = 1.f;
+		fMaxY = 1.f;
+
+		fStartX = 0.f;
+		fStartY = 0.f;
+
+		fCurX = 0.f;
+		fCurY = 0.f;
+
+		fEndX = 0.f;
+		fEndY = 0.f;
+
+		fAccumulatedTime = 0.f;
+		fElapsedTime = 0.f;
+		fLimitTime = 0.f;
+
+		bIsEnd = false;
+	}
+
+	tagAnimInfo(CTexture* texture, ANIMATION_TYPE animType, float maxX, float maxY,
+		float startX, float startY, float endX, float endY, float limitTime)
+	{
+		pTexture = texture;
+		eAnimType = animType;
+
+		fMaxX = maxX;
+		fMaxY = maxY;
+
+		fStartX = startX;
+		fStartY = startY;
+
+		fCurX = 0.f;
+		fCurY = 0.f;
+
+		fEndX = endX;
+		fEndY = endY;
+
+		fAccumulatedTime = 0.f;
+		fElapsedTime = 0.f;
+		fLimitTime = limitTime;
+
+		bIsEnd = false;
+	}
+
+	CTexture* pTexture;
+	ANIMATION_TYPE eAnimType;
 
 	// 총 길이
-	float fMaxX = 1.f;
-	float fMaxY = 1.f;
+	float fMaxX;
+	float fMaxY;
 
-	float fStartX = 0.f;
-	float fStartY = 0.f;
+	float fStartX;
+	float fStartY;
 	
 	// 현재 위치
-	float fCurX = 0.f;
-	float fCurY = 0.f;
+	float fCurX;
+	float fCurY;
 
-	float fEndX = 0.f;
-	float fEndY = 0.f;
+	float fEndX;
+	float fEndY;
 
 	// 애니메이션 진행시간
-	float fAccumulatedTime = 0.f;
-	float fElapsedTime = 0.f;
-	float fLimitTime = 0.f;
+	float fAccumulatedTime;
+	float fElapsedTime;
+	float fLimitTime;
 
+	// 애니메이션 종료여부
+	bool bIsEnd;
+	
 } ANIMINFO;
 
 //2차원상 벡터를 표현하기위한 구조체

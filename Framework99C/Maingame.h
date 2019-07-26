@@ -30,6 +30,7 @@ private:
 	CPathMgr* m_pPathMgr;
 	CResourceMgr* m_pResourceMgr;
 	CKeyboardMgr* m_pKeyboardMgr;
+	CEffectMgr* m_pEffectMgr;
 	CSpawnManager m_SpawnMonster;
 };
 

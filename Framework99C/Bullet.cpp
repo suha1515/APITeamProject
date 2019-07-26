@@ -85,8 +85,12 @@ void CBullet::Render(HDC hDC)
 {
 	if (m_BulletType == PLAYER_BULLET_TYPE::WINGMAN)
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f, 4.f);
-		m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+		
+		CGameObject::UpdateRect();
+		Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 4.f);
+		m_tImgInfo.fPivotY = 0.1f;
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	else
 	{

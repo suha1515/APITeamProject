@@ -31,15 +31,15 @@ int CWingMan::Update()
 
 	CGameObject::UpdateRect();
 	//CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f,3.f*(16.f / 13.f));
-
 	CGameObject::UpdateImgInfo(30.f, 35.f, 1.f, 1.f);
+
 	return NO_EVENT;
 }
 
 void CWingMan::Render(HDC hDC)
 {
 	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
-	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	//Rectangle(hDC, m_tInfo.fX - m_tInfo.fCX, m_tInfo.fY - m_tInfo.fCY, m_tInfo.fX + m_tInfo.fCX, m_tInfo.fY + m_tInfo.fCY);
 }
 
