@@ -76,19 +76,23 @@ void CMonBullet::Render(HDC hDC)
 	{
 	case 0:
 		CGameObject::UpdateImgInfo(20, 20);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 1:
 		CGameObject::UpdateImgInfo(20, 20);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 2:
 		CGameObject::UpdateImgInfo(20 * 1.5f, 20 * 1.5f);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 3:
 		CGameObject::UpdateImgInfo(20 * 2.f, 20 * 2.f);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	}
 }

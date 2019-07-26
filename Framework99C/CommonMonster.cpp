@@ -105,19 +105,23 @@ void CCommonMonster::Render(HDC hDC)
 	{
 	case 0:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 1:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 2:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 3:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	}
 }

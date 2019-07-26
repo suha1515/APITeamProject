@@ -245,25 +245,25 @@ void CPlayer::Render(HDC hDC)
 
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
 		m_pAnimator->SetImgInfo(1, m_tImgInfo);
-		m_pAnimator->AnimateClip(1, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(1, hDC);
 	}
 	else if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
 	{
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
 		m_pAnimator->SetImgInfo(2, m_tImgInfo);
-		m_pAnimator->AnimateClip(2, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(2, hDC);
 	}
 	else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
 	{
 		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
 		m_pAnimator->SetImgInfo(3, m_tImgInfo);
-		m_pAnimator->AnimateClip(3, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(3, hDC);
 	}
 	else
 	{
 		CGameObject::UpdateImgInfo(100, 100);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 	}
 	// --------------------------------------------------------
 

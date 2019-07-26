@@ -56,7 +56,8 @@ void CItems::Render(HDC hDC)
 {
 	//Rectangle(hDC, m_tInfo.fX - 20, m_tInfo.fY - 20, m_tInfo.fX + 20, m_tInfo.fY + 20);
 	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f, 2.f);
-	m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+	m_pAnimator->SetImgInfo(0, m_tImgInfo);
+	m_pAnimator->AnimateClip(0, hDC);
 
 	
 }

@@ -109,15 +109,18 @@ void CMidBoss::Render(HDC hDC)
 	{
 	case 0:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.f);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 1:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.5f);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 2:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
-		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	}
 }
