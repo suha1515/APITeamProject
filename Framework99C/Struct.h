@@ -1,6 +1,6 @@
-#pragma once
+#pragma once		
 
-#ifndef __STRUCT_H__
+#ifndef __STRUCT_H__		
 
 typedef struct tagInfo
 {
@@ -118,7 +118,6 @@ typedef struct tagAnimInfo
 
 	float fStartX;
 	float fStartY;
-	
 	// 현재 위치
 	float fCurX;
 	float fCurY;
@@ -136,8 +135,8 @@ typedef struct tagAnimInfo
 	
 } ANIMINFO;
 
-//2차원상 벡터를 표현하기위한 구조체
-//-정보성-
+//2차원상 벡터를 표현하기위한 구조체		
+//-정보성-		
 typedef struct tVector2D
 {
 	tVector2D() {};
@@ -146,8 +145,8 @@ typedef struct tVector2D
 	int y;
 }VECTOR2D;
 
-//몬스터 스폰을 위한 구조체
-//-정보성-
+//몬스터 스폰을 위한 구조체		
+//-정보성-		
 typedef struct tSpawn_INFO
 {
 	MONSTER_TYPE monster_type;
@@ -160,5 +159,5 @@ typedef struct tSpawn_INFO
 	int spawnTime;
 }SPAWN_INFO;
 
-#define __STRUCT_H__
-#endif
+#define __STRUCT_H__		
+#endif		

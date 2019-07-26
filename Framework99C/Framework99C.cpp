@@ -51,6 +51,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }   
 
+	srand((unsigned int)time(NULL));
+
     MSG msg;
 	msg.message = WM_NULL;
 

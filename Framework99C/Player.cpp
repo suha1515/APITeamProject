@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "WingMan.h"
+#include "Items.h"
 
 CPlayer::CPlayer()
 {
@@ -93,6 +94,36 @@ POINT * CPlayer::GetWingManPos()
 	return m_WingManLoc;
 }
 
+void CPlayer::UpdateCollider()
+{
+	CGameObject* pItem = CCollsionMgr::GetInstance()->CollisionRectReturn(this, OBJECT_ITEM);
+	CGameObject* pMonBullet = CCollsionMgr::GetInstance()->CollisionRectReturn(this, OBJECT_MONBULLET);
+	if (pItem)
+	{
+		ITEM_TYPE type = dynamic_cast<CItems*>(pItem)->GetType();
+		if (type == ITEM_TYPE::POWER)
+		{
+			LevelUp();
+			pItem->SetDead(true);
+		}
+		else if (type == ITEM_TYPE::SPECIAL)
+		{
+			if(m_BombCount<4)
+			m_BombCount++;
+
+			pItem->SetDead(true);
+		}	
+	}
+
+	if (pMonBullet)
+	{
+		// 폭파 애니메이션
+		m_PlayerLife--;
+		cout << m_PlayerLife << endl;
+		pMonBullet->SetDead(true);
+	}
+}
+
 void CPlayer::LevelUp()
 {
 	if (m_PowerLevel < 5)
@@ -104,10 +135,10 @@ void CPlayer::LevelUp()
 
 void CPlayer::Initialize()
 {
-	m_tInfo.fX = 400.f;
-	m_tInfo.fY = 400.f;
-	m_tInfo.fCX = 100.f;
-	m_tInfo.fCY = 100.f;
+	m_tInfo.fX = 350.f;
+	m_tInfo.fY = 1200.f;
+	m_tInfo.fCX = 20.f;
+	m_tInfo.fCY = 20.f;
 
 	m_tInfo.fSpeed = 350.f;
 
@@ -149,6 +180,8 @@ void CPlayer::Initialize()
 
 
 	m_PowerLevel = 1;
+	m_BombCount  = 3;
+	m_PlayerLife = 3;
 
 	wingCount = 0;
 	fFireRate = 0.f;
@@ -194,6 +227,7 @@ int CPlayer::Update()
 
 	UpdateWingMan();
 	UpdateBarrel();
+	UpdateCollider();
 	//m_pTexture->SetXY(0.f, 2.f);
 
 
@@ -208,27 +242,28 @@ void CPlayer::Render(HDC hDC)
 	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 76.f / 33.f);
+
+		CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
 		m_pAnimator->SetImgInfo(1, m_tImgInfo);
-		m_pAnimator->AnimateClip(1, hDC);
+		m_pAnimator->AnimateClip(1, hDC, m_tImgInfo);
 	}
 	else if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
+		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
 		m_pAnimator->SetImgInfo(2, m_tImgInfo);
-		m_pAnimator->AnimateClip(2, hDC);
+		m_pAnimator->AnimateClip(2, hDC, m_tImgInfo);
 	}
 	else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
+		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
 		m_pAnimator->SetImgInfo(3, m_tImgInfo);
-		m_pAnimator->AnimateClip(3, hDC);
+		m_pAnimator->AnimateClip(3, hDC, m_tImgInfo);
 	}
 	else
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		CGameObject::UpdateImgInfo(100, 100);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
-		m_pAnimator->AnimateClip(0, hDC);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	// --------------------------------------------------------
 
@@ -238,12 +273,11 @@ void CPlayer::Render(HDC hDC)
 	Rectangle(hDC, m_WingManLoc[2].x - 10, m_WingManLoc[2].y - 10, m_WingManLoc[2].x + 10, m_WingManLoc[2].y + 10);
 	Rectangle(hDC, m_WingManLoc[3].x - 10, m_WingManLoc[3].y - 10, m_WingManLoc[3].x + 10, m_WingManLoc[3].y + 10);*/
 
-	Rectangle(hDC, m_Barrel[0].x - 10, m_Barrel[0].y - 10, m_Barrel[0].x + 10, m_Barrel[0].y + 10);
+	/*Rectangle(hDC, m_Barrel[0].x - 10, m_Barrel[0].y - 10, m_Barrel[0].x + 10, m_Barrel[0].y + 10);
 	Rectangle(hDC, m_Barrel[1].x - 10, m_Barrel[1].y - 10, m_Barrel[1].x + 10, m_Barrel[1].y + 10);
 	Rectangle(hDC, m_Barrel[2].x - 10, m_Barrel[2].y - 10, m_Barrel[2].x + 10, m_Barrel[2].y + 10);
 	Rectangle(hDC, m_Barrel[3].x - 10, m_Barrel[3].y - 10, m_Barrel[3].x + 10, m_Barrel[3].y + 10);
-	Rectangle(hDC, m_Barrel[4].x - 10, m_Barrel[4].y - 10, m_Barrel[4].x + 10, m_Barrel[4].y + 10);
-
+	Rectangle(hDC, m_Barrel[4].x - 10, m_Barrel[4].y - 10, m_Barrel[4].x + 10, m_Barrel[4].y + 10);*/
 }
 
 void CPlayer::Release()
@@ -278,7 +312,6 @@ void CPlayer::KeyInput()
 	//else
 	//{
 	CObjectMgr* objMgr = CObjectMgr::GetInstance();
-	CCollsionMgr::GetInstance()->CollisionRectEX(objMgr->GetObjectList(OBJECT_PLAYER), objMgr->GetObjectList(OBJECT_MONSTER));
 		//플레이어 영역 제한 버벅거리는거 없음.
 		if (m_tRect.left > 0)
 		{

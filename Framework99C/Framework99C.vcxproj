@@ -22,13 +22,13 @@
     <ProjectGuid>{E79496AC-BE9D-47B0-A6F0-4A2DBA009181}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Framework99C</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollsionMgr.h" />
     <ClInclude Include="CommonMonster.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Function.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="KeyboardMgr.h" />
     <ClInclude Include="Maingame.h" />
     <ClInclude Include="MidBoss.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="WingMan.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="CollsionMgr.cpp" />
@@ -191,6 +194,7 @@
     <ClCompile Include="Framework99C.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="KeyboardMgr.cpp" />
     <ClCompile Include="Maingame.cpp" />
     <ClCompile Include="MidBoss.cpp" />

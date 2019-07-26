@@ -23,30 +23,36 @@ CMonBullet::~CMonBullet()
 
 void CMonBullet::Initialize()
 {
-	m_tInfo.fCX = 20.f;
-	m_tInfo.fCY = 20.f;
+	m_tInfo.fCX = 10.f;
+	m_tInfo.fCY = 10.f;
+
+	m_pAnimator = new CAnimator;
 
 	switch (m_BulletType)
 	{
 	case SMALL:
 		m_tInfo.fSpeed = 10.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Magic_Elec3.bmp"));
-		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet1", _T("Stage/Bullet/MBasic_Bullet.bmp"));
+		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 8, 1, 0, 0, 7, 0, 1.5f);
 		break;
 	case MIDIUM:
 		m_tInfo.fSpeed = 5.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Magic_Elec3.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet2", _T("Stage/Bullet/Magic_Elec.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 3, 1, 0, 0, 2, 0, 0.1f);
 		break;
 	case FAST:
 		m_tInfo.fSpeed = 15.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Mob_D.bmp"));
-		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet3", _T("Stage/Bullet/MBasic_Bullet2.bmp"));
+		m_pTexture->SetColorKey(RGB(0, 0, 0));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 4, 1, 0, 0, 3, 0, 0.1f);
 		break;
 	case BOMB:
 		m_tInfo.fSpeed = 3.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Bullet", _T("Stage/Bullet/Bullet_Mob_D.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet4", _T("Stage/Bullet/Magic_Elec.bmp"));
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 3, 1, 0, 0, 2, 0, 0.1f);
 		break;
 	}
 
@@ -66,7 +72,25 @@ int CMonBullet::Update()
 
 void CMonBullet::Render(HDC hDC)
 {
-	m_pTexture->DrawTexture(hDC, m_tImgInfo);
+	switch (m_BulletType)
+	{
+	case 0:
+		CGameObject::UpdateImgInfo(20, 20);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 1:
+		CGameObject::UpdateImgInfo(20, 20);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 2:
+		CGameObject::UpdateImgInfo(20 * 1.5f, 20 * 1.5f);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 3:
+		CGameObject::UpdateImgInfo(20 * 2.f, 20 * 2.f);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	}
 }
 
 void CMonBullet::Release()
@@ -107,56 +131,56 @@ void CMonBullet::IsMoving()
 			CGameObject* pBullet;
 			pBullet = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 0.f;
-			dynamic_cast<CMonBullet*>(pBullet)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet);
 
 			CGameObject* pBullet2;
 			pBullet2 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 45.f;
-			dynamic_cast<CMonBullet*>(pBullet2)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet2)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet2)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet2);
 
 			CGameObject* pBullet3;
 			pBullet3 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 90.f;
-			dynamic_cast<CMonBullet*>(pBullet3)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet3)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet3)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet3);
 
 			CGameObject* pBullet4;
 			pBullet4 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 135.f;
-			dynamic_cast<CMonBullet*>(pBullet4)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet4)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet4)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet4);
 
 			CGameObject* pBullet5;
 			pBullet5 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 180.f;
-			dynamic_cast<CMonBullet*>(pBullet5)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet5)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet5)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet5);
 
 			CGameObject* pBullet6;
 			pBullet6 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 225.f;
-			dynamic_cast<CMonBullet*>(pBullet6)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet6)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet6)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet6);
 
 			CGameObject* pBullet7;
 			pBullet7 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 270.f;
-			dynamic_cast<CMonBullet*>(pBullet7)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet7)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet7)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet7);
 
 			CGameObject* pBullet8;
 			pBullet8 = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 			m_fAngle = 315.f;
-			dynamic_cast<CMonBullet*>(pBullet8)->SetInfo(SMALL, m_fAngle);
+			dynamic_cast<CMonBullet*>(pBullet8)->SetInfo(MIDIUM, m_fAngle);
 			dynamic_cast<CMonBullet*>(pBullet8)->Initialize();
 			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet8);
 

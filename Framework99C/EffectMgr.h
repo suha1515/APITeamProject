@@ -5,6 +5,7 @@ class CEffectMgr
 
 public:
 	void Initialize();
+
 	CTexture* AddEffect(EFFECT key, IMGINFO imgInfo);
 	void AnimateEffect(HDC hDC);
 

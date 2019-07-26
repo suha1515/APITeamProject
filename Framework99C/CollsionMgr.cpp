@@ -30,6 +30,30 @@ bool CCollsionMgr::CollisionRect(const OBJLIST& dstLst, const OBJLIST& srcLst)
 	return false;
 }
 
+CGameObject * CCollsionMgr::CollisionRectReturn(const CGameObject * pDst, OBJECT_TYPE type)
+{
+	RECT dstRect = pDst->GetRect();
+	OBJLIST& objlst = CObjectMgr::GetInstance()->GetObjectList(type);
+	OBJLIST::iterator iter_begin = objlst.begin();
+	OBJLIST::iterator iter_end = objlst.end();
+
+	for (; iter_begin != iter_end; ++iter_begin)
+	{
+		RECT srcRect = (*iter_begin)->GetRect();
+		//x축에 대하여 겹치는지 체크.
+		if (dstRect.right - srcRect.left > 0 && srcRect.right - dstRect.left>0)
+		{
+			//y축에 대하여 겹치는지 체크.
+			if (dstRect.bottom - srcRect.top > 0 && srcRect.bottom - dstRect.top>0)
+			{
+				cout << "hit colider!" << endl;
+				return (*iter_begin);
+			}
+		}
+	}
+	return nullptr;
+}
+
 bool CCollsionMgr::CollisionRectEX(const OBJLIST & dstLst, const OBJLIST & srcLst)
 {
 	for (auto& pDest : dstLst)

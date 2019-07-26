@@ -11,7 +11,7 @@ class CObjectMgr
 	DECLARE_SINGLE_TONE(CObjectMgr)
 public:
 	CGameObject* GetPlayer() const;
-	const OBJLIST& GetObjectList(OBJECT_TYPE eType);
+	OBJLIST& GetObjectList(OBJECT_TYPE eType);
 
 public:
 	void AddObject(OBJECT_TYPE eType, CGameObject* pObject);

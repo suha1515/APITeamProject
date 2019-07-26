@@ -18,6 +18,8 @@ void CMidBoss::Initialize()
 	m_iShotCount = 0;
 	m_fCoolDown = 1.f;
 
+	m_pAnimator = new CAnimator;
+
 	switch (m_Various)
 	{
 	case 0:
@@ -26,9 +28,9 @@ void CMidBoss::Initialize()
 		m_tInfo.fSpeed = 150.f;
 		m_iHP = 70;
 
-
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss1", _T("Stage/Monster/Monster_4.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 1.0f);
 		break;
 	case 1:
 		m_tInfo.fCX = 100.f;
@@ -36,8 +38,9 @@ void CMidBoss::Initialize()
 		m_tInfo.fSpeed = 100.f;
 		m_iHP = 100;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss2", _T("Stage/Monster/MidAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.0f);
 		break;
 	case 2:
 		m_tInfo.fCX = 100.f;
@@ -45,8 +48,9 @@ void CMidBoss::Initialize()
 		m_tInfo.fSpeed = 50.f;
 		m_iHP = 130;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss3", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 1, 1, 0, 0, 0, 0, 1.0f);
 		break;
 
 	}
@@ -58,9 +62,28 @@ int CMidBoss::Update()
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	SetBarrel(&m_Barrel, 85.f, 30.f);
-	SetBarrel(&m_Barrel2, -85.f, 30.f);
-	SetBarrel(&m_Barrel3, 0.f, 100.f);
+
+	switch (m_Various)
+	{
+	case 0:
+		SetBarrel(&m_Barrel, 80.f, 30.f);
+		SetBarrel(&m_Barrel2, -80.f, 30.f);
+		SetBarrel(&m_Barrel3, 0.f, 40.f);
+
+		break;
+	case 1:
+		SetBarrel(&m_Barrel, 85.f, -10.f);
+		SetBarrel(&m_Barrel2, -85.f, -10.f);
+		SetBarrel(&m_Barrel3, 0.f, 100.f);
+
+		break;
+	case 2:
+		SetBarrel(&m_Barrel, 100.f, 10.f);
+		SetBarrel(&m_Barrel2, -100.f, 10.f);
+		SetBarrel(&m_Barrel3, 0.f, 110.f);
+
+		break;
+	}
 
 	if (nullptr == m_pTarget)
 	{
@@ -73,11 +96,30 @@ int CMidBoss::Update()
 	IsMoving();
 	IsOutRange();
 	IsFire();
-	CMonster::DropItem();
+	CMonster::IsDead();
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 
 	return NO_EVENT;
+}
+
+void CMidBoss::Render(HDC hDC)
+{
+	switch (m_Various)
+	{
+	case 0:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.f);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 1:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.5f);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	case 2:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
+		break;
+	}
 }
 
 void CMidBoss::Release()

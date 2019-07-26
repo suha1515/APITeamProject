@@ -28,5 +28,8 @@ private:
 	float m_fAngle;
 	float m_fFuse;
 	BULLET_TYPE m_BulletType;
+	CAnimator* m_pAnimator;
+
+
 };
 

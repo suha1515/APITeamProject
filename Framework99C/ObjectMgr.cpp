@@ -11,7 +11,7 @@ CGameObject * CObjectMgr::GetPlayer() const
 	return m_ObjLst[OBJECT_PLAYER].front();
 }
 
-const OBJLIST& CObjectMgr::GetObjectList(OBJECT_TYPE eType) 
+OBJLIST& CObjectMgr::GetObjectList(OBJECT_TYPE eType) 
 {
 	return m_ObjLst[eType];
 }
@@ -44,8 +44,13 @@ void CObjectMgr::Update()
 				++iter_Begin;
 		}
 	}
-	CCollsionMgr::GetInstance()->CollisionRectEX(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJECT_PLAYER]);
-	CCollsionMgr::GetInstance()->CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+	//CCollsionMgr::GetInstance()->CollisionRectEX(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJECT_PLAYER]);
+	//CCollsionMgr::GetInstance()->CollisionSphere(m_ObjLst[OBJECT_MONSTER], m_ObjLst[OBJLECT_BULLET]);
+	/*if (CCollsionMgr::GetInstance()->CollisionRect(m_ObjLst[OBJECT_PLAYER], m_ObjLst[OBJECT_ITEM]))
+	{
+
+	}*/
+	
 }
 
 void CObjectMgr::Render(HDC hDC)

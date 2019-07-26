@@ -7,8 +7,9 @@ public:
 	~CSpawnManager();
 
 public:
-	void SetEnemyPool(SPAWN_INFO enemy);
+	void SetEnemyPool(SPAWN_INFO* enemy,int size);
 	void SpawnEnemy();
+	void Initialize();
 	void RenderSpawnLocation();
 
 

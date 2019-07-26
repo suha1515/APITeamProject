@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Items.h"
 #include "Monster.h"
 
 
@@ -34,6 +35,7 @@ int CMonster::Update()
 
 	IsMoving();
 	IsOutRange();
+	IsDead();
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 
@@ -71,12 +73,6 @@ float CMonster::GetAngle(CGameObject* pDesObj, POINT* pPoint)
 void CMonster::SetDamaged(int dmg)
 {
 	m_iHP -= dmg;
-
-	if (m_iHP <= 0)
-	{
-		m_bIsDead = true;
-	}
-
 }
 
 void CMonster::SetBulletLst(OBJLIST * pBulletLst)
@@ -110,14 +106,31 @@ void CMonster::SetBarrel(POINT* pBarrel, float fX, float fY)
 
 void CMonster::DropItem()
 {
-	if (m_bIsDead)
-	{
 		if (m_Various == 3)
 		{
 			// 드롭아이템
+			CGameObject*  pGameObject;
+			pGameObject = CAbstractFactory<CItems>::CreateObject();
+			pGameObject->SetPos(m_tInfo.fX, m_tInfo.fY);
+			int random = rand() % 2;
+			if(random ==0)
+				dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::SPECIAL);
+			else
+				dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::POWER);
+			dynamic_cast<CItems*>(pGameObject)->Initialize();
+			CObjectMgr::GetInstance()->AddObject(OBJECT_ITEM, pGameObject);
 
 		}
+}
+
+void CMonster::IsDead()
+{
+	if (m_iHP <= 0)
+	{
+		DropItem();
+		m_bIsDead = true;
 	}
+
 }
 
 void CMonster::IsMoving()
@@ -136,10 +149,13 @@ void CMonster::IsMoving()
 
 void CMonster::IsOutRange()
 {
-	/*CGameObject::UpdateRect();
+	CGameObject::UpdateRect();
 
-	if (0.f >= m_tRect.left || WINCX <= m_tRect.right)
-		m_tInfo.fSpeed *= -1;*/
+	if (-100.f >= m_tRect.left || WINCX + 100.f <= m_tRect.right)
+	{
+		m_bIsDead = true;
+	}
+	
 }
 
 void CMonster::IsFire()
