@@ -37,8 +37,6 @@ void CCommonMonster::Initialize()
 	m_iShotCount = 0;
 	m_pAnimator = new CAnimator;
 
-	m_pAnimator = new CAnimator;
-
 	switch (m_Various)
 	{
 	case 0:
@@ -94,7 +92,7 @@ int CCommonMonster::Update()
 	IsMoving();
 	IsOutRange();
 	IsFire();
-	CMonster::DropItem();
+	CMonster::IsDead();
 	CGameObject::UpdateRect();
 	
 

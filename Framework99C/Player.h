@@ -51,6 +51,10 @@ private:
 
 	//플레이어 파워 레벨
 	int m_PowerLevel;
+	//플레이어 필살기 개수
+	int m_BombCount;
+	//플레이어 목숨 개수
+	int m_PlayerLife;
 
 	int wingCount;
 	float fFireRate;

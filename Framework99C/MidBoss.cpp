@@ -96,7 +96,7 @@ int CMidBoss::Update()
 	IsMoving();
 	IsOutRange();
 	IsFire();
-	CMonster::DropItem();
+	CMonster::IsDead();
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 

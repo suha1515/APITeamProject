@@ -30,6 +30,8 @@ public:
 	void SetBarrel(POINT* pBarrel, float fX, float fY);
 	void DropItem();
 
+public:
+	void IsDead();
 
 protected:
 	void IsMoving();

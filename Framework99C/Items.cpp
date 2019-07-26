@@ -17,16 +17,25 @@ void CItems::Initialize()
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 	m_RandomAngle = 0.01745f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (6.28319f - 0.01745f)));
-	cout << m_RandomAngle << endl;
+
 	m_IsAvailable = true;
 	m_tInfo.fSpeed = 150.f;
 	m_TimeLimit = 0.0f;
 
 	m_pAnimator = new CAnimator;
-
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Item_Power", _T("Stage/Item/Item_Power.bmp"));
-	m_pTexture->SetColorKey(RGB(0, 128, 128));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 6, 1, 0, 0, 5, 0, 3.f);
+	if (m_Type == ITEM_TYPE::POWER)
+	{
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Item_Power", _T("Stage/Item/Item_Power.bmp"));
+		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 6, 1, 0, 0, 5, 0, 3.f);
+	}
+	else if (m_Type == ITEM_TYPE::SPECIAL)
+	{
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Item_Bomb", _T("Stage/Item/Item_Bomb.bmp"));
+		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 4, 1, 0, 0, 3, 0, 3.f);
+	}
+	
 }
 
 int CItems::Update()
@@ -92,6 +101,16 @@ void CItems::IsOutofRange()
 	}
 	
 
+}
+
+void CItems::SetType(ITEM_TYPE type)
+{
+	m_Type = type;
+}
+
+ITEM_TYPE CItems::GetType()
+{
+	return m_Type;
 }
 
 void CItems::Release()

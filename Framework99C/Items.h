@@ -14,6 +14,10 @@ public:
 public:
 	void Move();
 	void IsOutofRange();
+	void SetType(ITEM_TYPE type);
+
+public:
+	ITEM_TYPE GetType();
 
 protected:
 	virtual void Release();

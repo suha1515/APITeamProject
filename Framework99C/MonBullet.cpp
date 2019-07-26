@@ -23,8 +23,8 @@ CMonBullet::~CMonBullet()
 
 void CMonBullet::Initialize()
 {
-	m_tInfo.fCX = 20.f;
-	m_tInfo.fCY = 20.f;
+	m_tInfo.fCX = 10.f;
+	m_tInfo.fCY = 10.f;
 
 	m_pAnimator = new CAnimator;
 
@@ -75,19 +75,19 @@ void CMonBullet::Render(HDC hDC)
 	switch (m_BulletType)
 	{
 	case 0:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		CGameObject::UpdateImgInfo(20, 20);
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 		break;
 	case 1:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		CGameObject::UpdateImgInfo(20, 20);
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 		break;
 	case 2:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.5f, m_tInfo.fCY * 1.5f);
+		CGameObject::UpdateImgInfo(20 * 1.5f, 20 * 1.5f);
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 		break;
 	case 3:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.f, m_tInfo.fCY * 2.f);
+		CGameObject::UpdateImgInfo(20 * 2.f, 20 * 2.f);
 		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 		break;
 	}
