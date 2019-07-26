@@ -32,6 +32,7 @@ void CBoss::Initialize()
 
 int CBoss::Update()
 {
+	// 보스는 데드이벤트 필요없음
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
