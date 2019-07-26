@@ -156,6 +156,7 @@
     <ClInclude Include="CollsionMgr.h" />
     <ClInclude Include="CommonMonster.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="Framework99C.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="CollsionMgr.cpp" />
     <ClCompile Include="CommonMonster.cpp" />
+    <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Framework99C.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />

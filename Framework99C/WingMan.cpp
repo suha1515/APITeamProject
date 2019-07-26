@@ -39,7 +39,7 @@ int CWingMan::Update()
 void CWingMan::Render(HDC hDC)
 {
 	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
-	m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+	m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	//Rectangle(hDC, m_tInfo.fX - m_tInfo.fCX, m_tInfo.fY - m_tInfo.fCY, m_tInfo.fX + m_tInfo.fCX, m_tInfo.fY + m_tInfo.fCY);
 }
 

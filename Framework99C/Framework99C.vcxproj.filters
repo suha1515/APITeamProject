@@ -22,6 +22,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="WingMan.cpp" />
+    <ClCompile Include="EffectMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractFactory.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Typedef.h" />
     <ClInclude Include="WingMan.h" />
+    <ClInclude Include="EffectMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Framework99C.rc" />

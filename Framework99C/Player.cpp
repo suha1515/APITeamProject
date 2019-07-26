@@ -141,15 +141,16 @@ void CPlayer::Render(HDC hDC)
 	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
 
 	// TEST ---------------------------------------------------
+	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 	if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
 	{
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 76.f / 33.f);
-		m_pAnimator->RunAnim(1, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(1, hDC, m_tImgInfo);
 	}
 	else
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
-		m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	// --------------------------------------------------------
 
@@ -173,7 +174,7 @@ CGameObject* CPlayer::CreateBullet()
 
 CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir)
 {
-	CGameObject* pBullet = CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
+	CGameObject* pBullet = CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY - m_tInfo.fCY * 0.5f);
 	dynamic_cast<CBullet*>(pBullet)->SetDirection(eDir);
 
 	return pBullet;

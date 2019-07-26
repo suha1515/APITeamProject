@@ -53,6 +53,9 @@ typedef struct tagAnimInfo
 	float fElapsedTime = 0.f;
 	float fLimitTime = 0.f;
 
+	// 애니메이션 종료여부
+	bool bIsEnd = false;
+	
 } ANIMINFO;
 
 //2차원상 벡터를 표현하기위한 구조체
