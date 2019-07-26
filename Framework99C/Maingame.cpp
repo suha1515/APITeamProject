@@ -139,4 +139,6 @@ void CMaingame::Release()
 	CPathMgr::DeleteInstance();
 	CResourceMgr::DeleteInstance();
 	CKeyboardMgr::DeleteInstance();
+	CEffectMgr::GetInstance()->DeleteAnimator();
+	CEffectMgr::DeleteInstance();
 }

@@ -79,7 +79,7 @@ void CBullet::Render(HDC hDC)
 	if (m_BulletType == PLAYER_BULLET_TYPE::WINGMAN)
 	{
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f, 4.f);
-		m_pAnimator->RunAnim(0, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC, m_tImgInfo);
 	}
 	else
 	{

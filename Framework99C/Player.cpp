@@ -214,12 +214,12 @@ void CPlayer::Render(HDC hDC)
 	else if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
 	{
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
-		m_pAnimator->RunAnim(2, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(2, hDC, m_tImgInfo);
 	}
 	else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
 	{
 		CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 1.f, 1.f);
-		m_pAnimator->RunAnim(3, hDC, m_tImgInfo);
+		m_pAnimator->AnimateClip(3, hDC, m_tImgInfo);
 	}
 	else
 	{

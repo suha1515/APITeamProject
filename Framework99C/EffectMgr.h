@@ -8,6 +8,8 @@ public:
 	void AddEffect(EFFECT key);
 	void AnimateEffect(HDC hDC, IMGINFO imgInfo);
 
+public:
+	void DeleteAnimator();
 private:
 	unordered_map<EFFECT, ANIMINFO*> m_mapEffect;
 	CAnimator* m_pAnimator;
