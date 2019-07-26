@@ -84,7 +84,11 @@ void CCommonMonster::Initialize()
 int CCommonMonster::Update()
 {
 	if (m_bIsDead)
+	{
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2, m_tInfo.fCY * 2);
+		CEffectMgr::GetInstance()->AddEffect(E_MINIPLANE_DESTROIED, m_tImgInfo);
 		return DEAD_OBJ;
+	}
 
 	SetDistance();
 	SetBarrel(&m_Barrel, 0.f, 20.f);

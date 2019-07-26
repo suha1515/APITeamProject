@@ -107,6 +107,7 @@ typedef struct tagAnimInfo
 		fLimitTime = limitTime;
 
 		bIsEnd = false;
+
 	}
 
 	CTexture* pTexture;
@@ -133,6 +134,7 @@ typedef struct tagAnimInfo
 	// 애니메이션 종료여부
 	bool bIsEnd;
 	
+	IMGINFO tImgInfo;
 } ANIMINFO;
 
 //2차원상 벡터를 표현하기위한 구조체		

@@ -9,7 +9,7 @@ public:
 
 public:
 	void Update();
-	bool AddAnimInfo(ANIMINFO animInfo, IMGINFO imgInfo);
+	bool AddAnimInfo(ANIMINFO animInfo, IMGINFO& imgInfo);
 	bool AddAnimInfo(CTexture* pTexture, ANIMATION_TYPE animType, float maxX, float maxY,
 		float startX, float startY, float endX, float endY, float limitTime);
 	bool DeleteAnimInfo(int iIdx);

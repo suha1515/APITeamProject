@@ -31,7 +31,9 @@ void CMonster::Initialize()
 int CMonster::Update()
 {
 	if (m_bIsDead)
+	{
 		return DEAD_OBJ;
+	}
 
 	IsMoving();
 	IsOutRange();

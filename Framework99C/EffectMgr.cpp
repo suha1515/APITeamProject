@@ -25,7 +25,6 @@ void CEffectMgr::AnimateEffect(HDC hDC)
 {
 	m_pAnimator->Update();
 
-
 	for (int i = 0; i < m_pAnimator->GetAnimSize(); ++i)
 	{
 		m_pAnimator->AnimateClip(i, hDC);

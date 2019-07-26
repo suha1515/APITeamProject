@@ -26,14 +26,7 @@ public:
 public:
 	void SetColorKey(COLORREF colorKey);
 	void SetKeyEnable(bool keyEnable);
-	void SetImgInfo(IMGINFO imgInfo);
 
-	////test
-	//void SetXY(float x, float _maxX)
-	//{
-	//	startX = x;
-	//	maxX = _maxX;
-	//}
 private:
 	int nTextureRef;
 	HDC m_hMemDC;
@@ -45,10 +38,5 @@ private:
 	bool m_bColorKeyEnable;
 	COLORREF m_tColorKey;
 
-	IMGINFO m_tImgInfo;
-
-	// test
-	//float startX = 0.f;
-	//float maxX = 1.f;
 };
 

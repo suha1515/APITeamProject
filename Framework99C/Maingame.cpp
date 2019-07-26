@@ -98,7 +98,6 @@ void CMaingame::Render()
 {
 	CObjectMgr::GetInstance()->Render(m_hMemDC);
 
-	IMGINFO testInfo( 500, 400, 0.5, 0.5, 200, 200, 1, 1 );
 	CEffectMgr::GetInstance()->AnimateEffect(m_hMemDC);
 
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);

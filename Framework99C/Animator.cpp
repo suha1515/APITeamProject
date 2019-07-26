@@ -33,10 +33,10 @@ void CAnimator::Update()
 
 }
 
-bool CAnimator::AddAnimInfo(ANIMINFO animInfo, IMGINFO imgInfo)
+bool CAnimator::AddAnimInfo(ANIMINFO animInfo , IMGINFO& imgInfo)
 {
 	ANIMINFO tTmpInfo = animInfo;
-	tTmpInfo.pTexture->SetImgInfo(imgInfo);
+	tTmpInfo.tImgInfo = imgInfo;
 
 	m_vecAnimInfo.push_back(tTmpInfo);
 	return true;
@@ -89,13 +89,13 @@ bool CAnimator::DeleteAnimInfo(int iIdx)
 
 void CAnimator::SetImgInfo(int iIdx, IMGINFO & imgInfo)
 {
-	m_vecAnimInfo[iIdx].pTexture->m_tImgInfo = imgInfo;
+	m_vecAnimInfo[iIdx].tImgInfo = imgInfo;
 }
 
 void CAnimator::AnimateClip(int iIdx, HDC hDC)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
-	IMGINFO& imgInfo = tmpAnim->pTexture->m_tImgInfo;
+	IMGINFO& imgInfo = tmpAnim->tImgInfo;
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
@@ -175,7 +175,7 @@ void CAnimator::AnimateClip(int iIdx, HDC hDC)
 void CAnimator::AnimateReversedClip(int iIdx, HDC hDC)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
-	IMGINFO& imgInfo = tmpAnim->pTexture->m_tImgInfo;
+	IMGINFO& imgInfo =tmpAnim->tImgInfo;
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = -1.f;
 
