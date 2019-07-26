@@ -5,13 +5,14 @@ class CEffectMgr
 
 public:
 	void Initialize();
-	void AddEffect(EFFECT key);
-	void AnimateEffect(HDC hDC, IMGINFO imgInfo);
+	CTexture* AddEffect(EFFECT key, IMGINFO imgInfo);
+	void AnimateEffect(HDC hDC);
 
 public:
 	void DeleteAnimator();
 private:
 	unordered_map<EFFECT, ANIMINFO*> m_mapEffect;
-	CAnimator* m_pAnimator;
+
+	CAnimator* m_pAnimator;	
 };
 

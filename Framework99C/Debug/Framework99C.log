@@ -2,20 +2,20 @@
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\function.h(27): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\function.h(28): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Animator.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(110): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(109): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(108): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(106): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(105): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(116): warning C4244: '인수': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(115): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(189): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(188): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(187): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(185): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(184): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(195): warning C4244: '인수': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(117): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(116): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(114): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(124): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(123): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(198): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(197): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(196): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(194): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(193): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(204): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\animator.cpp(203): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Bullet.cpp
   CollsionMgr.cpp
   CommonMonster.cpp
@@ -94,7 +94,7 @@ c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(143
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(144): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(147): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(148): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(257): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\player.cpp(261): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ResourceMgr.cpp
   SpawnManager.cpp
 c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\spawnmanager.cpp(43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -110,6 +110,6 @@ c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\texture.cpp(83
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
   WingMan.cpp
-c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\wingman.cpp(68): warning C4244: '인수': 'float'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\wingman.cpp(69): warning C4244: '인수': 'float'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   Framework99C.vcxproj -> C:\Users\bsj10\OneDrive\문서\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe

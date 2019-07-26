@@ -4,7 +4,7 @@
 
 CAnimator::CAnimator()
 {
-	m_vecAnimInfo.reserve(10);
+	m_vecAnimInfo.reserve(100);
 }
 
 
@@ -15,6 +15,7 @@ CAnimator::~CAnimator()
 
 void CAnimator::Update()
 {
+
 	vector<ANIMINFO>::iterator iter;
 	vector<ANIMINFO>::iterator iter_end = m_vecAnimInfo.end();
 
@@ -32,9 +33,10 @@ void CAnimator::Update()
 
 }
 
-bool CAnimator::AddAnimInfo(ANIMINFO animInfo)
+bool CAnimator::AddAnimInfo(ANIMINFO animInfo, IMGINFO imgInfo)
 {
 	ANIMINFO tTmpInfo = animInfo;
+	tTmpInfo.pTexture->SetImgInfo(imgInfo);
 
 	m_vecAnimInfo.push_back(tTmpInfo);
 	return true;
@@ -85,9 +87,15 @@ bool CAnimator::DeleteAnimInfo(int iIdx)
 	return true;
 }
 
-void CAnimator::AnimateClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
+void CAnimator::SetImgInfo(int iIdx, IMGINFO & imgInfo)
+{
+	m_vecAnimInfo[iIdx].pTexture->m_tImgInfo = imgInfo;
+}
+
+void CAnimator::AnimateClip(int iIdx, HDC hDC)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
+	IMGINFO& imgInfo = tmpAnim->pTexture->m_tImgInfo;
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
@@ -164,9 +172,10 @@ void CAnimator::AnimateClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 	}
 }
 
-void CAnimator::AnimateReversedClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
+void CAnimator::AnimateReversedClip(int iIdx, HDC hDC)
 {
 	ANIMINFO* tmpAnim = &m_vecAnimInfo.at(iIdx);
+	IMGINFO& imgInfo = tmpAnim->pTexture->m_tImgInfo;
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = -1.f;
 
@@ -246,4 +255,9 @@ void CAnimator::AnimateReversedClip(int iIdx, HDC hDC, const IMGINFO& imgInfo)
 int CAnimator::GetAnimSize()
 {
 	return m_vecAnimInfo.size();
+}
+
+CTexture* CAnimator::GetTexture(int iIdx)
+{
+	return m_vecAnimInfo[iIdx].pTexture;
 }

@@ -96,6 +96,11 @@ void CTexture::SetKeyEnable(bool keyEnable)
 	m_bColorKeyEnable = keyEnable;
 }
 
+void CTexture::SetImgInfo(IMGINFO imgInfo)
+{
+	m_tImgInfo = imgInfo;
+}
+
 
 HDC CTexture::GetDC()
 {

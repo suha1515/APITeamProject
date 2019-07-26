@@ -15,17 +15,20 @@ void CEffectMgr::Initialize()
 	m_mapEffect.insert(unordered_map<EFFECT, ANIMINFO*>::value_type(E_MINIPLANE_DESTROIED, pTmpAnim));
 }
 
-void CEffectMgr::AddEffect(const EFFECT key)
+CTexture* CEffectMgr::AddEffect(const EFFECT key, IMGINFO imgInfo)
 {
-	m_pAnimator->AddAnimInfo(*(m_mapEffect[key])); // º¹»çÇØ¼­ ÁÜ
+	m_pAnimator->AddAnimInfo(*(m_mapEffect[key]), imgInfo); // º¹»çÇØ¼­ ÁÜ
+	return m_pAnimator->GetTexture(m_pAnimator->GetAnimSize() - 1);
 }
 
-void CEffectMgr::AnimateEffect(HDC hDC, IMGINFO imgInfo)
+void CEffectMgr::AnimateEffect(HDC hDC)
 {
 	m_pAnimator->Update();
+
+
 	for (int i = 0; i < m_pAnimator->GetAnimSize(); ++i)
 	{
-		m_pAnimator->AnimateClip(i, hDC, imgInfo);
+		m_pAnimator->AnimateClip(i, hDC);
 	}
 }
 
