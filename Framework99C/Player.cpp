@@ -119,6 +119,7 @@ void CPlayer::UpdateCollider()
 	{
 		// 폭파 애니메이션
 		m_PlayerLife--;
+		cout << m_PlayerLife << endl;
 		pMonBullet->SetDead(true);
 	}
 }
@@ -134,10 +135,10 @@ void CPlayer::LevelUp()
 
 void CPlayer::Initialize()
 {
-	m_tInfo.fX = 400.f;
-	m_tInfo.fY = 400.f;
+	m_tInfo.fX = 350.f;
+	m_tInfo.fY = 1200.f;
 	m_tInfo.fCX = 20.f;
-	m_tInfo.fCY = 200.f;
+	m_tInfo.fCY = 20.f;
 
 	m_tInfo.fSpeed = 350.f;
 
