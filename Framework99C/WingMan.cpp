@@ -31,8 +31,8 @@ int CWingMan::Update()
 
 	CGameObject::UpdateRect();
 	//CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f,3.f*(16.f / 13.f));
-
 	CGameObject::UpdateImgInfo(30.f, 35.f, 1.f, 1.f);
+
 	return NO_EVENT;
 }
 
