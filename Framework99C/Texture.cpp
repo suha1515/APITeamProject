@@ -71,12 +71,12 @@ COLORREF CTexture::GetColorKey()
 	return m_tColorKey;
 }
 
-void CTexture::DrawTexture(HDC hDC, IMGINFO& imgInfo, float maxX, float maxY, float scaleX, float scaleY)
+void CTexture::DrawTexture(HDC hDC, IMGINFO& imgInfo, float startX, float startY, float maxX, float maxY, float scaleX, float scaleY)
 {
 	if (m_bColorKeyEnable)
 	{
 		TransparentBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
-			imgInfo.fImgCX * scaleX, imgInfo.fImgCY * scaleY, m_hMemDC, 0, 0, m_tBit.bmWidth / maxX, m_tBit.bmHeight / maxY, m_tColorKey);
+			imgInfo.fImgCX * scaleX, imgInfo.fImgCY * scaleY, m_hMemDC, startX, startY, m_tBit.bmWidth / maxX, m_tBit.bmHeight / maxY, m_tColorKey);
 	}
 	else
 	{
