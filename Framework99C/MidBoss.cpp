@@ -71,7 +71,12 @@ void CMidBoss::Initialize()
 int CMidBoss::Update()
 {
 	if (m_bIsDead)
+	{
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 4, m_tInfo.fCY * 4);
+		CEffectMgr::GetInstance()->AddEffect(E_MINIPLANE_DESTROIED, m_tImgInfo);
 		return DEAD_OBJ;
+
+	}
 
 
 	switch (m_Various)
