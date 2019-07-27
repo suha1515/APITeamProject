@@ -10,7 +10,7 @@
 */
 
 CMonBullet::CMonBullet()
-	:m_iDmg(1), m_fFuse(2.f)
+	:m_iDmg(1), m_fFuse(2.f), m_MovingAngle(0.f), m_fCooldown(2.f)
 {
 
 }
@@ -54,6 +54,13 @@ void CMonBullet::Initialize()
 		m_pTexture->SetColorKey(RGB(255, 255, 255));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 3, 1, 0, 0, 2, 0, 0.1f);
 		break;
+	case SLOW:
+		m_tInfo.fSpeed = 3.f;
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet4", _T("Stage/Bullet/Guide_Bullet.bmp"));
+		m_pTexture->SetColorKey(RGB(128, 0, 0));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 4, 1, 0, 0, 3, 0, 0.1f);
+
+		break;
 	}
 
 }
@@ -94,6 +101,11 @@ void CMonBullet::Render(HDC hDC)
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
+	case 4:
+		CGameObject::UpdateImgInfo(20 * 2.f, 20 * 2.f);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
+		break;
 	}
 }
 
@@ -107,6 +119,15 @@ void CMonBullet::SetInfo(BULLET_TYPE bType, float fAngle)
 {
 	m_fAngle = fAngle;
 	m_BulletType = bType;
+}
+
+float CMonBullet::GetAngle(CGameObject* pDesObj, CGameObject* pSrcObj)
+{
+	float fAngle = atan2(pDesObj->GetInfo().fY - pSrcObj->GetInfo().fY, pDesObj->GetInfo().fX - pSrcObj->GetInfo().fX) * 180 / PI;
+	if (fAngle < 0)
+		fAngle += 360;
+
+	return fAngle;
 }
 
 void CMonBullet::IsOutRange()
@@ -196,7 +217,27 @@ void CMonBullet::IsMoving()
 		}
 
 		break;
+	case SLOW:
+		m_fCooldown -= DELTA_TIME;
+
+		m_tInfo.fX += m_tInfo.fSpeed * cosf(m_fAngle * PI / 180 + m_MovingAngle);
+		m_tInfo.fY += m_tInfo.fSpeed * sinf(m_fAngle * PI / 180);
+		m_MovingAngle += 0.05f;
+
+		if (m_fCooldown < 0)
+		{
+			CGameObject* pBullet;
+			pBullet = CAbstractFactory<CMonBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
+			m_fPlayerAngle = GetAngle( CObjectMgr::GetInstance()->GetPlayer(), this );
+			dynamic_cast<CMonBullet*>(pBullet)->SetInfo(MIDIUM, m_fPlayerAngle);
+			dynamic_cast<CMonBullet*>(pBullet)->Initialize();
+			CObjectMgr::GetInstance()->AddObject(OBJECT_MONBULLET, pBullet);
+			m_fCooldown += 0.3f;
+		}
+		
+		break;
 	default:
+		// 이외의 탄종
 		//플레이어의 방향으로 직선이동
 		m_tInfo.fX += m_tInfo.fSpeed * cosf(m_fAngle * PI / 180);
 		m_tInfo.fY += m_tInfo.fSpeed * sinf(m_fAngle * PI / 180);

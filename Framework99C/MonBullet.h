@@ -18,6 +18,7 @@ private:
 
 public:
 	void SetInfo(BULLET_TYPE bType, float fAngle);
+	float GetAngle(CGameObject* pDesObj, CGameObject* pSrcObj);
 
 public:
 	void IsOutRange();
@@ -26,7 +27,10 @@ public:
 private:
 	int m_iDmg;
 	float m_fAngle;
+	float m_MovingAngle;
+	float m_fPlayerAngle;
 	float m_fFuse;
+	float m_fCooldown;
 	BULLET_TYPE m_BulletType;
 	CAnimator* m_pAnimator;
 

@@ -1,2 +1,12 @@
-﻿  Framework99C.vcxproj -> E:\[프로그래밍 공부]\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
+﻿  Boss.cpp
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(320): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(327): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(349): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(357): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(380): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(387): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(416): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(437): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\[프로그래밍 공부]\github\apiteamproject\framework99c\boss.cpp(459): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Framework99C.vcxproj -> E:\[프로그래밍 공부]\GitHub\APITeamProject\Framework99C\.\Debug\Framework99C_Debugx32.exe
   Framework99C.vcxproj -> .\Debug\Framework99C_Debugx32.pdb (Full PDB)

@@ -768,8 +768,8 @@ void CSpawnManager::Initialize()
 	monsterPool[82].monster_various = 3;
 
 	// 보스출현
-	monsterPool[83].spawnPos_x = 350;
-	monsterPool[83].spawnPos_y = -100;
+	monsterPool[83].spawnPos_x = 375;
+	monsterPool[83].spawnPos_y = -300;
 	monsterPool[83].spawnTime = 1600;
 	monsterPool[83].monster_type = MONSTER_TYPE::BOSS;
 	monsterPool[83].fire_type = MONSTER_FIRETYPE::SINGLE;

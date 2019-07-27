@@ -7,6 +7,7 @@
 #include "Items.h"
 #include "UserInterface.h"
 
+#include "Boss.h"
 
 CMaingame::CMaingame()	
 {
@@ -78,6 +79,13 @@ void CMaingame::Initialize()
 	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	//}
 
+	// 보스 테스트용
+	CGameObject *object = CAbstractFactory<CBoss>::CreateObject();
+	object->SetPos(375, -300);
+	dynamic_cast<CBoss*>(object)->SetMonType(BOSS, SINGLE, RIGHT, 0);
+	dynamic_cast<CBoss*>(object)->Initialize();
+	CObjectMgr::GetInstance()->AddObject(OBJECT_MONSTER, object);
+
 
 	// Item Test
 	pGameObject = CAbstractFactory<CItems>::CreateObject();
@@ -93,7 +101,7 @@ void CMaingame::Initialize()
 
 void CMaingame::Update()
 {
-	m_SpawnMonster.SpawnEnemy();
+	//m_SpawnMonster.SpawnEnemy();
 	CKeyboardMgr::GetInstance()->Update();
 	CObjectMgr::GetInstance()->Update();
 }
