@@ -17,7 +17,10 @@ private:
 
 private:
 	void IsMoving();
+	void DeadEffect();
 	virtual void IsFire() override;
+	void IsDead();
+
 
 private:
 	POINT m_Barrel3;
@@ -27,5 +30,11 @@ private:
 	float m_fCoolDown2;
 
 	CAnimator* m_pAnimator;
+
+	bool m_DeadEffect;
+	float m_DeadTime;
+
+
+	list<PARTICLE_INFO> m_EffectINFO;
 };
 

@@ -161,5 +161,19 @@ typedef struct tSpawn_INFO
 	int spawnTime;
 }SPAWN_INFO;
 
+//이펙트 애니메이션을 위한 구조체
+//- 정보성-
+
+typedef struct tParticle_INFO
+{
+	tParticle_INFO(IMGINFO info, float time)
+	{
+		effect_Info = info;
+		effect_Time = time;
+	}
+	IMGINFO	effect_Info;
+	float effect_Time;
+}PARTICLE_INFO;
+
 #define __STRUCT_H__		
 #endif		

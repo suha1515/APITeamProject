@@ -25,6 +25,7 @@ private:
 private:
 	void IsMoving();
 	void IsOutRange();
+	void BombDrop();
 
 private:
 	BULLET_DIRECTION	m_eDirection;
@@ -33,5 +34,6 @@ private:
 	CAnimator* m_pAnimator;
 
 	int m_damage;
+	float m_AliveTime;
 };
 

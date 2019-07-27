@@ -14,5 +14,10 @@ private:
 
 private:
 	int m_stageY;
+
+public:
+	int m_PlayerLife;
+	int m_PlayerBomb;
+	int m_Score;
 };
 

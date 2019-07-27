@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "WingMan.h"
+#include "Monster.h"
 #include "Items.h"
 
 CPlayer::CPlayer()
@@ -105,12 +106,13 @@ void CPlayer::UpdateCollider()
 		{
 			LevelUp();
 			pItem->SetDead(true);
+
 		}
 		else if (type == ITEM_TYPE::SPECIAL)
 		{
-			if(m_BombCount<4)
-			m_BombCount++;
-
+			if(m_BombCount<3)
+			 m_BombCount++;
+			CUserInterfaceMgr::GetInstance()->AddSpecial();
 			pItem->SetDead(true);
 		}	
 	}
@@ -119,7 +121,7 @@ void CPlayer::UpdateCollider()
 	{
 		// 폭파 애니메이션
 		m_PlayerLife--;
-		cout << m_PlayerLife << endl;
+
 		pMonBullet->SetDead(true);
 	}
 }
@@ -142,6 +144,8 @@ void CPlayer::Initialize()
 
 	m_tInfo.fSpeed = 350.f;
 
+	bombCoolTime = 0.0f;
+	invincibleTime = 0.0f;
 
 
 	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Move_TB_A.bmp"));
@@ -180,7 +184,7 @@ void CPlayer::Initialize()
 
 
 	m_PowerLevel = 1;
-	m_BombCount  = 3;
+	m_BombCount  = 2;
 	m_PlayerLife = 3;
 
 	wingCount = 0;
@@ -213,7 +217,41 @@ void CPlayer::Initialize()
 	m_pTexture->SetColorKey(RGB(255, 255, 255));
 	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 0.3f);
 
+
+	m_SpecialAttack = CResourceMgr::GetInstance()->LoadTexture("player_Special", _T("Stage/Bomb/Bomb_Airplan.bmp"));
+	m_SpecialAttack->SetColorKey(RGB(0, 248, 0));
+
+
 	// --------------------------------------------------------
+
+	//폭격기 위치
+	m_BigPlane = IMGINFO(350, 1100, 0.5, 0.5,400, 400);
+	// 폭격 위치
+	POINT pt;
+	pt.x = 200; pt.y = 750;
+	bombDrop.push_back(pair<POINT, float>(pt, 0.5f));
+	pt.x = 500; pt.y = 730;
+	bombDrop.push_back(pair<POINT, float>(pt, 0.7f));
+	pt.x = 300; pt.y = 670;
+	bombDrop.push_back(pair<POINT, float>(pt, 0.9f));
+	pt.x = 450; pt.y = 610;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.0f));
+	pt.x = 100; pt.y = 540;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.2f));
+	pt.x = 600; pt.y = 570;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.4f));
+	pt.x = 700; pt.y = 510;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.6f));
+	pt.x = 550; pt.y = 400;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.65f));
+	pt.x = 330; pt.y = 310;
+	bombDrop.push_back(pair<POINT, float>(pt, 1.8f));
+	pt.x = 200; pt.y = 250;
+	bombDrop.push_back(pair<POINT, float>(pt, 2.3f));
+	pt.x = 300; pt.y = 180;
+	bombDrop.push_back(pair<POINT, float>(pt, 2.5f));
+	pt.x = 600; pt.y = 100;
+	bombDrop.push_back(pair<POINT, float>(pt, 3.0f));
 
 }
 
@@ -228,6 +266,10 @@ int CPlayer::Update()
 	UpdateWingMan();
 	UpdateBarrel();
 	UpdateCollider();
+	if (m_IsSpecialAttack)
+	{
+		SpecialAttack();
+	}
 	//m_pTexture->SetXY(0.f, 2.f);
 
 
@@ -240,31 +282,36 @@ void CPlayer::Render(HDC hDC)
 
 	// TEST ---------------------------------------------------
 	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
-	if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
-	{
+		if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
+		{
+			CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
+			m_pAnimator->SetImgInfo(1, m_tImgInfo);
+			m_pAnimator->AnimateClip(1, hDC);
+		}
+		else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
+		{
+			CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
+			m_pAnimator->SetImgInfo(2, m_tImgInfo);
+			m_pAnimator->AnimateClip(2, hDC);
+		}
+		else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
+		{
+			CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
+			m_pAnimator->SetImgInfo(3, m_tImgInfo);
+			m_pAnimator->AnimateClip(3, hDC);
+		}
+		else
+		{
+			CGameObject::UpdateImgInfo(100, 100);
+			m_pAnimator->SetImgInfo(0, m_tImgInfo);
+			m_pAnimator->AnimateClip(0, hDC);
+		}
 
-		CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
-		m_pAnimator->SetImgInfo(1, m_tImgInfo);
-		m_pAnimator->AnimateClip(1, hDC);
-	}
-	else if(CKeyboardMgr::GetInstance()->KeyPressed(KEY_LEFT))
-	{
-		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
-		m_pAnimator->SetImgInfo(2, m_tImgInfo);
-		m_pAnimator->AnimateClip(2, hDC);
-	}
-	else if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_RIGHT))
-	{
-		CGameObject::UpdateImgInfo(100, 100, 1.f, 1.f);
-		m_pAnimator->SetImgInfo(3, m_tImgInfo);
-		m_pAnimator->AnimateClip(3, hDC);
-	}
-	else
-	{
-		CGameObject::UpdateImgInfo(100, 100);
-		m_pAnimator->SetImgInfo(0, m_tImgInfo);
-		m_pAnimator->AnimateClip(0, hDC);
-	}
+		if (m_IsSpecialAttack)
+		{
+			m_SpecialAttack->DrawTexture(hDC, m_BigPlane);
+		}
+
 	// --------------------------------------------------------
 
 	//디버그용
@@ -283,11 +330,89 @@ void CPlayer::Render(HDC hDC)
 void CPlayer::Release()
 {
 	m_pTexture->SafeDelete();
+	m_SpecialAttack->SafeDelete();
 }
 
 CGameObject* CPlayer::CreateBullet()
 {
 	return CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
+}
+
+void CPlayer::SpecialAttack()
+{
+	if (m_BigPlane.fY >= -200)
+	{
+		m_BigPlane.fY -= DELTA_TIME * 600.f;
+	}
+	if (bombCoolTime <= 5.f&&bombCoolTime >= 2.f)
+	{
+		OBJLIST::iterator iter_begin = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONSTER).begin();
+		OBJLIST::iterator iter_end = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONSTER).end();
+
+		for (; iter_begin != iter_end;++iter_begin)
+		{
+			dynamic_cast<CMonster*>((*iter_begin))->SetDamaged(100);
+		}
+
+		 iter_begin = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONBULLET).begin();
+		 iter_end = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONBULLET).end();
+
+		 for (; iter_begin != iter_end; ++iter_begin)
+		 {
+			 (*iter_begin)->SetDead(true);
+		 }
+	}
+
+	if (bombCoolTime >= 5.f)
+	{
+		bombCoolTime -= bombCoolTime;
+		m_BigPlane = IMGINFO(350, 1100, 0.5, 0.5, 400, 400);
+		
+		//재장전
+		POINT pt;
+		pt.x = 200; pt.y = 750;
+		bombDrop.push_back(pair<POINT, float>(pt, 0.5f));
+		pt.x = 500; pt.y = 730;
+		bombDrop.push_back(pair<POINT, float>(pt, 0.7f));
+		pt.x = 300; pt.y = 670;
+		bombDrop.push_back(pair<POINT, float>(pt, 0.9f));
+		pt.x = 450; pt.y = 610;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.0f));
+		pt.x = 100; pt.y = 540;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.2f));
+		pt.x = 600; pt.y = 570;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.4f));
+		pt.x = 700; pt.y = 510;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.6f));
+		pt.x = 550; pt.y = 400;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.65f));
+		pt.x = 330; pt.y = 310;
+		bombDrop.push_back(pair<POINT, float>(pt, 1.8f));
+		pt.x = 200; pt.y = 250;
+		bombDrop.push_back(pair<POINT, float>(pt, 2.3f));
+		pt.x = 300; pt.y = 180;
+		bombDrop.push_back(pair<POINT, float>(pt, 2.5f));
+		pt.x = 600; pt.y = 100;
+		bombDrop.push_back(pair<POINT, float>(pt, 3.0f));
+		m_IsSpecialAttack = false;
+	}
+	else
+	{
+		list<pair<POINT, float>>::iterator iter_begin = bombDrop.begin();
+		list<pair<POINT, float>>::iterator iter_end = bombDrop.end();
+		for (; iter_begin != iter_end;)
+		{
+			if (bombCoolTime >= iter_begin->second)
+			{
+				CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP, iter_begin->first, PLAYER_BULLET_TYPE::BOMBS));
+				iter_begin = bombDrop.erase(iter_begin);
+			}
+			else
+				iter_begin++;
+		}
+	}
+
+	bombCoolTime += DELTA_TIME;
 }
 
 CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir, POINT pos,PLAYER_BULLET_TYPE type)
@@ -334,15 +459,23 @@ void CPlayer::KeyInput()
 				m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
 		}
 
-		if (CKeyboardMgr::GetInstance()->KeyUp(KEY_ACTION))
+		if (CKeyboardMgr::GetInstance()->KeyUp(KEY_SPECIAL))
 		{
-			LevelUp();
+			if (m_BombCount > 0)
+			{
+				if (!m_IsSpecialAttack)
+				{
+					m_IsSpecialAttack = true;
+					CUserInterfaceMgr::GetInstance()->SubSpecial();
+					m_BombCount--;
+				}
+			}
 		}
 	static int nMaximumBullet = MAXIMUM_MISSILE;
 
 #pragma region PLAYER_SHOOTING
 
-	if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_SPECIAL))
+	if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_ACTION))
 	{
 		//공격버튼을 5초간 누르고, 차지샷 스킬 사용중이 아닐때 ,또한 윙맨의 개수는 2개 이상이어야 차지샷 가능
 		if (chargeTime >= 5.f&&m_chargeShot == false&&wingCount>2)
@@ -375,7 +508,6 @@ void CPlayer::KeyInput()
 				}
 				else if (m_PowerLevel>=4)// 4일경우
 				{
-					cout << "LEVEL4" << endl;
 					CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP, m_Barrel[0], PLAYER_BULLET_TYPE::LEVEL4));
 					CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP, m_Barrel[1], PLAYER_BULLET_TYPE::LEVEL3));
 					CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP, m_Barrel[2], PLAYER_BULLET_TYPE::LEVEL3));
@@ -394,15 +526,13 @@ void CPlayer::KeyInput()
 			}
 			chargeTime += DELTA_TIME;
 			fFireRate += DELTA_TIME;
-			cout << chargeTime << endl;
 		}
 
 	}
 	//공격버튼에서 떼면
 	// 2초간 차지 했으면 차지샷 아니면 차지타임 초기화
-	if (CKeyboardMgr::GetInstance()->KeyUp(KEY_SPECIAL))
+	if (CKeyboardMgr::GetInstance()->KeyUp(KEY_ACTION))
 	{
-		cout << "공격키 땜" << endl;
 		if (m_chargeWIngman)
 		{
 			m_chargeShot = true;
@@ -471,4 +601,14 @@ void CPlayer::KeyInput()
 	//	m_pBulletLst->push_back(CreateBullet(BULLET_UP));
 	//if (GetAsyncKeyState('D') & 0x8000)
 	//	m_pBulletLst->push_back(CreateBullet(BULLET_RIGHT));
+}
+
+void CPlayer::Respawn()
+{
+	if (m_tInfo.fY <= 800.0f)
+	{
+
+	}
+	if(invincibleTime)
+	m_tInfo.fY -= DELTA_TIME*100.f;
 }

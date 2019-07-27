@@ -44,7 +44,7 @@ void CSpawnManager::SpawnEnemy()
 		{
 			if (info.monster_type == MONSTER_TYPE::DEFAULT)
 			{
-				CGameObject *object = CAbstractFactory<CCommonMonster>::CreateObject();
+				CGameObject *object = new CCommonMonster;
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
 				dynamic_cast<CCommonMonster*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type,info.monster_various);
 				dynamic_cast<CCommonMonster*>(object)->Initialize();
@@ -52,7 +52,7 @@ void CSpawnManager::SpawnEnemy()
 			}
 			else if (info.monster_type == MONSTER_TYPE::MIDDLE)
 			{
-				CGameObject *object = CAbstractFactory<CMidBoss>::CreateObject();
+				CGameObject *object = new CMidBoss;
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
 				dynamic_cast<CMidBoss*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type, info.monster_various);
 				dynamic_cast<CMidBoss*>(object)->Initialize();
@@ -61,7 +61,7 @@ void CSpawnManager::SpawnEnemy()
 			}
 			else if (info.monster_type == MONSTER_TYPE::BOSS)
 			{
-				CGameObject *object = CAbstractFactory<CBoss>::CreateObject();
+				CGameObject *object = new CBoss;
 				object->SetPos(info.spawnPos_x, info.spawnPos_y);
 				dynamic_cast<CBoss*>(object)->SetMonType(info.monster_type, info.fire_type, info.move_type, info.monster_various);
 				dynamic_cast<CBoss*>(object)->Initialize();

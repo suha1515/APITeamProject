@@ -20,6 +20,7 @@ void CMidBoss::Initialize()
 
 	m_pAnimator = new CAnimator;
 
+	
 	switch (m_Various)
 	{
 	case 0:
@@ -66,14 +67,18 @@ void CMidBoss::Initialize()
 
 	}
 
+
+
+	m_DeadEffect = false;
+	m_DeadTime = 0.0f;
+
 }
 
 int CMidBoss::Update()
 {
 	if (m_bIsDead)
 	{
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 4, m_tInfo.fCY * 4);
-		CEffectMgr::GetInstance()->AddEffect(E_MINIPLANE_DESTROIED, m_tImgInfo);
+		
 		return DEAD_OBJ;
 
 	}
@@ -114,11 +119,18 @@ int CMidBoss::Update()
 		m_fAngle2 = GetAngle(m_pTarget, &m_Barrel) + 20.f;
 
 	}
-
-	IsMoving();
-	IsOutRange();
-	IsFire();
-	CMonster::IsDead();
+	if (!m_DeadEffect)
+	{
+		IsMoving();
+		IsOutRange();
+		IsFire();
+		IsDead();
+	}
+	else
+	{
+		DeadEffect();
+	}
+	
 	CGameObject::UpdateRect();
 	CGameObject::UpdateImgInfo(300.f, 300.f);
 
@@ -196,6 +208,37 @@ void CMidBoss::IsMoving()
 		break;
 	}
 
+}
+
+void CMidBoss::DeadEffect()
+{
+	if (m_DeadTime > 3.5f)
+	{
+		m_bIsDead = true;
+		DropItem();
+		//마지막 죽었을때 
+		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX , m_tInfo.fY , 0.5, 0.5, 300,300, 1, 1));
+	}
+	else
+	{
+		list<PARTICLE_INFO>::iterator iter_begin = m_EffectINFO.begin();
+		list<PARTICLE_INFO>::iterator iter_end = m_EffectINFO.end();
+		for (;iter_begin!=iter_end;)
+		{
+			// m_DeadTIme 보다 리스트에 들어간 시간이 커질경우 이펙트 실행
+			if (m_DeadTime >= iter_begin->effect_Time)
+			{
+				//이펙트 출력부분
+				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, iter_begin->effect_Info);
+				iter_begin = m_EffectINFO.erase(iter_begin);
+			}
+			else
+				iter_begin++;
+		}
+		m_tInfo.fCX -= DELTA_TIME*15.0f;
+		m_tInfo.fCY -= DELTA_TIME*15.0f;
+		m_DeadTime += DELTA_TIME;
+	}
 }
 
 void CMidBoss::IsFire()
@@ -378,4 +421,23 @@ void CMidBoss::IsFire()
 		break;
 	}
 
+}
+//업데이트에서 계속 체크
+void CMidBoss::IsDead()
+{
+	if (m_iHP <= 0)
+	{
+		m_DeadEffect = true;
+
+		//죽음 이펙트 설정부분
+
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 70, m_tInfo.fY + 40, 0.5, 0.5, 100, 100, 1, 1), 0.5f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 40, m_tInfo.fY - 60, 0.5, 0.5, 120, 120, 1, 1), 1.2f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 100, m_tInfo.fY + 70, 0.5, 0.5,100, 100, 1, 1), 1.7f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 90, m_tInfo.fY - 10, 0.5, 0.5, 150, 150, 1, 1), 2.4f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 10, m_tInfo.fY + 50, 0.5, 0.5, 200, 200, 1, 1), 3.2f));
+
+		////////////////////////
+
+	}
 }
