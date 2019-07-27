@@ -63,16 +63,16 @@ void CMaingame::Initialize()
 	//// Monster
 	//for (int i = 0; i < 1; ++i)
 	//{
-	//	//float x = float(rand() % (WINCX - 200)) + 100.f;
-	//	//float y = float(rand() % (WINCY - 200)) + 100.f;
+	//	float x = float(rand() % (WINCX - 200)) + 100.f;
+	//	float y = float(rand() % (WINCY - 200)) + 100.f;
 
-	//	//pGameObject = CAbstractFactory<CMonster>::CreateObject();
+	//	pGameObject = CAbstractFactory<CMonster>::CreateObject();
 	//	pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
 	//	// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
-	//	//dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
 	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
 
-	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+	//	m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	//}
 
 	// 보스 테스트용

@@ -13,6 +13,8 @@ extern float g_fElapsedTime;
 extern float g_fTimeScale;
 extern float g_fTotalTime;
 
+extern float g_fStageTime;
+
 // Å°º¸µå
 extern const DWORD KEY_UP;
 extern const DWORD KEY_DOWN;

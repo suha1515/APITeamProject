@@ -11,6 +11,8 @@
 HWND g_hWnd;
 HDC	g_hDC;
 
+float g_fStageTime = 100.f;
+
 // 프레임간 간격관련 변수
 float g_fDeltaTime;
 float g_fElapsedTime;

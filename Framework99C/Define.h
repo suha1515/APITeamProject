@@ -6,7 +6,7 @@
 
 #define WINCX 700
 #define WINCY 1000
-#define STAGE_SPEED 100.f
+#define STAGE_SPEED (g_fStageTime)
 
 #define PI 3.14f
 

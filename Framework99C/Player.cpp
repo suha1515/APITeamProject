@@ -159,8 +159,6 @@ void CPlayer::Initialize()
 	invincibleTime = 0.0f;
 
 
-	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Move_TB_A.bmp"));
-
 	m_WingManLoc[0].x = m_tInfo.fX - 50;
 	m_WingManLoc[0].y = m_tInfo.fY + 50;
 
@@ -205,11 +203,6 @@ void CPlayer::Initialize()
 	chargeTime = 0;
 	chargeShotTime = 0.0f;
 
-	//m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Player", _T("Stage/Player/Player_left.bmp"));
-	//m_pTexture->SetColorKey(RGB(255, 255, 255));
-
-
-	// TEST ---------------------------------------------------
 
 	m_pAnimator = new CAnimator;
 
@@ -310,10 +303,7 @@ int CPlayer::Update()
 
 void CPlayer::Render(HDC hDC)
 {
-	//m_pTexture->DrawTexture(hDC, m_tImgInfo);
 
-	// TEST ---------------------------------------------------
-	//Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 		if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_UP))
 		{
 			CGameObject::UpdateImgInfo(100, 100, 1.f, 76.f / 33.f);
@@ -344,19 +334,6 @@ void CPlayer::Render(HDC hDC)
 			m_SpecialAttack->DrawTexture(hDC, m_BigPlane);
 		}
 
-	// --------------------------------------------------------
-
-	//디버그용
-  /*Rectangle(hDC, m_WingManLoc[0].x - 10, m_WingManLoc[0].y - 10, m_WingManLoc[0].x + 10, m_WingManLoc[0].y + 10);
-	Rectangle(hDC, m_WingManLoc[1].x - 10, m_WingManLoc[1].y - 10, m_WingManLoc[1].x + 10, m_WingManLoc[1].y + 10);
-	Rectangle(hDC, m_WingManLoc[2].x - 10, m_WingManLoc[2].y - 10, m_WingManLoc[2].x + 10, m_WingManLoc[2].y + 10);
-	Rectangle(hDC, m_WingManLoc[3].x - 10, m_WingManLoc[3].y - 10, m_WingManLoc[3].x + 10, m_WingManLoc[3].y + 10);*/
-
-	/*Rectangle(hDC, m_Barrel[0].x - 10, m_Barrel[0].y - 10, m_Barrel[0].x + 10, m_Barrel[0].y + 10);
-	Rectangle(hDC, m_Barrel[1].x - 10, m_Barrel[1].y - 10, m_Barrel[1].x + 10, m_Barrel[1].y + 10);
-	Rectangle(hDC, m_Barrel[2].x - 10, m_Barrel[2].y - 10, m_Barrel[2].x + 10, m_Barrel[2].y + 10);
-	Rectangle(hDC, m_Barrel[3].x - 10, m_Barrel[3].y - 10, m_Barrel[3].x + 10, m_Barrel[3].y + 10);
-	Rectangle(hDC, m_Barrel[4].x - 10, m_Barrel[4].y - 10, m_Barrel[4].x + 10, m_Barrel[4].y + 10);*/
 }
 
 void CPlayer::Release()
@@ -456,10 +433,6 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir, POINT pos,PLAYER_BULLE
 
 void CPlayer::KeyInput()
 {
-	// 임시
-	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
-		AddWingMan();
-
 	CKeyboardMgr::GetInstance()->Update();
 	VECTOR2D vector(0, 0);
 	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -

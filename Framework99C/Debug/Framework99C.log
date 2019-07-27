@@ -1,1 +1,11 @@
-﻿
+﻿  Maingame.cpp
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\maingame.cpp(73): error C2039: 'SetPlayer': 'CCommonMonster'의 멤버가 아닙니다.
+  c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\commonmonster.h(3): note: 'CCommonMonster' 선언을 참조하십시오.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\maingame.cpp(73): error C2039: 'm_ObjLst': 'CGameObject'의 멤버가 아닙니다.
+  c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\gameobject.h(2): note: 'CGameObject' 선언을 참조하십시오.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\maingame.cpp(73): error C2065: 'm_ObjLst': 선언되지 않은 식별자입니다.
+  SpawnManager.cpp
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\spawnmanager.cpp(48): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\spawnmanager.cpp(56): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\bsj10\onedrive\문서\github\apiteamproject\framework99c\spawnmanager.cpp(65): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
