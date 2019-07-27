@@ -21,6 +21,7 @@ extern const DWORD KEY_RIGHT;
 
 extern const DWORD KEY_ACTION;
 extern const DWORD KEY_SPECIAL;
+extern const DWORD KEY_CHEAT;
 
 #define __EXTERN_H__
 #endif

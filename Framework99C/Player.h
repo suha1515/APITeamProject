@@ -80,6 +80,7 @@ private:
 	bool m_chargeWIngman = false;
 	bool m_IsSpecialAttack;
 	bool m_IsDead = false;
+	bool m_Invincible = false;
 
 	// TEST ---------------------------------------------------
 	CAnimator* m_pAnimator;

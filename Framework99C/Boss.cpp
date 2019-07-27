@@ -31,110 +31,132 @@ void CBoss::Initialize()
 	// 보스 몸통
 	m_pAnimator = new CAnimator;
 	// 보스 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody", _T("Stage/Monster/LBossMain.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 8, 2, 0, 0, 0, 0, 2.0f);	// 포구가 닫힌 상태로 접근
+	CTexture* pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody", _T("Stage/Monster/LBossMain.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 8, 2, 0, 0, 0, 0, 2.0f);	// 포구가 닫힌 상태로 접근
+	pTexture->SafeDelete();
 	// 보스 위치도착
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody1", _T("Stage/Monster/LBossMain.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 8, 2, 0, 0, 7, 0, 2.0f);	// 1회만 재생
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody1", _T("Stage/Monster/LBossMain.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 8, 2, 0, 0, 7, 0, 2.0f);	// 1회만 재생
+	pTexture->SafeDelete();
 	// 보스 파괴
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody2", _T("Stage/Monster/LBossMain.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 8, 2, 0, 1, 0, 1, 2.0f);	// 1회만 재생
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossBody2", _T("Stage/Monster/LBossMain.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 8, 2, 0, 1, 0, 1, 2.0f);	// 1회만 재생
+	pTexture->SafeDelete();
 
 	// 보스 머리
 	m_pAnimatorHead = new CAnimator;
 	// 머리 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead", _T("Stage/Monster/LBossCenter.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorHead->AddAnimInfo(m_pTexture, AT_RETAIN, 7, 3, 0, 1, 0, 1, 2.0f);	// 포구가 닫힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead", _T("Stage/Monster/LBossCenter.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorHead->AddAnimInfo(pTexture, AT_RETAIN, 7, 3, 0, 1, 0, 1, 2.0f);	// 포구가 닫힌 상태로 접근
+	pTexture->SafeDelete();
 	// 머리펴짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead1", _T("Stage/Monster/LBossCenter.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorHead->AddAnimInfo(m_pTexture, AT_RETAIN, 7, 3, 0, 1, 6, 1, 2.0f);	// 포구열림
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead1", _T("Stage/Monster/LBossCenter.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorHead->AddAnimInfo(pTexture, AT_RETAIN, 7, 3, 0, 1, 6, 1, 2.0f);	// 포구열림
+	pTexture->SafeDelete();
 	// 머리터짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead2", _T("Stage/Monster/LBossCenter.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorHead->AddAnimInfo(m_pTexture, AT_RETAIN, 7, 3, 0, 0, 0, 0, 2.0f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossHead2", _T("Stage/Monster/LBossCenter.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorHead->AddAnimInfo(pTexture, AT_RETAIN, 7, 3, 0, 0, 0, 0, 2.0f);
+	pTexture->SafeDelete();
 	
 	// 보스다리1(좌하단)
 	m_pAnimatorLeg1 = new CAnimator;
 	// 다리 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg1->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg1->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리펴짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-1", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg1->AddAnimInfo(m_pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-1", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg1->AddAnimInfo(pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리회전
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-2", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg1->AddAnimInfo(m_pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-2", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg1->AddAnimInfo(pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture->SafeDelete();
 	//다리파괴
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-3", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg1->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg1-3", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg1->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture->SafeDelete();
 
 	// 좌상단
 	m_pAnimatorLeg2 = new CAnimator;
 	// 다리 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg2->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg2->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리펴짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-1", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg2->AddAnimInfo(m_pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-1", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg2->AddAnimInfo(pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리회전
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-2", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg2->AddAnimInfo(m_pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);		// 다리 회전
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-2", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg2->AddAnimInfo(pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);		// 다리 회전
+	pTexture->SafeDelete();
 	//다리파괴
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-3", _T("Stage/Monster/LBossLeft.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg2->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg2-3", _T("Stage/Monster/LBossLeft.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg2->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture->SafeDelete();
 
 
 	// 우하단
 	m_pAnimatorLeg3 = new CAnimator;
 	// 다리 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg3->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg3->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리펴짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-1", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg3->AddAnimInfo(m_pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-1", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg3->AddAnimInfo(pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리회전
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-2", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg3->AddAnimInfo(m_pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-2", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg3->AddAnimInfo(pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture->SafeDelete();
 	//다리파괴
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-3", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg3->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg3-3", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg3->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture->SafeDelete();
 
 
 	// 우상단
 	m_pAnimatorLeg4 = new CAnimator;
 	// 다리 생성
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg4->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg4->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 0, 0, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리펴짐
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-1", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg4->AddAnimInfo(m_pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-1", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg4->AddAnimInfo(pTexture, AT_ONCE_DESTROY, 9, 3, 0, 0, 8, 0, 2.0f);	// 다리가 접힌 상태로 접근
+	pTexture->SafeDelete();
 	//다리회전
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-2", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg4->AddAnimInfo(m_pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-2", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg4->AddAnimInfo(pTexture, AT_LOOP, 9, 3, 0, 1, 3, 1, 0.15f);	// 다리 회전
+	pTexture->SafeDelete();
 	//다리파괴
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-3", _T("Stage/Monster/LBossRight.bmp"));
-	m_pTexture->SetColorKey(RGB(82, 90, 74));
-	m_pAnimatorLeg4->AddAnimInfo(m_pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("BossLeg4-3", _T("Stage/Monster/LBossRight.bmp"));
+	pTexture->SetColorKey(RGB(82, 90, 74));
+	m_pAnimatorLeg4->AddAnimInfo(pTexture, AT_RETAIN, 9, 3, 0, 2, 0, 2, 2.0f);
+	pTexture->SafeDelete();
 
 
 }
