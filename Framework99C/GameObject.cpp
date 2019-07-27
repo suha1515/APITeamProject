@@ -38,8 +38,6 @@ void CGameObject::SetPos(float x, float y)
 void CGameObject::SetDead(bool bIsDead)
 {
 	m_bIsDead = bIsDead;
-	IMGINFO testInfo3(m_tInfo.fX, m_tInfo.fY, 0.5, 0.5, 200, 200, 1, 1);
-	CEffectMgr::GetInstance()->AddEffect(E_MINIPLANE_DESTROIED, testInfo3);
 }
 
 void CGameObject::UpdateRect()

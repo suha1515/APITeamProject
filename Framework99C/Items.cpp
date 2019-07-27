@@ -42,6 +42,7 @@ int CItems::Update()
 {
 	if (m_bIsDead)
 		return DEAD_OBJ;
+		
 
 	
 	Move();

@@ -5,6 +5,7 @@
 class CGameObject;
 class CMonster;
 class CWingMan;
+class CTexture;
 typedef list<CGameObject*>	OBJLIST;
 
 #define __TYPEDEF_H__

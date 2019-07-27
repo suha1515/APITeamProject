@@ -54,6 +54,7 @@ using namespace std;
 #include "SpawnManager.h"
 #include "ObjectMgr.h"
 #include "EffectMgr.h"
+#include "UIMgr.h"
 
 #pragma comment(linker,"/entry:wWinMainCRTStartup /subsystem:console")
 //√‚√≥: https://alleysark.tistory.com/36 [æŸ∏ÆªÌ]

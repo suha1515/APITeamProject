@@ -37,9 +37,12 @@ private:
 private:
 	//총알 발사
 	CGameObject* CreateBullet();
+	//스폐셜 어택
+	void SpecialAttack();
 	//레벨에 따른 총알 스킨 다르게
 	CGameObject* CreateBullet(BULLET_DIRECTION eDir,POINT pos, PLAYER_BULLET_TYPE type);
 	void KeyInput();
+	void Respawn();
 
 private:	
 	//OBJLIST*	m_pBulletLst;
@@ -56,11 +59,16 @@ private:
 	//플레이어 목숨 개수
 	int m_PlayerLife;
 
+
 	int wingCount;
 	float fFireRate;
 	float fWingFireRate;
 	float chargeTime;
 	float chargeShotTime;
+
+	float bombCoolTime;
+	float invincibleTime;
+
 	bool m_bArrButton[BUTTON_END];
 
 
@@ -70,11 +78,16 @@ private:
 	bool m_bIsAttack = false;
 	bool m_chargeShot = false;
 	bool m_chargeWIngman = false;
-
+	bool m_IsSpecialAttack;
+	bool m_IsDead = false;
 
 	// TEST ---------------------------------------------------
 	CAnimator* m_pAnimator;
 	// --------------------------------------------------------
+	CTexture* m_SpecialAttack;
 
+	IMGINFO m_BigPlane;
+
+	list<pair<POINT, float>> bombDrop;
 };
 

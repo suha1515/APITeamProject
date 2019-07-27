@@ -31,7 +31,7 @@ public:
 	void DropItem();
 
 public:
-	void IsDead();
+	virtual void IsDead();
 
 protected:
 	void IsMoving();

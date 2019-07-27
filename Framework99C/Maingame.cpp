@@ -5,7 +5,7 @@
 #include "CommonMonster.h"
 #include "Stage.h"
 #include "Items.h"
-#include "UserInterface.h"
+
 
 #include "Boss.h"
 
@@ -86,7 +86,6 @@ void CMaingame::Initialize()
 	dynamic_cast<CBoss*>(object)->Initialize();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_MONSTER, object);
 
-
 	// Item Test
 	pGameObject = CAbstractFactory<CItems>::CreateObject();
 	pGameObject->SetPos(100, 100);
@@ -112,6 +111,8 @@ void CMaingame::Render()
 
 	CEffectMgr::GetInstance()->AnimateEffect(m_hMemDC);
 
+	CUserInterfaceMgr::GetInstance()->ShowUI(m_hMemDC);
+
 	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_hMemDC, 0, 0, SRCCOPY);
 }	
 
@@ -129,4 +130,5 @@ void CMaingame::Release()
 	CKeyboardMgr::DeleteInstance();
 	CEffectMgr::GetInstance()->DeleteAnimator();
 	CEffectMgr::DeleteInstance();
+	CUserInterfaceMgr::DeleteInstance();
 }
