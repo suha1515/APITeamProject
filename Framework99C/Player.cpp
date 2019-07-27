@@ -116,14 +116,21 @@ void CPlayer::UpdateCollider()
 			pItem->SetDead(true);
 		}	
 	}
-
-	if (pMonBullet)
-	{
-		// 폭파 애니메이션
-		m_PlayerLife--;
-
-		pMonBullet->SetDead(true);
-	}
+	
+		if (pMonBullet)
+		{
+			//죽었을때는 총알을 맞지 않는다.
+			if (!m_IsDead)
+			{// 폭파 애니메이션
+				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5f, 0.5f, 200, 200));
+				m_tInfo.fX
+				m_PlayerLife--;
+				m_IsDead = true;
+			}
+			pMonBullet->SetDead(true);
+		}
+	
+	
 }
 
 void CPlayer::LevelUp()
