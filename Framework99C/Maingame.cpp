@@ -7,6 +7,7 @@
 #include "Items.h"
 
 
+#include "Boss.h"
 
 CMaingame::CMaingame()	
 {
@@ -55,6 +56,35 @@ void CMaingame::Initialize()
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
 
+	pGameObject = CAbstractFactory<CUserInterface>::CreateObject();
+	CObjectMgr::GetInstance()->AddObject(OBJECT_UI, pGameObject);
+
+	//윙맨 추가 -테스트-
+	//dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
+	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);
+	//m_ObjLst[OBJECT_PLAYER].push_back(pGameObject);
+
+	//// Monster
+	//for (int i = 0; i < 1; ++i)
+	//{
+	//	//float x = float(rand() % (WINCX - 200)) + 100.f;
+	//	//float y = float(rand() % (WINCY - 200)) + 100.f;
+
+	//	//pGameObject = CAbstractFactory<CMonster>::CreateObject();
+	//	pGameObject = CAbstractFactory<CCommonMonster>::CreateObject();
+	//	// 몬스터 생성시, 몬스터의 탄환리스트와 플레이어 리스트를 넘겨준다.
+	//	//dynamic_cast<CCommonMonster*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJECT_MONBULLET]);
+	//	dynamic_cast<CCommonMonster*>(pGameObject)->SetPlayer(*(CGameObject::m_ObjLst[OBJECT_PLAYER].begin()));
+
+	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
+	//}
+
+	// 보스 테스트용
+	CGameObject *object = CAbstractFactory<CBoss>::CreateObject();
+	object->SetPos(375, -300);
+	dynamic_cast<CBoss*>(object)->SetMonType(BOSS, SINGLE, RIGHT, 0);
+	dynamic_cast<CBoss*>(object)->Initialize();
+	CObjectMgr::GetInstance()->AddObject(OBJECT_MONSTER, object);
 
 	// Item Test
 	pGameObject = CAbstractFactory<CItems>::CreateObject();
@@ -70,7 +100,7 @@ void CMaingame::Initialize()
 
 void CMaingame::Update()
 {
-	m_SpawnMonster.SpawnEnemy();
+	//m_SpawnMonster.SpawnEnemy();
 	CKeyboardMgr::GetInstance()->Update();
 	CObjectMgr::GetInstance()->Update();
 }

@@ -145,7 +145,7 @@ void CPlayer::LevelUp()
 void CPlayer::Initialize()
 {
 	m_tInfo.fX = 350.f;
-	m_tInfo.fY = 1200.f;
+	m_tInfo.fY = 200.f;
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
 
