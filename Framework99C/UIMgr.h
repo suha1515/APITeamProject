@@ -10,8 +10,7 @@ class CUserInterfaceMgr
 public:
 	void SetLife(int nLife);
 	void SetScore(int nScore);
-	void AddSpecial();
-	void SubSpecial();
+	void SetSpecial(int nSpecial);
 
 private:
 	int CalModular(int& number, int digit);

@@ -99,6 +99,10 @@ void CAnimator::AnimateClip(int iIdx, HDC hDC)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = 1.f;
 
+	tmpAnim->fAccumulatedTime += g_fDeltaTime;
+	tmpAnim->fElapsedTime += g_fDeltaTime;
+
+
 	if (g_fTotalTime > tmpAnim->fAccumulatedTime)
 	{
 		tmpAnim->fCurX = tmpAnim->fStartX;
@@ -123,9 +127,6 @@ void CAnimator::AnimateClip(int iIdx, HDC hDC)
 		BitBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
 	}
-
-	tmpAnim->fAccumulatedTime += g_fDeltaTime;
-	tmpAnim->fElapsedTime += g_fDeltaTime;
 
 	while (tmpAnim->fElapsedTime >= fUnitTime)
 	{
@@ -179,6 +180,11 @@ void CAnimator::AnimateReversedClip(int iIdx, HDC hDC)
 	float fUnitTime = tmpAnim->fLimitTime / (tmpAnim->fMaxX);
 	float fUnitFrame = -1.f;
 
+
+	tmpAnim->fAccumulatedTime += g_fDeltaTime;
+	tmpAnim->fElapsedTime += g_fDeltaTime;
+
+
 	if (g_fTotalTime > tmpAnim->fAccumulatedTime)
 	{
 		tmpAnim->fCurX = tmpAnim->fStartX;
@@ -203,9 +209,6 @@ void CAnimator::AnimateReversedClip(int iIdx, HDC hDC)
 		BitBlt(hDC, imgInfo.fX - (imgInfo.fImgCX * imgInfo.fPivotX), imgInfo.fY - (imgInfo.fImgCY * imgInfo.fPivotY),
 			imgInfo.fImgCX, imgInfo.fImgCY, tmpAnim->pTexture->m_hMemDC, imgInfo.fX, imgInfo.fY, SRCCOPY);
 	}
-
-	tmpAnim->fAccumulatedTime += g_fDeltaTime;
-	tmpAnim->fElapsedTime += g_fDeltaTime;
 
 	while (tmpAnim->fElapsedTime >= fUnitTime)
 	{

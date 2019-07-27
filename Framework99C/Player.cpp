@@ -112,7 +112,7 @@ void CPlayer::UpdateCollider()
 		{
 			if(m_BombCount<3)
 			 m_BombCount++;
-			CUserInterfaceMgr::GetInstance()->AddSpecial();
+			CUserInterfaceMgr::GetInstance()->SetSpecial(m_BombCount);
 			pItem->SetDead(true);
 		}	
 	}
@@ -198,6 +198,7 @@ void CPlayer::Initialize()
 	m_BombCount  = 2;
 	m_PlayerLife = 3;
 	CUserInterfaceMgr::GetInstance()->SetLife(m_PlayerLife);
+	CUserInterfaceMgr::GetInstance()->SetSpecial(m_BombCount);
 	wingCount = 0;
 	fFireRate = 0.f;
 	fWingFireRate = 0.0f;
@@ -212,21 +213,25 @@ void CPlayer::Initialize()
 
 	m_pAnimator = new CAnimator;
 
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player_default", _T("Stage/Player/Player.bmp"));
-	m_pTexture->SetColorKey(RGB(255, 255, 255));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.f);
+	CTexture* pTexture = CResourceMgr::GetInstance()->LoadTexture("player_default", _T("Stage/Player/Player.bmp"));
+	pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.f);
+	pTexture->SafeDelete();
 
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveUp", _T("Stage/Player/Move_TB_A.bmp"));
-	m_pTexture->SetColorKey(RGB(255, 255, 255));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 7, 1, 0, 0, 6, 0, 0.5f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveUp", _T("Stage/Player/Move_TB_A.bmp"));
+	pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 7, 1, 0, 0, 6, 0, 0.5f);
+	pTexture->SafeDelete();
 
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveLeft", _T("Stage/Player/Player_left.bmp"));
-	m_pTexture->SetColorKey(RGB(255, 255, 255));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 0.3f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveLeft", _T("Stage/Player/Player_left.bmp"));
+	pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 0.3f);
+	pTexture->SafeDelete();
 
-	m_pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveRight", _T("Stage/Player/Player_right.bmp"));
-	m_pTexture->SetColorKey(RGB(255, 255, 255));
-	m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 0.3f);
+	pTexture = CResourceMgr::GetInstance()->LoadTexture("player_moveRight", _T("Stage/Player/Player_right.bmp"));
+	pTexture->SetColorKey(RGB(255, 255, 255));
+	m_pAnimator->AddAnimInfo(pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 0.3f);
+	pTexture->SafeDelete();
 
 
 	m_SpecialAttack = CResourceMgr::GetInstance()->LoadTexture("player_Special", _T("Stage/Bomb/Bomb_Airplan.bmp"));
@@ -356,7 +361,6 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release()
 {
-	m_pTexture->SafeDelete();
 	m_SpecialAttack->SafeDelete();
 }
 
@@ -492,11 +496,13 @@ void CPlayer::KeyInput()
 				if (!m_IsSpecialAttack)
 				{
 					m_IsSpecialAttack = true;
-					CUserInterfaceMgr::GetInstance()->SubSpecial();
 					m_BombCount--;
+					CUserInterfaceMgr::GetInstance()->SetSpecial(m_BombCount);
 				}
 			}
 		}
+		if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_CHEAT))
+			this->LevelUp();
 	static int nMaximumBullet = MAXIMUM_MISSILE;
 
 #pragma region PLAYER_SHOOTING
@@ -633,6 +639,7 @@ void CPlayer::Respawn()
 {
 	if (m_tInfo.fY <= 900.0f)
 	{
+		
 		m_IsDead = false;
 	}
 	m_tInfo.fY -= DELTA_TIME*100.f;

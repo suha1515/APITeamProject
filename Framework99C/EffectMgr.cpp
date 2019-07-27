@@ -32,6 +32,12 @@ void CEffectMgr::Initialize()
 	m_mapEffect.insert(unordered_map<EFFECT, ANIMINFO*>::value_type(EXPLOSIVE_2, pExplosive_2_Anim));
 	m_mapEffect.insert(unordered_map<EFFECT, ANIMINFO*>::value_type(EXPLOSIVE_3, pExplosive_3_Anim));
 	m_mapEffect.insert(unordered_map<EFFECT, ANIMINFO*>::value_type(E_HIT_EFFECT, pHitAnim));
+
+	pExplosive1->SafeDelete();
+	pExplosive2->SafeDelete();
+	pExplosive3->SafeDelete();
+	pHitTexture->SafeDelete();
+
 }
 
 CTexture* CEffectMgr::AddEffect(const EFFECT key, IMGINFO imgInfo)
