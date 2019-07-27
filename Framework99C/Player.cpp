@@ -432,6 +432,10 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir, POINT pos,PLAYER_BULLE
 
 void CPlayer::KeyInput()
 {
+	// 임시
+	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
+		AddWingMan();
+
 	CKeyboardMgr::GetInstance()->Update();
 	VECTOR2D vector(0, 0);
 	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
@@ -572,6 +576,8 @@ void CPlayer::KeyInput()
 			chargeTime -= chargeTime;
 		}
 	}
+
+
 #pragma endregion
 
 	
