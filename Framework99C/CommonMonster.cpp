@@ -19,6 +19,7 @@ MonType 0~3
 */
 
 CCommonMonster::CCommonMonster()
+	:m_fMovingAngle(0.f)
 {
 }
 
@@ -40,7 +41,7 @@ void CCommonMonster::Initialize()
 	switch (m_Various)
 	{
 	case 0:
-		m_tInfo.fSpeed = 300.f;
+		m_tInfo.fSpeed = 350.f;
 		m_iHP = 1;
 
 		m_fCoolDown = 1.f;
@@ -50,16 +51,16 @@ void CCommonMonster::Initialize()
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 1:
-		m_tInfo.fSpeed = 200.f;
+		m_tInfo.fSpeed = 300.f;
 		m_iHP = 2;
 
 		m_fCoolDown = 1.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster2", _T("Stage/Monster/Monster_2.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster1", _T("Stage/Monster/Monster_1.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 2:
-		m_tInfo.fSpeed = 350.f;
+		m_tInfo.fSpeed = 250.f;
 		m_iHP = 3;
 
 		m_fCoolDown = 1.f;
@@ -68,12 +69,12 @@ void CCommonMonster::Initialize()
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
 	case 3:
-		m_tInfo.fSpeed = 550.f;
+		m_tInfo.fSpeed = 350.f;
 		m_iHP = 4;
 
 		m_fCoolDown = 1.f;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster1", _T("Stage/Monster/Monster_1.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster2", _T("Stage/Monster/Monster_2.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
@@ -169,6 +170,12 @@ void CCommonMonster::IsMoving()
 			// 플레이어의 우측에 있음
 			m_tInfo.fX -= (m_tInfo.fSpeed * 0.5f) * DELTA_TIME;
 		}
+		break;
+	case 4:
+		// 좌우 반복이동
+		m_tInfo.fY += m_tInfo.fSpeed  * DELTA_TIME;
+		m_tInfo.fX += m_tInfo.fSpeed * sinf(m_fMovingAngle) * DELTA_TIME;
+		m_fMovingAngle += 0.05f;
 		break;
 	}
 

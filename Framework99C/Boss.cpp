@@ -15,7 +15,7 @@ CBoss::~CBoss()
 void CBoss::Initialize()
 {
 	m_iShotCount = 0;
-	m_fCoolDown = 1.f;
+	m_fCoolDown = 3.f;
 
 	m_pAnimator = new CAnimator;
 
@@ -53,6 +53,10 @@ int CBoss::Update()
 
 void CBoss::Render(HDC hDC)
 {
+	CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.f, m_tInfo.fCY * 1.f);
+	m_pAnimator->SetImgInfo(0, m_tImgInfo);
+	m_pAnimator->AnimateClip(0, hDC);
+
 }
 
 void CBoss::Release()

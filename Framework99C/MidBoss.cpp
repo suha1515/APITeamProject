@@ -26,11 +26,11 @@ void CMidBoss::Initialize()
 		m_tInfo.fCX = 100.f;
 		m_tInfo.fCY = 100.f;
 		m_tInfo.fSpeed = 150.f;
-		m_iHP = 70;
+		m_iHP = 40;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss1", _T("Stage/Monster/Monster_4.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
-		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 1, 0, 1.0f);
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 1, 0, 1, 0, 1.0f);
 		break;
 	case 1:
 		m_tInfo.fCX = 100.f;
@@ -46,7 +46,18 @@ void CMidBoss::Initialize()
 		m_tInfo.fCX = 100.f;
 		m_tInfo.fCY = 100.f;
 		m_tInfo.fSpeed = 50.f;
-		m_iHP = 130;
+		m_iHP = 150;
+
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss3", _T("Stage/Monster/BigAirPlan.bmp"));
+		m_pTexture->SetColorKey(RGB(0, 128, 128));
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 1, 1, 0, 0, 0, 0, 1.0f);
+		break;
+
+	case 3:
+		m_tInfo.fCX = 100.f;
+		m_tInfo.fCY = 100.f;
+		m_tInfo.fSpeed = 50.f;
+		m_iHP = 300;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss3", _T("Stage/Monster/BigAirPlan.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
@@ -78,6 +89,12 @@ int CMidBoss::Update()
 
 		break;
 	case 2:
+		SetBarrel(&m_Barrel, 100.f, 10.f);
+		SetBarrel(&m_Barrel2, -100.f, 10.f);
+		SetBarrel(&m_Barrel3, 0.f, 110.f);
+
+		break;
+	case 3:
 		SetBarrel(&m_Barrel, 100.f, 10.f);
 		SetBarrel(&m_Barrel2, -100.f, 10.f);
 		SetBarrel(&m_Barrel3, 0.f, 110.f);
@@ -118,6 +135,11 @@ void CMidBoss::Render(HDC hDC)
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 2:
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
+		m_pAnimator->SetImgInfo(0, m_tImgInfo);
+		m_pAnimator->AnimateClip(0, hDC);
+		break;
+	case 3:
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);

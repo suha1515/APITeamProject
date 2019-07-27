@@ -153,7 +153,7 @@ void CMonster::IsOutRange()
 {
 	CGameObject::UpdateRect();
 
-	if (-100.f >= m_tRect.left || WINCX + 100.f <= m_tRect.right)
+	if (-200.f >= m_tRect.left || WINCX + 200.f <= m_tRect.right)
 	{
 		m_bIsDead = true;
 	}

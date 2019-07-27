@@ -18,7 +18,9 @@ private:
 protected:
 	void IsMoving();
 	virtual void IsFire() override;
-
+	
+private:
+	float m_fMovingAngle;
 
 };
 
