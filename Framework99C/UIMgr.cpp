@@ -5,8 +5,8 @@ DEFINE_SINGLE_TONE(CUserInterfaceMgr)
 
 void CUserInterfaceMgr::Initialize()
 {
-	m_nNumOfLife = 2;
-	m_nNumOfSpecial = 2;
+	m_nNumOfLife;
+	m_nNumOfSpecial;
 
 	m_pTextureBoob = CResourceMgr::GetInstance()->LoadTexture("UI_Bomb", _T("Stage/Item/Item_Bomb.bmp"));
 	m_pTextureBoob->SetColorKey(RGB(0, 128, 128));
@@ -58,14 +58,9 @@ void CUserInterfaceMgr::SetScore(int nScore)
 	m_nScore = nScore;
 }
 
-void CUserInterfaceMgr::AddSpecial()
+void CUserInterfaceMgr::SetSpecial(int nSpecial)
 {
-	++m_nNumOfSpecial;
-}
-
-void CUserInterfaceMgr::SubSpecial()
-{
-	--m_nNumOfSpecial;
+	m_nNumOfSpecial = nSpecial;
 }
 
 int CUserInterfaceMgr::CalModular(int& number, int digit)

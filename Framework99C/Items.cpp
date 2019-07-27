@@ -14,8 +14,8 @@ CItems::~CItems()
 
 void CItems::Initialize()
 {
-	m_tInfo.fCX = 20.f;
-	m_tInfo.fCY = 20.f;
+	m_tInfo.fCX = 54.f;
+	m_tInfo.fCY = 32.f;
 	m_RandomAngle = 0.01745f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (6.28319f - 0.01745f)));
 
 	m_IsAvailable = true;
@@ -43,8 +43,6 @@ int CItems::Update()
 	if (m_bIsDead)
 		return DEAD_OBJ;
 		
-
-	
 	Move();
 	IsOutofRange();
 
@@ -55,8 +53,8 @@ int CItems::Update()
 
 void CItems::Render(HDC hDC)
 {
-	//Rectangle(hDC, m_tInfo.fX - 20, m_tInfo.fY - 20, m_tInfo.fX + 20, m_tInfo.fY + 20);
-	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY, 3.f, 2.f);
+	//Rectangle(hDC, m_tInfo.fX - 27, m_tInfo.fY - 16, m_tInfo.fX + 27, m_tInfo.fY + 16);
+	CGameObject::UpdateImgInfo(m_tInfo.fCX, m_tInfo.fCY);
 	m_pAnimator->SetImgInfo(0, m_tImgInfo);
 	m_pAnimator->AnimateClip(0, hDC);
 
@@ -80,11 +78,13 @@ void CItems::Move()
 
 void CItems::IsOutofRange()
 {
+	static bool bIsOut = false;
+
 	CGameObject::UpdateRect();
 	if (!m_IsAvailable)
 	{
-		if (0 >= m_tRect.left || 0 >= m_tRect.top
-			|| WINCX <= m_tRect.right || WINCY <= m_tRect.bottom)
+		if (0 >= m_tRect.right || 0 >= m_tRect.bottom
+			|| WINCX <= m_tRect.left || WINCY <= m_tRect.top)
 		{
 			m_bIsDead = true;
 			//Release();
@@ -92,14 +92,27 @@ void CItems::IsOutofRange()
 	}
 	else
 	{
-		if (0 >= m_tRect.left || 0 >= m_tRect.top
-			|| WINCX <= m_tRect.right || WINCY <= m_tRect.bottom)
+		if ( (0 > m_tRect.left || 0 > m_tRect.top
+			|| WINCX < m_tRect.right || WINCY < m_tRect.bottom) && !bIsOut)
 		{
+			bIsOut = true;
 			m_tInfo.fSpeed *= -1;
 			m_RandomAngle += 1.0472f;
 			//m_bIsDead = true;
 			//Release();
 		}
+		else
+		{
+			bIsOut = false;
+		}
+		//if (0 >= m_tRect.left || 0 >= m_tRect.top
+		//	|| WINCX <= m_tRect.right || WINCY <= m_tRect.bottom)
+		//{
+		//	m_tInfo.fSpeed *= -1;
+		//	m_RandomAngle += 1.0472f;
+		//	//m_bIsDead = true;
+		//	//Release();
+		//}
 	}
 	
 
