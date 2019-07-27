@@ -16,10 +16,14 @@ public:
 private:
 	virtual void Release() override;
 
-protected:
+private:
 	void IsMoving();
 	virtual void IsFire() override;
 	void PhaseShift();
+	void DeadPartsCheck();
+	void PrintEffect();
+	void IsDead();
+	void DeadEffect();
 
 private:
 	POINT m_Barrel3;
@@ -34,8 +38,16 @@ private:
 	float m_fCoolDown4;
 
 	float m_transTime;
+	float m_DeadTime;
 
 	int m_TransPhase;
+
+	bool m_LegBreak1;
+	bool m_LegBreak2;
+	bool m_LegBreak3;
+	bool m_LegBreak4;
+	bool m_HeadBreak;
+	bool m_DeadEffect;
 
 
 	CAnimator* m_pAnimator;
@@ -51,5 +63,6 @@ private:
 	IMGINFO m_BossLegInfo3;
 	IMGINFO m_BossLegInfo4;
 
+	list<PARTICLE_INFO> m_EffectINFO;
 };
 
