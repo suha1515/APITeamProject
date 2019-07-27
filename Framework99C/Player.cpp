@@ -120,11 +120,16 @@ void CPlayer::UpdateCollider()
 		if (pMonBullet)
 		{
 			//죽었을때는 총알을 맞지 않는다.
-			if (!m_IsDead)
+			if (!m_Invincible)
 			{// 폭파 애니메이션
 				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5f, 0.5f, 200, 200));
+				m_tInfo.fY = 1200;
+				m_tInfo.fX = 350;
 				m_PlayerLife--;
 				m_IsDead = true;
+				m_Invincible = true;
+
+				CUserInterfaceMgr::GetInstance()->SetLife(m_PlayerLife);
 			}
 			pMonBullet->SetDead(true);
 		}
@@ -192,7 +197,7 @@ void CPlayer::Initialize()
 	m_PowerLevel = 1;
 	m_BombCount  = 2;
 	m_PlayerLife = 3;
-
+	CUserInterfaceMgr::GetInstance()->SetLife(m_PlayerLife);
 	wingCount = 0;
 	fFireRate = 0.f;
 	fWingFireRate = 0.0f;
@@ -276,8 +281,24 @@ int CPlayer::Update()
 	{
 		SpecialAttack();
 	}
+	if (m_IsDead)
+	{
+		Respawn();
+	}
 	//m_pTexture->SetXY(0.f, 2.f);
 
+	if (m_Invincible)
+	{
+		invincibleTime += DELTA_TIME;
+		if (invincibleTime >= 5.0f)
+		{
+			m_Invincible = false;
+			invincibleTime -= invincibleTime;
+		}
+		cout << m_Invincible;
+			
+	}
+		
 
 	return NO_EVENT;
 }
@@ -343,7 +364,6 @@ CGameObject* CPlayer::CreateBullet()
 {
 	return CAbstractFactory<CBullet>::CreateObject(m_tInfo.fX, m_tInfo.fY);
 }
-
 void CPlayer::SpecialAttack()
 {
 	if (m_BigPlane.fY >= -200)
@@ -357,7 +377,7 @@ void CPlayer::SpecialAttack()
 
 		for (; iter_begin != iter_end;++iter_begin)
 		{
-			dynamic_cast<CMonster*>((*iter_begin))->SetDamaged(100);
+			dynamic_cast<CMonster*>((*iter_begin))->SetDamaged(2);
 		}
 
 		 iter_begin = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONBULLET).begin();
@@ -611,10 +631,9 @@ void CPlayer::KeyInput()
 
 void CPlayer::Respawn()
 {
-	if (m_tInfo.fY <= 800.0f)
+	if (m_tInfo.fY <= 900.0f)
 	{
-
+		m_IsDead = false;
 	}
-	if(invincibleTime)
 	m_tInfo.fY -= DELTA_TIME*100.f;
 }
