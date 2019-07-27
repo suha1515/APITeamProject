@@ -55,10 +55,6 @@ void CMaingame::Initialize()
 	// Player
 	pGameObject = CAbstractFactory<CPlayer>::CreateObject();
 	CObjectMgr::GetInstance()->AddObject(OBJECT_PLAYER, pGameObject);
-
-	pGameObject = CAbstractFactory<CUserInterface>::CreateObject();
-	CObjectMgr::GetInstance()->AddObject(OBJECT_UI, pGameObject);
-
 	//윙맨 추가 -테스트-
 	//dynamic_cast<CPlayer*>(pGameObject)->AddWingMan();
 	//dynamic_cast<CPlayer*>(pGameObject)->SetBulletLst(&m_ObjLst[OBJLECT_BULLET]);

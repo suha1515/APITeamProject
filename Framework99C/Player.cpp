@@ -123,7 +123,6 @@ void CPlayer::UpdateCollider()
 			if (!m_IsDead)
 			{// 폭파 애니메이션
 				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5f, 0.5f, 200, 200));
-				m_tInfo.fX
 				m_PlayerLife--;
 				m_IsDead = true;
 			}
