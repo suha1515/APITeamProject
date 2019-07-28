@@ -16,6 +16,7 @@ public:
 public:
 	void SetBulletLst(OBJLIST* pBulletLst);
 	void AddWingMan();
+	void RemoveWingMan();
 	void UpdateWingMan();
 	void UpdateBarrel();
 	POINT* GetWingManPos();
@@ -81,6 +82,8 @@ private:
 	bool m_IsSpecialAttack;
 	bool m_IsDead = false;
 	bool m_Invincible = false;
+
+	bool m_GODMODE = false;
 
 	// TEST ---------------------------------------------------
 	CAnimator* m_pAnimator;

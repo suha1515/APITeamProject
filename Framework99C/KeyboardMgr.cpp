@@ -9,6 +9,7 @@ const DWORD KEY_RIGHT = 0x00000008;
 const DWORD KEY_ACTION = 0x00000010;
 const DWORD KEY_SPECIAL = 0x00000020;
 
+const DWORD KEY_GOD = 0x0000030;
 const DWORD KEY_CHEAT = 0x00000040;
 
 DEFINE_SINGLE_TONE(CKeyboardMgr)
@@ -32,6 +33,8 @@ void CKeyboardMgr::Update()
 		m_dwKey |= KEY_LEFT;
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		m_dwKey |= KEY_RIGHT;
+	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		m_dwKey |= KEY_GOD;
 
 	if (GetAsyncKeyState('A') & 0x8000)
 		m_dwKey |= KEY_ACTION;

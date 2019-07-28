@@ -29,6 +29,22 @@ void CPlayer::AddWingMan()
 	++wingCount;
 }
 
+void CPlayer::RemoveWingMan()
+{
+	OBJLIST::iterator iter_begin = CObjectMgr::GetInstance()->GetObjectList(OBJECT_WINGMAN).begin();
+	OBJLIST::iterator iter_end = CObjectMgr::GetInstance()->GetObjectList(OBJECT_WINGMAN).end();
+	for (; iter_begin != iter_end; ++iter_begin)
+	{
+		(*iter_begin)->SetDead(true);
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		 m_WingMan[i]=nullptr;
+	}
+	wingCount = 0;
+	m_PowerLevel = 1;
+}
+
 void CPlayer::UpdateWingMan()
 {
 	//차지샷 스킬 활성화시
@@ -119,18 +135,24 @@ void CPlayer::UpdateCollider()
 	
 		if (pMonBullet)
 		{
-			//죽었을때는 총알을 맞지 않는다.
-			if (!m_Invincible)
-			{// 폭파 애니메이션
-				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5f, 0.5f, 200, 200));
-				m_tInfo.fY = 1200;
-				m_tInfo.fX = 350;
-				m_PlayerLife--;
-				m_IsDead = true;
-				m_Invincible = true;
-
-				CUserInterfaceMgr::GetInstance()->SetLife(m_PlayerLife);
+			//갓모드
+			if (!m_GODMODE)
+			{
+				//죽었을때는 총알을 맞지 않는다.
+				if (!m_Invincible)
+				{// 폭파 애니메이션
+					CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5f, 0.5f, 200, 200));
+					m_tInfo.fY = 1200;
+					m_tInfo.fX = 350;
+					m_PlayerLife--;
+					m_IsDead = true;
+					m_Invincible = true;
+					//윙맨 초기화
+					RemoveWingMan();
+					CUserInterfaceMgr::GetInstance()->SetLife(m_PlayerLife);
+				}
 			}
+			
 			pMonBullet->SetDead(true);
 		}
 	
@@ -286,14 +308,11 @@ int CPlayer::Update()
 	//안죽었을때만 폭탄사용가능
 	if (m_IsSpecialAttack)
 	{
-		if (!m_IsDead)
-		{
-			SpecialAttack();
-		}
-		
+		SpecialAttack();
 	}
 	if (m_IsDead)
 	{
+
 		Respawn();
 	}
 	//m_pTexture->SetXY(0.f, 2.f);
@@ -462,10 +481,19 @@ CGameObject* CPlayer::CreateBullet(BULLET_DIRECTION eDir, POINT pos,PLAYER_BULLE
 
 void CPlayer::KeyInput()
 {
-	// 임시
-	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
-		AddWingMan();
-
+	if (CKeyboardMgr::GetInstance()->KeyUp(KEY_GOD))
+	{
+		if (!m_GODMODE)
+		{
+			m_GODMODE = true;
+			cout << "god mode on" << endl;
+		}
+		else
+		{
+			m_GODMODE = false;
+			cout << "god mode off" << endl;
+		}
+	}
 	CKeyboardMgr::GetInstance()->Update();
 	VECTOR2D vector(0, 0);
 	//// 몬스터와 충돌하면 뒤로 밀어버림 - 정보성 -
@@ -505,14 +533,19 @@ void CPlayer::KeyInput()
 			{
 				if (!m_IsSpecialAttack)
 				{
-					m_IsSpecialAttack = true;
-					m_BombCount--;
-					CUserInterfaceMgr::GetInstance()->SetSpecial(m_BombCount);
+					if (!m_IsDead)
+					{
+						m_IsSpecialAttack = true;
+						m_BombCount--;
+						CUserInterfaceMgr::GetInstance()->SetSpecial(m_BombCount);
+					}
+					
 				}
 			}
 		}
-		if (CKeyboardMgr::GetInstance()->KeyPressed(KEY_CHEAT))
+		if (CKeyboardMgr::GetInstance()->KeyUp(KEY_CHEAT))
 			this->LevelUp();
+
 	static int nMaximumBullet = MAXIMUM_MISSILE;
 
 #pragma region PLAYER_SHOOTING
