@@ -26,6 +26,8 @@ void CWingMan::Initialize()
 
 int CWingMan::Update()
 {
+	if (m_bIsDead)
+		return DEAD_OBJ;
 	
 	Move();
 
