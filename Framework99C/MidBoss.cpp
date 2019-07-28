@@ -24,18 +24,18 @@ void CMidBoss::Initialize()
 	switch (m_Various)
 	{
 	case 0:
-		m_tInfo.fCX = 100.f;
+		m_tInfo.fCX = 200.f;
 		m_tInfo.fCY = 100.f;
 		m_tInfo.fSpeed = 150.f;
 		m_iHP = 40;
 
 		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MidBoss1", _T("Stage/Monster/Monster_4.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
-		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 1, 0, 1, 0, 1.0f);
+		m_pAnimator->AddAnimInfo(m_pTexture, AT_RETAIN, 2, 1, 0, 0, 0, 0, 1.0f);
 		break;
 	case 1:
-		m_tInfo.fCX = 100.f;
-		m_tInfo.fCY = 100.f;
+		m_tInfo.fCX = 200.f;
+		m_tInfo.fCY = 200.f;
 		m_tInfo.fSpeed = 100.f;
 		m_iHP = 100;
 
@@ -44,8 +44,8 @@ void CMidBoss::Initialize()
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 2, 1, 0, 0, 1, 0, 1.0f);
 		break;
 	case 2:
-		m_tInfo.fCX = 100.f;
-		m_tInfo.fCY = 100.f;
+		m_tInfo.fCX = 200.f;
+		m_tInfo.fCY = 200.f;
 		m_tInfo.fSpeed = 50.f;
 		m_iHP = 150;
 
@@ -55,8 +55,8 @@ void CMidBoss::Initialize()
 		break;
 
 	case 3:
-		m_tInfo.fCX = 100.f;
-		m_tInfo.fCY = 100.f;
+		m_tInfo.fCX = 200.f;
+		m_tInfo.fCY = 200.f;
 		m_tInfo.fSpeed = 50.f;
 		m_iHP = 300;
 
@@ -157,22 +157,22 @@ void CMidBoss::Render(HDC hDC)
 	switch (m_Various)
 	{
 	case 0:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.f);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.25f, m_tInfo.fCY * 2.f);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 1:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2.5f, m_tInfo.fCY * 2.5f);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.25f, m_tInfo.fCY * 1.25f);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 2:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.5f, m_tInfo.fCY * 1.5f);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
 	case 3:
-		CGameObject::UpdateImgInfo(m_tInfo.fCX * 3.f, m_tInfo.fCY * 3.f);
+		CGameObject::UpdateImgInfo(m_tInfo.fCX * 1.5f, m_tInfo.fCY * 1.5f);
 		m_pAnimator->SetImgInfo(0, m_tImgInfo);
 		m_pAnimator->AnimateClip(0, hDC);
 		break;
