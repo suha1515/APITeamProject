@@ -21,7 +21,7 @@ CWingMan::~CWingMan()
 
 void CWingMan::Initialize()
 {
-
+	
 }
 
 int CWingMan::Update()

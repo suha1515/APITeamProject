@@ -116,10 +116,8 @@ void CItems::IsOutofRange()
 			m_tInfo.fSpeed *= -1;
 			m_RandomAngle += 1.0472f;
 		}
-		
 	}
 	
-
 }
 
 void CItems::SetType(ITEM_TYPE type)

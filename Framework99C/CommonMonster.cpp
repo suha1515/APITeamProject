@@ -46,7 +46,8 @@ void CCommonMonster::Initialize()
 
 		m_fCoolDown = 1.f;
 
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("Monster1", _T("Stage/Monster/Monster_1.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->
+			("Monster1", _T("Stage/Monster/Monster_1.bmp"));
 		m_pTexture->SetColorKey(RGB(0, 128, 128));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 11, 1, 0, 0, 10, 0, 1.5f);
 		break;
