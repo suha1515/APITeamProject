@@ -55,7 +55,7 @@ void CUserInterfaceMgr::SetLife(int nLife)
 
 void CUserInterfaceMgr::SetScore(int nScore)
 {
-	m_nScore = nScore;
+	m_nScore += nScore;
 }
 
 void CUserInterfaceMgr::SetSpecial(int nSpecial)

@@ -78,7 +78,22 @@ int CMidBoss::Update()
 {
 	if (m_bIsDead)
 	{
-		
+		switch (m_Various)
+		{
+		case 0:
+			CUserInterfaceMgr::GetInstance()->SetScore(1000);
+			break;
+		case 1:
+			CUserInterfaceMgr::GetInstance()->SetScore(1200);
+			break;
+		case 2:
+			CUserInterfaceMgr::GetInstance()->SetScore(1500);
+			break;
+		case 3:
+			CUserInterfaceMgr::GetInstance()->SetScore(3000);
+			break;
+		}
+
 		return DEAD_OBJ;
 
 	}

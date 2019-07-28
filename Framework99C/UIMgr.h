@@ -16,7 +16,7 @@ private:
 	int CalModular(int& number, int digit);
 
 private:
-	int m_nScore = 5252; // test
+	int m_nScore = 0;
 	int m_nNumOfSpecial;
 	int m_nNumOfLife;
 

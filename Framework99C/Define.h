@@ -6,7 +6,7 @@
 
 #define WINCX 700
 #define WINCY 1000
-#define STAGE_SPEED 100.f
+#define STAGE_SPEED 100.f	// 일단 절반으로 줄임
 
 #define PI 3.14f
 
