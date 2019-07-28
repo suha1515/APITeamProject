@@ -483,13 +483,13 @@ void CSpawnManager::Initialize()
 	// m
 	monsterPool[48].spawnPos_x = 500;
 	monsterPool[48].spawnPos_y = -100;
-	monsterPool[48].spawnTime = 2550;
+	monsterPool[48].spawnTime = 2750;
 	monsterPool[48].monster_type = MONSTER_TYPE::MIDDLE;
 	monsterPool[48].fire_type = MONSTER_FIRETYPE::AUTO;
 	monsterPool[48].move_type = MONSTER_MOVETYPE::RIGHT;
 	monsterPool[48].monster_various = 3;
 
-	monsterPool[49].spawnPos_x = 500;
+	monsterPool[49].spawnPos_x = 100;
 	monsterPool[49].spawnPos_y = -100;
 	monsterPool[49].spawnTime = 2900;
 	monsterPool[49].monster_type = MONSTER_TYPE::MIDDLE;
@@ -497,13 +497,13 @@ void CSpawnManager::Initialize()
 	monsterPool[49].move_type = MONSTER_MOVETYPE::DOWN;
 	monsterPool[49].monster_various = 0;
 
-	monsterPool[50].spawnPos_x = 500;
+	monsterPool[50].spawnPos_x = 450;
 	monsterPool[50].spawnPos_y = -100;
-	monsterPool[50].spawnTime = 2900;
-	monsterPool[50].monster_type = MONSTER_TYPE::MIDDLE;
+	monsterPool[50].spawnTime = 2800;
+	monsterPool[50].monster_type = MONSTER_TYPE::DEFAULT;
 	monsterPool[50].fire_type = MONSTER_FIRETYPE::BRUST_2;
-	monsterPool[50].move_type = MONSTER_MOVETYPE::DOWN;
-	monsterPool[50].monster_various = 0;
+	monsterPool[50].move_type = MONSTER_MOVETYPE::WAVING;
+	monsterPool[50].monster_various = 3;
 
 	//5-1s Áß¸÷ ÃâÇö°ú µ¿½Ã¿¡(ÁÂÃø)
 	monsterPool[51].spawnPos_x = 100;
