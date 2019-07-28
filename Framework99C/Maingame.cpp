@@ -75,19 +75,19 @@ void CMaingame::Initialize()
 	//	//m_ObjLst[OBJECT_MONSTER].push_back(pGameObject);
 	//}
 
-	// 보스 테스트용
-	CGameObject *object = CAbstractFactory<CBoss>::CreateObject();
-	object->SetPos(375, -300);
-	dynamic_cast<CBoss*>(object)->SetMonType(BOSS, SINGLE, RIGHT, 0);
-	dynamic_cast<CBoss*>(object)->Initialize();
-	CObjectMgr::GetInstance()->AddObject(OBJECT_MONSTER, object);
+	//// 보스 테스트용
+	//CGameObject *object = CAbstractFactory<CBoss>::CreateObject();
+	//object->SetPos(375, -300);
+	//dynamic_cast<CBoss*>(object)->SetMonType(BOSS, SINGLE, RIGHT, 0);
+	//dynamic_cast<CBoss*>(object)->Initialize();
+	//CObjectMgr::GetInstance()->AddObject(OBJECT_MONSTER, object);
 
-	// Item Test
-	pGameObject = CAbstractFactory<CItems>::CreateObject();
-	pGameObject->SetPos(100, 100);
-	dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::SPECIAL);
-	dynamic_cast<CItems*>(pGameObject)->Initialize();
-	CObjectMgr::GetInstance()->AddObject(OBJECT_ITEM, pGameObject);
+	//// Item Test
+	//pGameObject = CAbstractFactory<CItems>::CreateObject();
+	//pGameObject->SetPos(100, 100);
+	//dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::SPECIAL);
+	//dynamic_cast<CItems*>(pGameObject)->Initialize();
+	//CObjectMgr::GetInstance()->AddObject(OBJECT_ITEM, pGameObject);
 
 
 	m_SpawnMonster.Initialize();
@@ -96,7 +96,7 @@ void CMaingame::Initialize()
 
 void CMaingame::Update()
 {
-	//m_SpawnMonster.SpawnEnemy();
+	m_SpawnMonster.SpawnEnemy();
 	CKeyboardMgr::GetInstance()->Update();
 	CObjectMgr::GetInstance()->Update();
 }

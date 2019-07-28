@@ -277,9 +277,15 @@ int CPlayer::Update()
 	UpdateWingMan();
 	UpdateBarrel();
 	UpdateCollider();
+
+	//안죽었을때만 폭탄사용가능
 	if (m_IsSpecialAttack)
 	{
-		SpecialAttack();
+		if (!m_IsDead)
+		{
+			SpecialAttack();
+		}
+		
 	}
 	if (m_IsDead)
 	{
@@ -595,38 +601,6 @@ void CPlayer::KeyInput()
 #pragma endregion
 
 	
-
-	//// BUTTON_A : 키보드를 누를 경우 최대 4개의 미사일까지 발사
-	//if (!m_bArrButton[BUTTON_A] && (GetAsyncKeyState('A') & 0x8000))
-	//{
-	//	//CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET,CreateBullet(BULLET_UP));
-	//	if (!(--nMaximumBullet))
-	//	{
-	//		m_bArrButton[BUTTON_A] = true;
-	//		nMaximumBullet = MAXIMUM_MISSILE;
-	//	}
-	//}
-	//if (!GetAsyncKeyState('A'))
-	//	m_bArrButton[BUTTON_A] = false;
-
-		// BUTTON_S : 필살기 버튼 연속입력 방지
-	//	if (!m_bArrButton[BUTTON_S] && (GetAsyncKeyState('S') & 0x8000))
-	//	{
-	//		CObjectMgr::GetInstance()->AddObject(OBJLECT_BULLET, CreateBullet(BULLET_UP));
-	//		//윙맨들 사격
-	//		for (int i = 0; i < wingCount; ++i)
-	//		{
-	//			dynamic_cast<CWingMan*>(m_WingMan[i])->Fire();
-	//		}
-	//		m_bArrButton[BUTTON_S] = true;
-	//		m_bIsAttack = true;
-	//	}
-	//if (!GetAsyncKeyState('S'))
-	//	m_bArrButton[BUTTON_S] = false;
-	//if (GetAsyncKeyState('W') & 0x8000)
-	//	m_pBulletLst->push_back(CreateBullet(BULLET_UP));
-	//if (GetAsyncKeyState('D') & 0x8000)
-	//	m_pBulletLst->push_back(CreateBullet(BULLET_RIGHT));
 }
 
 void CPlayer::Respawn()
