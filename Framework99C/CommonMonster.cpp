@@ -88,6 +88,22 @@ int CCommonMonster::Update()
 	{
 		CGameObject::UpdateImgInfo(m_tInfo.fCX * 2, m_tInfo.fCY * 2);
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, m_tImgInfo);
+
+		switch (m_Various)
+		{
+		case 0:
+			CUserInterfaceMgr::GetInstance()->SetScore(200);
+			break;
+		case 1:
+			CUserInterfaceMgr::GetInstance()->SetScore(300);
+			break;
+		case 2:
+			CUserInterfaceMgr::GetInstance()->SetScore(400);
+			break;
+		case 3:
+			CUserInterfaceMgr::GetInstance()->SetScore(500);
+			break;
+		}
 		return DEAD_OBJ;
 	}
 
