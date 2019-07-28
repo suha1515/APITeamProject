@@ -39,6 +39,7 @@ private:
 
 	float m_transTime;
 	float m_DeadTime;
+	float m_EffectTime;
 
 	int m_TransPhase;
 

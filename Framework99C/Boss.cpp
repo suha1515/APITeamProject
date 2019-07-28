@@ -6,7 +6,7 @@
 CBoss::CBoss()
 	:m_TransPhase(0), m_BossHeadInfo(0, 0, 0, 0, 60, 60, 0.9f, 1.2f), m_BossLegInfo1(0, 0, 0, 0, 200, 200, 1.f, 1.f), m_BossLegInfo2(0, 0, 0, 0, 200, 200, 1.f, 1.f),
 	m_BossLegInfo3(0, 0, 0, 0, 200, 200, 1.f, 1.f), m_BossLegInfo4(0, 0, 0, 0, 200, 200, 1.f, 1.f), m_transTime(2.f), m_fCoolDown2(5.f), m_fCoolDown3(7.f), m_fCoolDown4(5.f),
-	m_iShotCount2(0), m_iShotCount3(0), m_DeadTime(0.f), m_LegBreak1(false), m_LegBreak2(false), m_LegBreak3(false), m_LegBreak4(false), m_HeadBreak(false), m_DeadEffect(false)
+	m_iShotCount2(0), m_iShotCount3(0), m_DeadTime(0.f), m_LegBreak1(false), m_LegBreak2(false), m_LegBreak3(false), m_LegBreak4(false), m_HeadBreak(false), m_DeadEffect(false), m_EffectTime(0.f)
 {
 }
 
@@ -601,50 +601,51 @@ void CBoss::PrintEffect()
 {
 
 	// 일정 조건마다 이펙트 출력하도록
-	if(m_LegBreak1 && m_DeadTime == 0.f)
+	if(m_LegBreak1 && m_EffectTime == 0.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX - 160.f, m_tInfo.fY + 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
 	
-	if (m_LegBreak2 && m_DeadTime == 1.f)
+	if (m_LegBreak2 && m_EffectTime == 1.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX + 160.f, m_tInfo.fY + 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
 
-	if (m_LegBreak3 && m_DeadTime == 2.f)
+	if (m_LegBreak3 && m_EffectTime == 2.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX - 160.f, m_tInfo.fY - 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
 
-	if (m_LegBreak4 && m_DeadTime == 3.f)
+	if (m_LegBreak4 && m_EffectTime == 3.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX + 160.f, m_tInfo.fY - 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
 
-	if (m_HeadBreak && m_DeadTime == 4.f)
+	if (m_HeadBreak && m_EffectTime == 4.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY - 10.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
 
-	if (m_bIsDead && m_DeadTime == 5.f)
+	if (m_bIsDead && m_EffectTime == 5.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY - 10.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
-	if (m_bIsDead && m_DeadTime == 6.f)
+	if (m_bIsDead && m_EffectTime == 6.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX + 50.f, m_tInfo.fY - 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		m_EffectTime += 1.f;
 	}
-	if (m_bIsDead && m_DeadTime == 7.f)
+	if (m_bIsDead && m_EffectTime == 7.f)
 	{
 		CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX - 50.f, m_tInfo.fY + 100.f, 0.5, 0.5, 300, 300, 1, 1));
-		m_DeadTime += 1.f;
+		CUserInterfaceMgr::GetInstance()->SetScore(100000);
+		m_EffectTime += 1.f;
 	}
 
 
@@ -656,13 +657,11 @@ void CBoss::IsDead()
 	{
 		m_DeadEffect = true;
 
-		//죽음 이펙트 설정부분
-
-		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 70, m_tInfo.fY + 40, 0.5, 0.5, 100, 100, 1, 1), 0.5f));
-		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 40, m_tInfo.fY - 60, 0.5, 0.5, 120, 120, 1, 1), 1.2f));
-		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 100, m_tInfo.fY + 70, 0.5, 0.5, 100, 100, 1, 1), 1.7f));
-		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 90, m_tInfo.fY - 10, 0.5, 0.5, 150, 150, 1, 1), 2.4f));
-		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 10, m_tInfo.fY + 50, 0.5, 0.5, 200, 200, 1, 1), 3.2f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 70, m_tInfo.fY + 40, 0.5, 0.5, 300, 300, 1, 1), 0.5f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 40, m_tInfo.fY - 60, 0.5, 0.5, 320, 320, 1, 1), 1.2f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX + 100, m_tInfo.fY + 70, 0.5, 0.5, 300, 300, 1, 1), 1.7f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 90, m_tInfo.fY - 10, 0.5, 0.5, 350, 350, 1, 1), 2.4f));
+		m_EffectINFO.push_back(PARTICLE_INFO(IMGINFO(m_tInfo.fX - 10, m_tInfo.fY + 50, 0.5, 0.5, 300, 300, 1, 1), 3.2f));
 	}
 
 }
@@ -671,7 +670,7 @@ void CBoss::DeadEffect()
 {
 	if (m_DeadTime > 3.5f)
 	{
-		//마지막 죽었을때 
+		m_bIsDead = true;
 		//CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, IMGINFO(m_tInfo.fX, m_tInfo.fY, 0.5, 0.5, 300, 300, 1, 1));
 	}
 	else
@@ -680,10 +679,8 @@ void CBoss::DeadEffect()
 		list<PARTICLE_INFO>::iterator iter_end = m_EffectINFO.end();
 		for (; iter_begin != iter_end;)
 		{
-			// m_DeadTIme 보다 리스트에 들어간 시간이 커질경우 이펙트 실행
 			if (m_DeadTime >= iter_begin->effect_Time)
 			{
-				//이펙트 출력부분
 				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, iter_begin->effect_Info);
 				iter_begin = m_EffectINFO.erase(iter_begin);
 			}

@@ -56,7 +56,7 @@ void CMonBullet::Initialize()
 		break;
 	case SLOW:
 		m_tInfo.fSpeed = 3.f;
-		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet4", _T("Stage/Bullet/Guide_Bullet.bmp"));
+		m_pTexture = CResourceMgr::GetInstance()->LoadTexture("MonBullet5", _T("Stage/Bullet/Guide_Bullet.bmp"));
 		m_pTexture->SetColorKey(RGB(128, 0, 0));
 		m_pAnimator->AddAnimInfo(m_pTexture, AT_LOOP, 4, 1, 0, 0, 3, 0, 0.1f);
 
