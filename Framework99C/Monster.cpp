@@ -112,8 +112,8 @@ void CMonster::DropItem()
 			CGameObject*  pGameObject;
 			pGameObject = CAbstractFactory<CItems>::CreateObject();
 			pGameObject->SetPos(m_tInfo.fX, m_tInfo.fY);
-			int random = rand() % 2;
-			if(random ==0)
+			int random = rand() % 10;
+			if(random < 3)
 				dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::SPECIAL);
 			else
 				dynamic_cast<CItems*>(pGameObject)->SetType(ITEM_TYPE::POWER);

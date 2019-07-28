@@ -684,8 +684,8 @@ void CBoss::DeadEffect()
 			if (m_DeadTime >= iter_begin->effect_Time)
 			{
 				//이펙트 출력부분
-				CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, iter_begin->effect_Info);
-				iter_begin = m_EffectINFO.erase(iter_begin);
+					CEffectMgr::GetInstance()->AddEffect(EXPLOSIVE_1, iter_begin->effect_Info);
+					iter_begin = m_EffectINFO.erase(iter_begin);
 			}
 			else
 				iter_begin++;

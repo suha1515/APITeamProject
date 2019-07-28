@@ -374,7 +374,7 @@ void CPlayer::SpecialAttack()
 	{
 		m_BigPlane.fY -= DELTA_TIME * 600.f;
 	}
-	if (bombCoolTime <= 5.f&&bombCoolTime >= 2.f)
+	if (bombCoolTime <= 5.f&& bombCoolTime >= .5f)
 	{
 		OBJLIST::iterator iter_begin = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONSTER).begin();
 		OBJLIST::iterator iter_end = CObjectMgr::GetInstance()->GetObjectList(OBJECT_MONSTER).end();

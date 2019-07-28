@@ -78,8 +78,6 @@ void CItems::Move()
 
 void CItems::IsOutofRange()
 {
-	static bool bIsOut = false;
-
 	CGameObject::UpdateRect();
 	if (!m_IsAvailable)
 	{
@@ -92,27 +90,33 @@ void CItems::IsOutofRange()
 	}
 	else
 	{
-		if ( (0 > m_tRect.left || 0 > m_tRect.top
-			|| WINCX < m_tRect.right || WINCY < m_tRect.bottom) && !bIsOut)
+		static RECT tScreen = { 0 , 0, WINCX, WINCY };
+		static RECT tOverlapped = {};
+
+		IntersectRect(&tOverlapped, &tScreen, &m_tRect);
+
+		if (tOverlapped.right - tOverlapped.left < m_tRect.right - m_tRect.left)
 		{
-			bIsOut = true;
+			if(0 > m_tRect.left)
+				m_tInfo.fX += 0 - m_tRect.left;
+			else if (WINCX < m_tRect.right)
+				m_tInfo.fX -= m_tRect.right - WINCX;
+
 			m_tInfo.fSpeed *= -1;
 			m_RandomAngle += 1.0472f;
-			//m_bIsDead = true;
-			//Release();
 		}
-		else
+
+		if (tOverlapped.bottom - tOverlapped.top < m_tRect.bottom - m_tRect.top)
 		{
-			bIsOut = false;
+			if (0 > m_tRect.top)
+				m_tInfo.fY += 0 - m_tRect.top;
+			else if (WINCY < m_tRect.bottom)
+				m_tInfo.fY -= m_tRect.bottom - WINCY;
+
+			m_tInfo.fSpeed *= -1;
+			m_RandomAngle += 1.0472f;
 		}
-		//if (0 >= m_tRect.left || 0 >= m_tRect.top
-		//	|| WINCX <= m_tRect.right || WINCY <= m_tRect.bottom)
-		//{
-		//	m_tInfo.fSpeed *= -1;
-		//	m_RandomAngle += 1.0472f;
-		//	//m_bIsDead = true;
-		//	//Release();
-		//}
+		
 	}
 	
 
